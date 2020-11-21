@@ -28,7 +28,7 @@ namespace Highbrow.HiPower.Controllers
         public IActionResult AddGet()
         {            
             return View("Add", new DesignationAddUpdateViewModel());
-        }
+        } 
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Add")]
