@@ -1,0 +1,30 @@
+﻿
+@{
+	string view = ViewData["form_class"].ToString();
+}
+<form id="form_Holiday" action="/holidays/1" accept-charset="UTF-8" method="post" novalidate="novalidate">
+	<div class="col-12 col-md-9 col-lg-8">
+		<div class="form-group">
+			<label class="form-label">Name*</label>
+			<span class="desc"></span>
+			<div class="controls">
+				<input class="form-control" type="text"  id="holiday_name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="form-label" for="holiday_date">Date *</label>
+			<span class="desc"></span>
+			<div class="controls">
+				<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="holiday_date" aria-required="true">
+			</div>
+		</div>
+	</div>
+	<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
+		<div class="text-left">
+			<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+				<a href="@Url.Action("List", "Holiday")">
+					<div type="button" class="btn">Cancel</div>
+				</a>
+		</div>
+	</div>
+</form>

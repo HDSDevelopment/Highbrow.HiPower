@@ -1,0 +1,36 @@
+﻿@using Highbrow.HiPower.Models
+@model Department
+
+@{
+	string view = ViewData["form_class"].ToString();
+}
+@using (Html.BeginForm(view, "Department", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_Department" }))
+{
+	@*<form id="form_Department" action="/departments/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.CreatedAt)
+<div class="col-12 col-md-9 col-lg-8">
+	<div class="form-group">
+		<label class="form-label" for="DepartmentName">Name *</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@Html.EditorFor(m => m.DepartmentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Department Name", type = "text" } })
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-check">
+			@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
+			<label class="form-check-label" for="IsActive">Active</label>
+		</div>
+	</div>
+</div>
+	<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
+		<div class="text-left">
+			<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+			<a href="@Url.Action("List", "Department")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+	</div>
+	@*</form>*@
+}

@@ -1,0 +1,21 @@
+﻿@using Highbrow.HiPower.Models
+@model Department
+@{ ViewData["Title"] = "Add Department";
+	ViewData["body_class"] = "add_department";
+	ViewData["form_class"] = "Add"; }
+
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Basic Info</h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				@Html.Partial("~/Views/Department/_Form.cshtml", Model)
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

@@ -1,0 +1,131 @@
+﻿
+@using Highbrow.HiPower.ViewModels.DesignationVM
+@model DesignationListViewModel
+
+@{ ViewData["Title"] = "Designation";
+	ViewData["body_class"] = "detail_designation"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Designations List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "Designation")">
+					<div type="button" class="btn btn-primary btn-sm">Add Designations</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						<div class="text-center">
+							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
+										<i class="fa fa-check"></i> Active (@Model.ActiveCount)
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
+										<i class="fa fa-ban"></i> Inactive (@Model.InActiveCount)
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-content primary" id="myTabContent1">
+							<div class="tab-pane fade show active" id="list_active">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Leave Approve Levels</th>
+												<th>Created At</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											@if (Model != null && Model.ActiveDesignations.Count() != 0)
+											{
+												@foreach (var item in Model.ActiveDesignations)
+												{
+													<tr>
+														<td>@item.DesignationName</td>
+														<td>
+															@if (item.LeaveApprovalLevel == 1)
+																@Html.Raw("One")
+																else if (item.LeaveApprovalLevel == 2)
+																	@Html.Raw("Two")
+														</td>
+														<td>@item.CreatedAt.ToString("dd MMM yyyy")</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Designation", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>                              <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" href="@Url.Action("Delete", "Designation", new { id = item.Id})">
+																<i class="fa fa-trash"></i>
+															</a>
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="list_inactive">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Leave Approve Levels</th>
+												<th>Created At</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											@if (Model != null && Model.InActiveDesignations.Count() != 0)
+											{
+												@foreach (var item in Model.InActiveDesignations)
+												{
+													<tr>
+														<td>@item.DesignationName</td>
+														<td>
+															@if (item.LeaveApprovalLevel == 1)
+																@Html.Raw("One")
+															else if (item.LeaveApprovalLevel == 2)
+																@Html.Raw("Two")
+														</td>
+														<td>@item.CreatedAt.ToString("dd MMM yyyy")</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Designation", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>                              <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" href="@Url.Action("Delete", "Designation", new { id = item.Id})">
+																<i class="fa fa-trash"></i>
+															</a>
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

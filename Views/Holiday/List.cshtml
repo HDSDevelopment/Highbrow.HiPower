@@ -1,0 +1,98 @@
+﻿@{ ViewData["Title"] = "Holidays";
+	ViewData["body_class"] = "detail_holiday"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Holidays List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "Holiday")">
+					<div type="button" class="btn btn-primary btn-sm">Add Holidays</div>
+				</a>
+				<a href="@Url.Action("BulkUpload", "Holiday")">
+					<div type="button" class="btn btn-info btn-sm">Upload Holidays</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Date</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Christmas</td>
+												<td>25 Dec 2020</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Diwali</td>
+												<td>14 Nov 2020</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Diwali</td>
+												<td>13 Nov 2020</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Vijaya Dasami</td>
+												<td>26 Oct 2020</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Ayudha Pooja</td>
+												<td>25 Oct 2020</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+						</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

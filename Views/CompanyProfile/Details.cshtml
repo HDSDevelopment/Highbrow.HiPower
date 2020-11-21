@@ -1,0 +1,63 @@
+@using Highbrow.HiPower.Models
+@model CompanyProfile
+
+@{ ViewData["Title"] = "Company";
+	ViewData["body_class"] = "detail_company"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Company Profile</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Update", "CompanyProfile",new { id=1})">
+					<div type="button" class="btn btn-primary btn-sm">Edit Company</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<!-- start -->
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="invoice-head">
+								<div class="row margin-0">
+									<div class="col-lg-6 col-md-9 col-9 invoice-title px-3">
+										<h5 class="text-center bg-primary ">@Html.DisplayFor(modelitem => Model.CompanyName)</h5>
+									</div>
+									<div class="col-lg-3 offset-lg-3 col-md-3 col-3 text-right py-3">
+										<img class="img-reponsive payslip-logo width-90" src="/Uploads/CompanyLogo/@Html.DisplayFor(modelitem => Model.LogoFileName)">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<br>
+						<div class="spacer"></div>
+						<div class="col-6 invoice-infoblock float-left">
+							<div>
+								<b>Address:</b>
+								<span class="text-muted">
+									@Html.DisplayFor(modelitem => Model.CompanyAddress)
+									<br><br>
+									<b>Phone:</b>&nbsp;@Html.DisplayFor(modelitem => Model.Phone)
+								</span>
+							</div>
+						</div>
+						<div class="col-6 invoice-infoblock text-right">
+							<div>
+								<b>PF No:</b>
+								<span class="text-muted">@Html.DisplayFor(modelitem => Model.PFNumber)</span>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<!-- end -->
+				</div>
+			</div>
+		</div>
+	</section>
+
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

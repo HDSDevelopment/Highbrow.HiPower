@@ -1,0 +1,104 @@
+﻿@{ ViewData["Title"] = "Leave Profiles";
+	ViewData["body_class"] = "detail_leaveProfile"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Leave Profiles List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "LeaveProfile")">
+					<div type="button" class="btn btn-primary btn-sm">Add Leave Profile</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						<div class="text-center">
+							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
+										<i class="fa fa-check"></i> Active (3)
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
+										<i class="fa fa-ban"></i> Inactive (0)
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-content primary" id="myTabContent1">
+							<div class="tab-pane fade show active" id="list_active">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Leave Type</th>
+												<th>Leave Category</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>Casual Leave</td>
+												<td>Confirmed</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveProfile")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveProfiles">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Sick Leave</td>
+												<td>Probationary</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveProfile")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveProfiles">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td>Restricted Leave</td>
+												<td>Confirmed</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveProfile")">
+														<i class="fa fa-edit"></i>
+													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveProfiles/3">
+														<i class="fa fa-trash"></i>
+													</a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="list_inactive">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Leave Type</th>
+												<th>Leave Category</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

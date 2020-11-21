@@ -1,0 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using Highbrow.HiPower.Models;
+
+namespace Highbrow.HiPower.Data
+{
+public class HiPowerContext : DbContext
+{
+    public HiPowerContext(DbContextOptions<HiPowerContext> options)
+            : base(options)
+        {
+        }    
+        
+    public DbSet<CompanyProfile> CompanyProfiles {get; set;}
+    public DbSet<Department> Departments {get; set;}
+    public DbSet<Designation> Designations { get; set; }
+}
+}

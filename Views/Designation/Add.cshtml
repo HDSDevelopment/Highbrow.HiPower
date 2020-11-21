@@ -1,0 +1,22 @@
+﻿@using Highbrow.HiPower.ViewModels.DesignationVM
+@model DesignationAddUpdateViewModel
+
+@{ ViewData["Title"] = "Add Designation";
+	ViewData["body_class"] = "add_designation";
+	ViewData["form_class"] = "Add"; }
+
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Basic Info</h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				@Html.Partial("~/Views/Designation/_Form.cshtml", Model)
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->
