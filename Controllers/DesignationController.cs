@@ -18,7 +18,6 @@ namespace Highbrow.HiPower.Controllers
         {
             _designationService = designationService;
         }
-
         public IActionResult Index()
         {
             return RedirectToAction("List", "Designation");
@@ -28,7 +27,7 @@ namespace Highbrow.HiPower.Controllers
         public IActionResult AddGet()
         {            
             return View("Add", new DesignationAddUpdateViewModel());
-        } 
+        }
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Add")]
@@ -43,7 +42,6 @@ namespace Highbrow.HiPower.Controllers
                     Designation designation = new Designation
                     {
                         DesignationName = designationViewModel.DesignationName,
-                        IsActive = designationViewModel.IsActive,
                         LeaveApprovalLevel = designationViewModel.LeaveApprovalLevel
                     };
 
@@ -73,7 +71,7 @@ namespace Highbrow.HiPower.Controllers
                     DesignationName = designation.DesignationName,
                     CreatedAt = designation.CreatedAt,
                     IsActive = designation.IsActive,
-                LeaveApprovalLevel = designation.LeaveApprovalLevel};
+                    LeaveApprovalLevel = designation.LeaveApprovalLevel};
 
                 return View("Update", designationViewModel);
             }
@@ -82,7 +80,7 @@ namespace Highbrow.HiPower.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Update")]
-        public async Task<IActionResult> UpdatePost(int id, DesignationAddUpdateViewModel designationViewModel)
+        public async Task<IActionResult> UpdatePost(DesignationAddUpdateViewModel designationViewModel)
         {
             ServiceResult result = ServiceResult.Failure;
 
@@ -94,14 +92,12 @@ namespace Highbrow.HiPower.Controllers
                     {
                         Id = designationViewModel.Id,
                         DesignationName = designationViewModel.DesignationName,
-                        CreatedAt = designationViewModel.CreatedAt,
-                        IsActive = designationViewModel.IsActive,
                     LeaveApprovalLevel = designationViewModel.LeaveApprovalLevel};
 
-                    result = await _designationService.Update(id, designation);
+                    result = await _designationService.Update(designation);
 
                     if (result == ServiceResult.Success)
-                        return RedirectToAction("List", "Designation");
+                        return RedirectToAction("Index", "Home");
                 }
                 catch (Exception ex)
                 {
@@ -112,30 +108,16 @@ namespace Highbrow.HiPower.Controllers
             return View("Update", designationViewModel);
         }
 
-        //[HttpGet, ActionName("Delete")]
-        //public async Task<IActionResult> DeleteGet(int? id)
-        //{
-        //    int idValue = id.Value;
-        //    Designation designation = await _designationService.Details(idValue);
-
-        //    if (designation != null)
-        //        return View("Delete", designation);
-        //    else
-        //    {
-        //        Response.StatusCode = 404;
-        //        return View("~/Views/Designation/NotFound.cshtml", idValue);
-        //    }
-        //}
-
-        [HttpGet, ActionName("Delete")]
-        public async Task<IActionResult> DeleteGet(int id)
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeletePost(int id)
         {
             try
             {
                 ServiceResult result = await _designationService.Delete(id);
 
                 if (result == ServiceResult.Success)
-                    return RedirectToAction("List", "Designation");
+                    return RedirectToAction("List");
             }
             catch (Exception ex)
             {
@@ -148,21 +130,21 @@ namespace Highbrow.HiPower.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            List<Designation> designations = null;
+            List<Designation> allDesignations = null;
 
             try
             {
-                designations = await _designationService.List();
+                allDesignations = await _designationService.List();
 
-                if (designations != null)
+                if (allDesignations != null)
                 {
                     DesignationListViewModel listViewModel = new DesignationListViewModel();
 
-                    listViewModel.ActiveDesignations = _designationService.ListByIsActive(designations, true);
-                    listViewModel.InActiveDesignations = _designationService.ListByIsActive(designations, false);
-                    listViewModel.ActiveCount = listViewModel.ActiveDesignations.Count;
-                    listViewModel.InActiveCount = listViewModel.InActiveDesignations.Count;
-
+            listViewModel.ActiveDesignations = await _designationService.ListActiveDesignations();
+        listViewModel.InactiveDesignations = await _designationService.ListInactiveDesignations();
+        
+                    listViewModel.ActiveCount = await _designationService.GetActiveCount();
+                    listViewModel.InactiveCount = await _designationService.GetInactiveCount();
 
                     return View("List", listViewModel);
                 }

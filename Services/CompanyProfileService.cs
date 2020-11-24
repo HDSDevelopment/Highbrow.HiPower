@@ -39,12 +39,12 @@ namespace Highbrow.HiPower.Services
                     return result;
         }
 
-        public async Task<ServiceResult> Update(int id, CompanyProfile companyProfile)
+        public async Task<ServiceResult> Update(CompanyProfile companyProfile)
         {
             ServiceResult result = ServiceResult.Failure;
             int recordsAffected = 0;
             
-            if(id == companyProfile.Id && await Exists(id))
+            if(await Exists(companyProfile.Id))
             {
                 companyProfile.UpdatedAt = DateTime.Now;
                 _context.CompanyProfiles.Update(companyProfile);

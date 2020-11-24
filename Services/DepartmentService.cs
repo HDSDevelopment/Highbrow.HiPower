@@ -16,15 +16,15 @@ namespace Highbrow.HiPower.Services
             _context = context;
         }
 
-        public async Task<Department> Details(int? id)
+         public async Task<Department> Details(int? id)
         {
             Department department = null;
-
-            if (id != null)
+            
+            if(id != null)
                 department = await _context.Departments.AsNoTracking()
                                                 .FirstOrDefaultAsync(n => n.Id == id);
-
-            return department;
+                
+                return department;            
         }
 
         public async Task<ServiceResult> Add(Department department)
@@ -43,16 +43,16 @@ namespace Highbrow.HiPower.Services
             return result;
         }
 
-        public async Task<ServiceResult> Update(int id, Department department)
+        public async Task<ServiceResult> Update(Department department)
         {
             ServiceResult result = ServiceResult.Failure;
-            int recordsAffected = 0;
+            int recordsAffected = 0;            
 
-            if (id == department.Id && await Exists(id))
+            if (await Exists(department.Id))
             {
                 department.UpdatedAt = DateTime.Now;
-
-                _context.Departments.Update(department);
+                
+                _context.Update(department);
                 recordsAffected = await _context.SaveChangesAsync();
             }
 
@@ -67,37 +67,63 @@ namespace Highbrow.HiPower.Services
             ServiceResult result = ServiceResult.Failure;
             int recordsAffected = 0;
 
-            if (await Exists(id))
+            if(await Exists(id))
             {
                 Department department = await _context.Departments.FindAsync(id);
                 _context.Departments.Remove(department);
                 recordsAffected = await _context.SaveChangesAsync();
             }
 
-            if (recordsAffected != 0)
+            if(recordsAffected != 0)
                 result = ServiceResult.Success;
 
-            return result;
+                return result;
         }
 
         public async Task<List<Department>> List()
         {
             List<Department> departments = null;
 
-            if (await _context.Departments.AnyAsync())
+            if(await _context.Departments.AnyAsync())
                 departments = await _context.Departments.AsNoTracking().ToListAsync();
 
-            return departments;
+                return departments;
         }
 
-        public List<Department> ListByIsActive(List<Department> departments, bool isActive)
+        private async Task<List<Department>> ListByIsActive(bool isActive)
         {
-            List<Department> departmentsByIsActive = null;
+            return await (from department in _context.Departments.AsNoTracking()
+                         where department.IsActive == isActive
+                         select department)
+                        .ToListAsync();
+        }
 
-            if (departments != null)
-                departmentsByIsActive = departments.Where(n => n.IsActive == isActive)
-                                                    .ToList();
-            return departmentsByIsActive;
+        public async Task<List<Department>> ListActiveDepartments()
+        {
+            return await ListByIsActive(true);
+        }
+
+        public async Task<int> GetActiveCount()
+        {
+            List<Department> activeDepartments = await ListActiveDepartments();
+            
+            if (activeDepartments != null)
+                return activeDepartments.Count;
+            return 0;
+        }
+
+        public async Task<List<Department>> ListInactiveDepartments()
+        {
+            return await ListByIsActive(false);
+        }
+
+        public async Task<int> GetInactiveCount()
+        {
+            List<Department> inactiveDepartments = await ListInactiveDepartments();
+            
+            if (inactiveDepartments != null)
+                return inactiveDepartments.Count;
+            return 0;
         }
 
         public async Task<bool> Exists(int id)

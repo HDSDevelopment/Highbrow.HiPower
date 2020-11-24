@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Highbrow.HiPower.Models;
 using Highbrow.HiPower.Data;
-using System;
 
 namespace Highbrow.HiPower.Services
 {
@@ -31,8 +30,6 @@ namespace Highbrow.HiPower.Services
         {
             ServiceResult result = ServiceResult.Failure;
 
-            designation.CreatedAt = DateTime.Now;
-            designation.UpdatedAt = designation.CreatedAt;
             await _context.AddAsync(designation);
             int recordsAffected = await _context.SaveChangesAsync();
 
@@ -42,14 +39,13 @@ namespace Highbrow.HiPower.Services
             return result;
         }
 
-        public async Task<ServiceResult> Update(int id, Designation designation)
+        public async Task<ServiceResult> Update(Designation designation)
         {
             ServiceResult result = ServiceResult.Failure;
             int recordsAffected = 0;
 
-            if (id == designation.Id && await Exists(id))
+            if (await Exists(designation.Id))
             {
-                designation.UpdatedAt = DateTime.Now;
                 _context.Update(designation);
                 recordsAffected = await _context.SaveChangesAsync();
             }
@@ -88,33 +84,46 @@ namespace Highbrow.HiPower.Services
             return designations;
         }
 
-        public List<Designation> ListByIsActive(List<Designation> designations, bool isActive)
-        {
-            List<Designation> designationsByIsActive = null;
-
-            if (designations != null)
-                designationsByIsActive = designations.Where(n => n.IsActive == isActive)
-                                                    .ToList();
-            return designationsByIsActive;
-        }
-
         public async Task<bool> Exists(int id)
         {
             Designation designation = await _context.Designations.AsNoTracking().FirstOrDefaultAsync(n => n.Id == id);
             return designation != null ? true : false;
         }
 
-        public int GetCount(List<Designation> designations, bool isActive)
+        private async Task<List<Designation>> ListByIsActive(bool isActive)
         {
-            int count = 0;
+            return await (from designation in _context.Designations.AsNoTracking()
+                          where designation.IsActive == isActive
+                          select designation)
+                        .ToListAsync();
+        }
 
-            if (designations != null)
-                count = (from designation in designations
-                         where designation.IsActive = isActive
-                         select designation)
-                        .Count();
+        public async Task<List<Designation>> ListActiveDesignations()
+        {
+            return await ListByIsActive(true);
+        }
 
-            return count;
+        public async Task<int> GetActiveCount()
+        {
+            List<Designation> activeDesignations = await ListActiveDesignations();
+
+            if (activeDesignations != null)
+                return activeDesignations.Count;
+            return 0;
+        }
+
+        public async Task<List<Designation>> ListInactiveDesignations()
+        {
+            return await ListByIsActive(false);
+        }
+
+        public async Task<int> GetInactiveCount()
+        {
+            List<Designation> inactiveDesignations = await ListInactiveDesignations();
+            
+            if (inactiveDesignations != null)
+                return inactiveDesignations.Count;
+            return 0;
         }
     }
 }

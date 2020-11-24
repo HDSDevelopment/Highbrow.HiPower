@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "Edit Shift";
+﻿@using Highbrow.HiPower.ViewModels.ShiftVM
+@model ShiftAddUpdateViewModel
+
+@{ ViewData["Title"] = "Edit Shift";
 	ViewData["body_class"] = "edit_shift";
 	ViewData["form_class"] = "Update"; }
 
@@ -11,7 +14,7 @@
 		</header>
 		<div class="content-body">
 			<div class="row">
-				@Html.Partial("~/Views/Shift/_Form.cshtml")
+				@Html.Partial("~/Views/Shift/_Form.cshtml", Model)
 			</div>
 		</div>
 	</section>

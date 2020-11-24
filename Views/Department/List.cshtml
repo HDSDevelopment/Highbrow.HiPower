@@ -29,7 +29,7 @@
 								</li>
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
-										<i class="fa fa-ban"></i> Inactive (@Model.InActiveCount)
+										<i class="fa fa-ban"></i> Inactive (@Model.InactiveCount)
 									</a>
 								</li>
 							</ul>
@@ -46,7 +46,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											@if (Model != null && Model.ActiveDepartments.Count() != 0)
+											@if (Model != null && Model.ActiveCount != 0)
 											{
 												@foreach (var item in Model.ActiveDepartments)
 												{
@@ -56,10 +56,14 @@
 														<td>
 															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Department", new { id = item.Id})">
 																<i class="fa fa-edit"></i>
-															</a>                              <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" href="@Url.Action("Delete", "Department", new { id = item.Id})">
-																<i class="fa fa-trash"></i>
 															</a>
-														</td>
+															@using (Html.BeginForm("Delete", "Department", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data"}))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
+															</td>
 													</tr>
 												}
 											}
@@ -82,9 +86,9 @@
 											</tr>
 										</thead>
 										<tbody>
-											@if (Model != null && Model.InActiveDepartments.Count() != 0)
+											@if (Model != null && Model.InactiveCount != 0)
 											{
-												@foreach (var item in Model.InActiveDepartments)
+												@foreach (var item in Model.InactiveDepartments)
 												{
 													<tr>
 														<td>@item.DepartmentName</td>
@@ -92,9 +96,13 @@
 														<td>
 															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Department", new { id = item.Id})">
 																<i class="fa fa-edit"></i>
-															</a>                              <a onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" href="@Url.Action("Delete", "Department", new { id = item.Id})">
-	<i class="fa fa-trash"></i>
-</a>
+															</a>
+															@using (Html.BeginForm("Delete", "Department", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
 														</td>
 													</tr>
 												}

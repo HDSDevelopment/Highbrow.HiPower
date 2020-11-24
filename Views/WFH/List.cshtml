@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "WFH Days";
+﻿@using Highbrow.HiPower.ViewModels.WFHVM
+@model WFHListViewModel
+
+@{ ViewData["Title"] = "WFH Days";
 	ViewData["body_class"] = "detail_WFH"; }
 
 <!-- MAIN CONTENT AREA STARTS -->
@@ -20,12 +23,12 @@
 							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
-										<i class="fa fa-check"></i> Active (1)
+										<i class="fa fa-check"></i> Active (@Model.ActiveCount)
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
-										<i class="fa fa-ban"></i> Inactive (0)
+										<i class="fa fa-ban"></i> Inactive (@Model.InactiveCount)
 									</a>
 								</li>
 							</ul>
@@ -43,18 +46,42 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>HDS_WFH</td>
-												<td>Yes</td>
-												<td>---</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "WFH")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/WFH">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
+											@if (Model != null && Model.ActiveCount != 0)
+											{
+												@foreach (var item in Model.ActiveWFHs)
+												{
+													<tr>
+														<td>@item.WFHName</td>
+														<td>
+															@if (item.IsUnlimited == true)
+																@Html.Raw("Yes")
+																else
+																	@Html.Raw("No")
+																</td>
+														<td>
+															@if (item.DaysPerMonth.HasValue)
+																@item.DaysPerMonth
+																else
+																	@Html.Raw("---")
+														</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "WFH", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@using (Html.BeginForm("Delete", "WFH", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
 										</tbody>
 									</table>
 								</div>
@@ -71,14 +98,49 @@
 											</tr>
 										</thead>
 										<tbody>
+											@if (Model != null && Model.InactiveCount != 0)
+											{
+												@foreach (var item in Model.InactiveWFHs)
+												{
+													<tr>
+														<td>@item.WFHName</td>
+														<td>
+															@if (item.IsUnlimited == true)
+																@Html.Raw("Yes")
+																else
+																	@Html.Raw("No")
+																</td>
+														<td>
+															@if (item.DaysPerMonth.HasValue)
+																@item.DaysPerMonth
+																else
+																	@Html.Raw("---")
+																</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "WFH", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@using (Html.BeginForm("Delete", "WFH", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
 
+											}
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
-						</div>
 					</div>
+				</div>
 			</div>
 		</div>
 	</section>

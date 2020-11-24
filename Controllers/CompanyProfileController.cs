@@ -10,7 +10,7 @@ using Highbrow.HiPower.Models;
 namespace Highbrow.HiPower.Controllers
 {
     public class CompanyProfileController : Controller
-    {        
+    {
         ICompanyProfileService _companyProfileService;
 
         public CompanyProfileController(ICompanyProfileService companyProfileService)
@@ -22,49 +22,50 @@ namespace Highbrow.HiPower.Controllers
         {
             return View("Details");
         }
+
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             //int idValue = id.Value;
             int idValue = 1;
             CompanyProfile companyProfile = await _companyProfileService.Details(idValue);
-            
-            if(companyProfile != null)
+
+            if (companyProfile != null)
             {
                 return View(companyProfile);
-                }
-                    else
-                        {
-                //Response.StatusCode = 404;
-                //return View("~/Views/CompanyProfile/NotFound.cshtml", idValue);
-                return RedirectToAction("Add", "CompanyProfile");
+            }
+            else
+            {
+                Response.StatusCode = 404;
+                return View("~/Views/CompanyProfile/NotFound.cshtml", idValue);
+
             }
         }
 
         [HttpGet, ActionName("Add")]
         public IActionResult AddGet()
-        {            
-            return View();
+        {
+            return View("Add", new CompanyProfile());
         }
 
-		[ValidateAntiForgeryToken]
-		[HttpPost, ActionName("Add")]
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Add")]
         public async Task<IActionResult> AddPost(CompanyProfile companyProfile, IFormFile companyLogo)
         {
             ServiceResult result = ServiceResult.Failure;
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
                     result = await _companyProfileService.Add(companyProfile);
 
-                    if(result == ServiceResult.Success)                    
-                    result = await AddLogo(companyProfile, companyLogo);
-                    
-                    if(result == ServiceResult.Success)
-                        //return RedirectToAction("Index", "Home");
-                    return RedirectToAction("Details", "CompanyProfile", new {id = companyProfile.Id });
+                    if (result == ServiceResult.Success)
+                        result = await AddLogo(companyProfile, companyLogo);
+
+                    if (result == ServiceResult.Success)
+                        return RedirectToAction("Index", "Home");
+
                 }
                 catch (Exception ex)
                 {
@@ -73,22 +74,22 @@ namespace Highbrow.HiPower.Controllers
                 }
             }
             return View(companyProfile);
-        }        
+        }
 
         [HttpGet, ActionName("Update")]
         public async Task<IActionResult> UpdateGet(int id)
         {
             CompanyProfile companyProfile = await _companyProfileService.Details(id);
-            
-            if(companyProfile != null)
+
+            if (companyProfile != null)
                 return View("Update", companyProfile);
 
-                    return View("Error");            
+            return View("Error");
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Update")]
-        public async Task<IActionResult> UpdatePost(int id, CompanyProfile companyProfile, IFormFile companyLogo)
+        public async Task<IActionResult> UpdatePost(CompanyProfile companyProfile, IFormFile companyLogo)
         {
             ServiceResult result = ServiceResult.Failure;
 
@@ -96,14 +97,14 @@ namespace Highbrow.HiPower.Controllers
             {
                 try
                 {
-                    result = await _companyProfileService.Update(id, companyProfile);
+                    result = await _companyProfileService.Update(companyProfile);
 
                     if (result == ServiceResult.Success)
                         result = await UpdateLogo(companyProfile, companyLogo);
-                        
-                        if (result == ServiceResult.Success)
-                        //return RedirectToAction("Index", "Home");
-                        return RedirectToAction("Details", "CompanyProfile", new { id = companyProfile.Id });
+
+                    if (result == ServiceResult.Success)
+                        return RedirectToAction("Index", "Home");
+
                 }
                 catch (Exception ex)
                 {
@@ -119,14 +120,14 @@ namespace Highbrow.HiPower.Controllers
         {
             int idValue = id.Value;
             CompanyProfile companyProfile = await _companyProfileService.Details(idValue);
-            
-            if(companyProfile != null)
+
+            if (companyProfile != null)
                 return View("Delete", companyProfile);
-                else
-                {
-                    Response.StatusCode = 404;
-                            return View("~/Views/CompanyProfile/NotFound.cshtml", idValue);
-                }
+            else
+            {
+                Response.StatusCode = 404;
+                return View("~/Views/CompanyProfile/NotFound.cshtml", idValue);
+            }
         }
 
         [HttpPost, ActionName("Delete")]
@@ -134,44 +135,44 @@ namespace Highbrow.HiPower.Controllers
         {
             try
             {
-            ServiceResult result = await _companyProfileService.Delete(id);
-            
-            if(result == ServiceResult.Success)
-                return RedirectToAction("Index", "Home");
+                ServiceResult result = await _companyProfileService.Delete(id);
+
+                if (result == ServiceResult.Success)
+                    return RedirectToAction("Index", "Home");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 //Perform logging here
                 return View("~/Views/Home/Error/500.cshtml");
             }
-                return View("Error");
+            return View("Error");
         }
 
         async Task<ServiceResult> AddLogo(CompanyProfile companyProfile, IFormFile companyLogo)
-        {            
-                    if(companyLogo.Length > 0)
-                    {
-                    string fileExtension = Path.GetExtension(companyLogo.FileName);                    
-                    var newFileName = companyProfile.Id + "_CompanyLogo" + fileExtension;
+        {
+            if (companyLogo.Length > 0)
+            {
+                string fileExtension = Path.GetExtension(companyLogo.FileName);
+                var newFileName = companyProfile.Id + "_CompanyLogo" + fileExtension;
 
-                    string directoryPath = @"wwwroot\Uploads\CompanyLogo\";
+                string directoryPath = @"wwwroot\Uploads\CompanyLogo\";
 
-                    CreateDirectory(directoryPath);
+                CreateDirectory(directoryPath);
 
-                    var filePath = Path.Combine(directoryPath, newFileName);                    
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                var filePath = Path.Combine(directoryPath, newFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     companyLogo.CopyTo(fileStream);
-                }                    
-                    companyProfile.LogoFileName = newFileName;
-                    companyProfile.LogoFileSize = companyLogo.Length;
-                    companyProfile.LogoContentType = companyLogo.ContentType;
-                    companyProfile.LogoCreatedAt = DateTime.Now;
-                    companyProfile.LogoUpdatedAt = companyProfile.LogoCreatedAt;
-                    
-                    return await _companyProfileService.Update(companyProfile.Id, companyProfile);
-                    }
-                    return ServiceResult.Failure;
+                }
+                companyProfile.LogoFileName = newFileName;
+                companyProfile.LogoFileSize = companyLogo.Length;
+                companyProfile.LogoContentType = companyLogo.ContentType;
+                companyProfile.LogoCreatedAt = DateTime.Now;
+                companyProfile.LogoUpdatedAt = companyProfile.LogoCreatedAt;
+
+                return await _companyProfileService.Update(companyProfile);
+            }
+            return ServiceResult.Failure;
         }
 
         async Task<ServiceResult> UpdateLogo(CompanyProfile companyProfile, IFormFile companyLogo)
@@ -199,23 +200,23 @@ namespace Highbrow.HiPower.Controllers
                 companyProfile.LogoContentType = companyLogo.ContentType;
                 companyProfile.LogoUpdatedAt = companyProfile.UpdatedAt;
 
-                return await _companyProfileService.Update(companyProfile.Id, companyProfile);
+                return await _companyProfileService.Update(companyProfile);
             }
             return ServiceResult.Failure;
         }
 
-            void DeleteFile(string directory, string fileWithExtension)
-            {
-                string deleteFileWithPath = Path.Combine(directory, fileWithExtension);
+        void DeleteFile(string directory, string fileWithExtension)
+        {
+            string deleteFileWithPath = Path.Combine(directory, fileWithExtension);
 
-                if (System.IO.File.Exists(deleteFileWithPath))
-                    System.IO.File.Delete(deleteFileWithPath);
-            }
+            if (System.IO.File.Exists(deleteFileWithPath))
+                System.IO.File.Delete(deleteFileWithPath);
+        }
 
-            void CreateDirectory(string directory)
-            {
-                if(!Directory.Exists(directory))                                        
-                        Directory.CreateDirectory(directory);
-            }
+        void CreateDirectory(string directory)
+        {
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+        }
     }
 }

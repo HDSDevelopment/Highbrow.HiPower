@@ -40,9 +40,9 @@ form {
 .form-check {
 	 padding-left: 0; 
 }
-[class*="icheckbox_"], [class*="iradio_"] {
+/*[class*="icheckbox_"], [class*="iradio_"] {
 	margin-right: 5px;
-}
+}*/
 .pace .pace-progress {
 	background: #f44336;
 	position: fixed;
@@ -86,4 +86,8 @@ table.dataTable tr td {
 }
 .hi-tabs .btn-secondary:not([disabled]):not(.disabled).active:focus, .hi-tabs .btn-secondary:not([disabled]):not(.disabled):active:focus, .show > .btn-secondary.dropdown-toggle:focus {
 	box-shadow: unset;
+}
+.hp-time select {
+	width: 100px;
+	display: inline;
 }

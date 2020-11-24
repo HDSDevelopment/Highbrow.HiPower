@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "Edit WFH";
+﻿@using Highbrow.HiPower.Models
+@model WFH
+
+@{ ViewData["Title"] = "Edit WFH";
 	ViewData["body_class"] = "edit_WFH";
 	ViewData["form_class"] = "Update"; }
 
@@ -11,7 +14,7 @@
 		</header>
 		<div class="content-body">
 			<div class="row">
-				@Html.Partial("~/Views/WFH/_Form.cshtml")
+				@Html.Partial("~/Views/WFH/_Form.cshtml", Model)
 			</div>
 		</div>
 	</section>

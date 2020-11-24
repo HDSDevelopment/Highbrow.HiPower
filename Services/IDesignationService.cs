@@ -10,14 +10,18 @@ public interface IDesignationService
 
     Task<ServiceResult> Add(Designation designation);
 
-    Task<ServiceResult> Update(int id, Designation designation);
+    Task<ServiceResult> Update(Designation designation);
 
     Task<ServiceResult> Delete(int id);
 
     Task<List<Designation>> List();
 
-    List<Designation> ListByIsActive(List<Designation> designations, bool isActive);
-    
-    int GetCount(List<Designation> designations, bool isActive);
+    Task<List<Designation>> ListActiveDesignations();
+
+    Task<List<Designation>> ListInactiveDesignations();
+
+    Task<int> GetActiveCount();
+
+    Task<int> GetInactiveCount();
 }
 }

@@ -9,7 +9,7 @@ public interface ICompanyProfileService
 
     Task<ServiceResult> Add(CompanyProfile companyProfile);
 
-    Task<ServiceResult> Update(int id, CompanyProfile companyProfile);
+    Task<ServiceResult> Update(CompanyProfile companyProfile);
 
     Task<ServiceResult> Delete(int id);
 }

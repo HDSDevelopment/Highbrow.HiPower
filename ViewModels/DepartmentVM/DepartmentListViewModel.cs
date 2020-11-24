@@ -7,10 +7,10 @@ namespace Highbrow.HiPower.ViewModels.DepartmentVM
     {
         public List<Department> ActiveDepartments { get; set; }
 
-        public List<Department> InActiveDepartments { get; set; }
+        public List<Department> InactiveDepartments { get; set; }
 
         public int ActiveCount { get; set; }
 
-        public int InActiveCount { get; set; }
+        public int InactiveCount { get; set; }
     }
 }
