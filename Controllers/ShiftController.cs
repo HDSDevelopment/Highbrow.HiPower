@@ -20,7 +20,7 @@ namespace Highbrow.HiPower.Controllers
 
         public IActionResult Index()
         {
-            return View("List");
+            return RedirectToAction("List");
         }
 
         [HttpGet, ActionName("Add")]
@@ -145,39 +145,9 @@ namespace Highbrow.HiPower.Controllers
             {
                 ShiftListViewModel listViewModel = new ShiftListViewModel();
                 List<Shift> activeShifts = await _shiftService.ListActiveShifts();
-
-                ShiftDetailsViewModel detailsViewModel;
-
-                if (activeShifts != null)
-                {
-                    foreach (Shift activeShift in activeShifts)
-                    {
-                        detailsViewModel = new ShiftDetailsViewModel();
-                        detailsViewModel.Id = activeShift.Id;
-                        detailsViewModel.ShiftName = activeShift.ShiftName;
-                        detailsViewModel.SetStartTime(activeShift.StartTimeInSeconds);
-                        detailsViewModel.SetEndTime(activeShift.EndTimeInSeconds);
-                        detailsViewModel.SetBufferTime(activeShift.BufferTimeInSeconds);
-                        listViewModel.ActiveShifts.Add(detailsViewModel);
-                    }
-                }
-
+                listViewModel.SetActiveShifts(activeShifts);
                 List<Shift> inactiveShifts = await _shiftService.ListInactiveShifts();
-
-                if (inactiveShifts != null)
-                {
-                    foreach (Shift inactiveShift in inactiveShifts)
-                    {
-                        detailsViewModel = new ShiftDetailsViewModel();
-                        detailsViewModel.Id = inactiveShift.Id;
-                        detailsViewModel.ShiftName = inactiveShift.ShiftName;
-                        detailsViewModel.SetStartTime(inactiveShift.StartTimeInSeconds);
-                        detailsViewModel.SetEndTime(inactiveShift.EndTimeInSeconds);
-                        detailsViewModel.SetBufferTime(inactiveShift.BufferTimeInSeconds);
-                        listViewModel.InactiveShifts.Add(detailsViewModel);
-                    }
-                }
-
+                listViewModel.SetInactiveShifts(inactiveShifts);
                 listViewModel.ActiveCount = await _shiftService.GetActiveCount();
                 listViewModel.InactiveCount = await _shiftService.GetInactiveCount();
 

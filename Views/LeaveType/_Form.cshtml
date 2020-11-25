@@ -1,31 +1,36 @@
-﻿
+﻿@using Highbrow.HiPower.Models
+@model LeaveType
 @{
 	string view = ViewData["form_class"].ToString();
 }
-<form id="form_LeaveType" action="/LeaveTypes/1" accept-charset="UTF-8" method="post" novalidate="novalidate">
-	<div class="col-12 col-md-9 col-lg-8">
-		<div class="form-group">
-			<label class="form-label">Name*</label>
-			<span class="desc"></span>
-			<div class="controls">
-				<input class="form-control" type="text" id="leave_type_name">
-			</div>
+@using (Html.BeginForm(view, "LeaveType", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_LeaveType" }))
+{
+	@*<form id="form_LeaveType" action="/LeaveTypes/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.CreatedAt)
+<div class="col-12 col-md-9 col-lg-8">
+	<div class="form-group">
+		<label class="form-label" for="LeaveTypeName">Name *</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@Html.EditorFor(m => m.LeaveTypeName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Leave Type Name", type = "text" } })
 		</div>
-		<div class="form-group">
-			<label class="form-label" for="leave_type_short_code">Short Code *</label>
-			<span class="desc"></span>
-			<div class="controls">
-				<input class="form-control" required="required" type="text" value="CL" id="leave_type_short_code" aria-required="true">
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="form-label" for="ShortCode">Short Code *</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@Html.EditorFor(m => m.ShortCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Short Code", type = "text" } })
 		</div>
-		<div class="form-group">
-			<label class="form-label" for="leave_type_total_days">Total Days *</label>
-			<span class="desc"></span>
-			<div class="controls">
-				<input class="form-control" required="required" type="number" value="12" id="leave_type_total_days" aria-required="true">
-			</div>
+	</div>
+	<div class="form-group">
+		<label class="form-label" for="TotalDays">Total Days *</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@Html.EditorFor(m => m.TotalDays, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Total Days", type = "number" } })
 		</div>
-		<div class="form-group">
+	</div>
+	@*<div class="form-group">
 			<label class="form-label" for="leave_type_gender">Gender *</label>
 			<span class="desc"></span>
 			<div class="controls">
@@ -35,32 +40,33 @@
 					<option value="Female">Female</option>
 				</select>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="form-label" for="leave_type_marital_status">Marital Status *</label>
-			<span class="desc"></span>
-			<div class="controls">
-				<select class="form-control" id="leave_type_marital_status">
-					<option selected="selected" value="Both">Both</option>
-					<option value="Single">Single</option>
-					<option value="Married">Married</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<div class="form-check">
-				<input class="form-check-input" type="checkbox" value="1" checked="checked"
-					   id="leave_type_is_active">
-				<label class="form-check-label" for="leave_type_is_active">Is Active</label>
-			</div>
+		</div>*@
+	<div class="form-group">
+		<label class="form-label" for="Gender">Gender *</label>
+		<div class="controls">
+			<select id="Gender" asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderType>()" class="form-control"></select>
 		</div>
 	</div>
+	<div class="form-group">
+		<label class="form-label" for="MaritalStatus">Marital Status *</label>
+		<div class="controls">
+			<select id="MaritalStatus" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatusType>()" class="form-control"></select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-check">
+			@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
+			<label class="form-check-label" for="IsActive">Active</label>
+		</div>
+	</div>
+</div>
 	<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
 		<div class="text-left">
 			<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
-				<a href="@Url.Action("List", "LeaveType")">
-					<div type="button" class="btn">Cancel</div>
-				</a>
+			<a href="@Url.Action("List", "LeaveType")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
 		</div>
 	</div>
-</form>
+	@*</form>*@
+}

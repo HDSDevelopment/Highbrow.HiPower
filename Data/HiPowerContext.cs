@@ -14,6 +14,7 @@ public class HiPowerContext : DbContext
     public DbSet<Department> Departments {get; set;}
     public DbSet<Designation> Designations { get; set; }
     public DbSet<WFH> WFHs {get; set;}
-    public DbSet<Shift> Shifts {get;set;}
+    public DbSet<Shift> Shifts {get; set;}    
+    public DbSet<LeaveType> LeaveTypes {get; set;}
 }
 }

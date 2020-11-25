@@ -164,6 +164,55 @@ public class DataGenerator
                         CreatedAt = Convert.ToDateTime("11/11/2020")
                     });
 
+            context.LeaveTypes.AddRange(
+                    new LeaveType
+                    {
+                        Id = 1,
+                        LeaveTypeName = "Casual Leave",
+                        ShortCode = "CL",
+                        TotalDays = 12,
+                        Gender = GenderType.Both,
+                        MaritalStatus = MaritalStatusType.Both,
+                        IsActive = true,
+                        CreatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.LeaveTypes.AddRange(
+                    new LeaveType
+                    {
+                        Id = 2,
+                        LeaveTypeName = "Earned Leave",
+                        ShortCode = "EL",
+                        TotalDays = 10,
+                        Gender = GenderType.Male,
+                        MaritalStatus = MaritalStatusType.Married,
+                        IsActive = true,
+                        CreatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.LeaveTypes.AddRange(
+                    new LeaveType
+                    {
+                        Id = 3,
+                        LeaveTypeName = "Sick Leave",
+                        ShortCode = "SL",
+                        TotalDays = 12,
+                        Gender = GenderType.Both,
+                        MaritalStatus = MaritalStatusType.Both,
+                        IsActive = true,
+                        CreatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.LeaveTypes.AddRange(
+                    new LeaveType
+                    {
+                        Id = 4,
+                        LeaveTypeName = "Restricted Leave",
+                        ShortCode = "RL",
+                        TotalDays = 1,
+                        Gender = GenderType.Both,
+                        MaritalStatus = MaritalStatusType.Both,
+                        IsActive = false,
+                        CreatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+
             context.SaveChanges();
     }
 }

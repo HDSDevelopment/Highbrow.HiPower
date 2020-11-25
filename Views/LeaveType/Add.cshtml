@@ -1,4 +1,8 @@
-﻿@{ ViewData["Title"] = "Add Leave Type";
+﻿@using Highbrow.HiPower.Models
+@model LeaveType
+
+
+@{ ViewData["Title"] = "Add Leave Type";
 	ViewData["body_class"] = "add_leaveType";
 	ViewData["form_class"] = "Add"; }
 
@@ -11,7 +15,7 @@
 		</header>
 		<div class="content-body">
 			<div class="row">
-				@Html.Partial("~/Views/LeaveType/_Form.cshtml")
+				@Html.Partial("~/Views/LeaveType/_Form.cshtml", Model)
 			</div>
 		</div>
 	</section>

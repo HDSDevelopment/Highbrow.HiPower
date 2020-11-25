@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "Leave Types";
+﻿@using Highbrow.HiPower.ViewModels.LeaveTypeVM
+@model LeaveTypeListViewModel
+
+@{ ViewData["Title"] = "Leave Types";
 	ViewData["body_class"] = "detail_leaveType"; }
 
 <!-- MAIN CONTENT AREA STARTS -->
@@ -20,12 +23,12 @@
 							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
-										<i class="fa fa-check"></i> Active (3)
+										<i class="fa fa-check"></i> Active (@Model.ActiveCount)
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
-										<i class="fa fa-ban"></i> Inactive (0)
+										<i class="fa fa-ban"></i> Inactive (@Model.InactiveCount)
 									</a>
 								</li>
 							</ul>
@@ -45,48 +48,34 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>Casual Leave</td>
-												<td>CL</td>
-												<td>12</td>
-												<td>Both</td>
-												<td>Both</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveType")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveTypes">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>Sick Leave</td>
-												<td>SL</td>
-												<td>12</td>
-												<td>Both</td>
-												<td>Both</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveType")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveTypes">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>Wedding Leave</td>
-												<td>WL</td>
-												<td>5</td>
-												<td>Both</td>
-												<td>Single</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveType")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/LeaveTypes/3">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
+											@if (Model != null && Model.ActiveCount != 0)
+											{
+												@foreach (var item in Model.ActiveLeaveTypes)
+												{
+													<tr>
+														<td>@item.LeaveTypeName</td>
+														<td>@item.ShortCode</td>
+														<td>@item.TotalDays</td>
+														<td>@item.Gender</td>
+														<td>@item.MaritalStatus</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveType", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@using (Html.BeginForm("Delete", "LeaveType", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
 										</tbody>
 									</table>
 								</div>
@@ -105,7 +94,34 @@
 											</tr>
 										</thead>
 										<tbody>
+											@if (Model != null && Model.InactiveCount != 0)
+											{
+												@foreach (var item in Model.InactiveLeaveTypes)
+												{
+													<tr>
+														<td>@item.LeaveTypeName</td>
+														<td>@item.ShortCode</td>
+														<td>@item.TotalDays</td>
+														<td>@item.Gender</td>
+														<td>@item.MaritalStatus</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveType", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@using (Html.BeginForm("Delete", "LeaveType", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
 
+											}
 										</tbody>
 									</table>
 								</div>
