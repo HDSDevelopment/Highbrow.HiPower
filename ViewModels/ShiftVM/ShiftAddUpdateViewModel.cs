@@ -50,25 +50,28 @@ namespace Highbrow.HiPower.ViewModels.ShiftVM
             return time.GetInSeconds();
         }
 
-        public void SetStartTime(double startTimeInSeconds)
+        public TimeSpan SetStartTime(double startTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(startTimeInSeconds);
             StartHour = time.Hours;
             StartMinute = time.Minutes;
+            return time;
         }
 
-        public void SetEndTime(double endTimeInSeconds)
+        public TimeSpan SetEndTime(double endTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(endTimeInSeconds);
             EndHour = time.Hours;
             EndMinute = time.Minutes;
+            return time;
         }
 
-        public void SetBufferTime(double bufferTimeInSeconds)
+        public TimeSpan SetBufferTime(double bufferTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(bufferTimeInSeconds);
             BufferHour = time.Hours;
             BufferMinute = time.Minutes;
+            return time;
         }
 
         public List<SelectListItem> TimeHourSelectItem { get; set; }
@@ -79,16 +82,16 @@ namespace Highbrow.HiPower.ViewModels.ShiftVM
             TimeHourSelectItem = new List<SelectListItem>
             {
                 new SelectListItem{Text = "Hour", Value = ""},
-                new SelectListItem{Text = "00", Value = "00"},
-                new SelectListItem{Text = "01", Value = "01"},
-                new SelectListItem{Text = "02", Value = "02"},
-                new SelectListItem{Text = "03", Value = "03"},
-                new SelectListItem{Text = "04", Value = "04"},
-                new SelectListItem{Text = "05", Value = "05"},
-                new SelectListItem{Text = "06", Value = "06"},
-                new SelectListItem{Text = "07", Value = "07"},
-                new SelectListItem{Text = "08", Value = "08"},
-                new SelectListItem{Text = "09", Value = "09"},
+                new SelectListItem{Text = "00", Value = "0"},
+                new SelectListItem{Text = "01", Value = "1"},
+                new SelectListItem{Text = "02", Value = "2"},
+                new SelectListItem{Text = "03", Value = "3"},
+                new SelectListItem{Text = "04", Value = "4"},
+                new SelectListItem{Text = "05", Value = "5"},
+                new SelectListItem{Text = "06", Value = "6"},
+                new SelectListItem{Text = "07", Value = "7"},
+                new SelectListItem{Text = "08", Value = "8"},
+                new SelectListItem{Text = "09", Value = "9"},
                 new SelectListItem{Text = "10", Value = "10"},
                 new SelectListItem{Text = "11", Value = "11"},
                 new SelectListItem{Text = "12", Value = "12"},
@@ -107,16 +110,16 @@ namespace Highbrow.HiPower.ViewModels.ShiftVM
             TimeMinuteSelectItem = new List<SelectListItem>
             {
                 new SelectListItem{Text = "Minute", Value = ""},
-                new SelectListItem{Text = "00", Value = "00"},
-                new SelectListItem{Text = "01", Value = "01"},
-                new SelectListItem{Text = "02", Value = "02"},
-                new SelectListItem{Text = "03", Value = "03"},
-                new SelectListItem{Text = "04", Value = "04"},
-                new SelectListItem{Text = "05", Value = "05"},
-                new SelectListItem{Text = "06", Value = "06"},
-                new SelectListItem{Text = "07", Value = "07"},
-                new SelectListItem{Text = "08", Value = "08"},
-                new SelectListItem{Text = "09", Value = "09"},
+                new SelectListItem{Text = "00", Value = "0"},
+                new SelectListItem{Text = "01", Value = "1"},
+                new SelectListItem{Text = "02", Value = "2"},
+                new SelectListItem{Text = "03", Value = "3"},
+                new SelectListItem{Text = "04", Value = "4"},
+                new SelectListItem{Text = "05", Value = "5"},
+                new SelectListItem{Text = "06", Value = "6"},
+                new SelectListItem{Text = "07", Value = "7"},
+                new SelectListItem{Text = "08", Value = "8"},
+                new SelectListItem{Text = "09", Value = "9"},
                 new SelectListItem{Text = "10", Value = "10"},
                 new SelectListItem{Text = "11", Value = "11"},
                 new SelectListItem{Text = "12", Value = "12"},

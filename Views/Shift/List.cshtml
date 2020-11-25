@@ -56,26 +56,26 @@
 														<td>@item.ShiftName</td>
 														<td>
 															@{
-																TimeSpan StartSpan = new TimeSpan(item.StartHour, item.StartMinute, 0);
-																@Html.Raw(new DateTime(StartSpan.Ticks).ToString("hh:mm tt"));
+																TimeSpan ActiveStartSpan = new TimeSpan(item.StartHour, item.StartMinute, 0);
+																@Html.Raw(new DateTime(ActiveStartSpan.Ticks).ToString("hh:mm tt"));
 															}
 														</td>
 														<td>
 															@{
-																TimeSpan EndSpan = new TimeSpan(item.EndHour, item.EndMinute, 0);
-																@Html.Raw(new DateTime(EndSpan.Ticks).ToString("hh:mm tt"));
+																TimeSpan ActiveEndSpan = new TimeSpan(item.EndHour, item.EndMinute, 0);
+																@Html.Raw(new DateTime(ActiveEndSpan.Ticks).ToString("hh:mm tt"));
 															}
 														</td>
 														<td>
 															@{
-																TimeSpan diff = EndSpan.Subtract(StartSpan);
-																@Html.Raw(new DateTime(diff.Ticks).ToString("hh:mm"));
+																TimeSpan Activediff = ActiveEndSpan.Subtract(ActiveStartSpan);
+																@Html.Raw(new DateTime(Activediff.Ticks).ToString("hh:mm"));
 															}
 														</td>
 														<td>
 															@{
-																TimeSpan BufferSpan = new TimeSpan(item.BufferHour, item.BufferMinute, 0);
-																@Html.Raw(new DateTime(BufferSpan.Ticks).ToString("hh:mm tt"));
+																TimeSpan ActiveBufferSpan = new TimeSpan(item.BufferHour, item.BufferMinute, 0);
+																@Html.Raw(new DateTime(ActiveBufferSpan.Ticks).ToString("hh:mm tt"));
 															}
 														</td>											<td>
 															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Shift", new { id = item.Id})">
@@ -117,24 +117,44 @@
 											{
 												@foreach (var item in Model.InactiveShifts)
 												{
-													<tr>
-														<td>@item.ShiftName</td>
-														<td>@item.StartHour:@item.StartMinute</td>
-														<td>@item.EndHour:@item.EndMinute</td>
-														<td>@item.BufferHour</td>
-														<td>@item.BufferHour:@item.BufferMinute</td>
-														<td>
-															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Shift", new { id = item.Id})">
-																<i class="fa fa-edit"></i>
-															</a>
-															@using (Html.BeginForm("Delete", "Shift", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
-															{
-																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
-																	<i class="fa fa-trash"></i>
-																</button>
-															}
-														</td>
-													</tr>
+											<tr>
+												<td>@item.ShiftName</td>
+												<td>
+													@{
+														TimeSpan InactiveStartSpan = new TimeSpan(item.StartHour, item.StartMinute, 0);
+														@Html.Raw(new DateTime(InactiveStartSpan.Ticks).ToString("hh:mm tt"));
+													}
+												</td>
+												<td>
+													@{
+														TimeSpan InactiveEndSpan = new TimeSpan(item.EndHour, item.EndMinute, 0);
+														@Html.Raw(new DateTime(InactiveEndSpan.Ticks).ToString("hh:mm tt"));
+													}
+												</td>
+												<td>
+													@{
+														TimeSpan Inactivediff = InactiveEndSpan.Subtract(InactiveStartSpan);
+														@Html.Raw(new DateTime(Inactivediff.Ticks).ToString("hh:mm"));
+													}
+												</td>
+												<td>
+													@{
+														TimeSpan InactiveBufferSpan = new TimeSpan(item.BufferHour, item.BufferMinute, 0);
+														@Html.Raw(new DateTime(InactiveBufferSpan.Ticks).ToString("hh:mm tt"));
+													}
+												</td>
+												<td>
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Shift", new { id = item.Id})">
+														<i class="fa fa-edit"></i>
+													</a>
+													@using (Html.BeginForm("Delete", "Shift", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+													{
+														<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+															<i class="fa fa-trash"></i>
+														</button>
+													}
+												</td>
+											</tr>
 												}
 											}
 											else

@@ -70,9 +70,15 @@ namespace Highbrow.HiPower.Controllers
                 ShiftAddUpdateViewModel shiftVM = new ShiftAddUpdateViewModel();
 
                 shiftVM.ShiftName = shift.ShiftName;
-                shiftVM.SetStartTime(shift.StartTimeInSeconds);
-                shiftVM.SetEndTime(shift.EndTimeInSeconds);
-                shiftVM.SetBufferTime(shift.BufferTimeInSeconds);
+                //shiftVM.SetStartTime(shift.StartTimeInSeconds);
+                shiftVM.StartHour = shiftVM.SetStartTime(shift.StartTimeInSeconds).Hours;
+                shiftVM.StartMinute = shiftVM.SetStartTime(shift.StartTimeInSeconds).Minutes;
+                shiftVM.EndHour = shiftVM.SetEndTime(shift.EndTimeInSeconds).Hours;
+                shiftVM.EndMinute = shiftVM.SetEndTime(shift.EndTimeInSeconds).Minutes;
+                shiftVM.BufferHour = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Hours;
+                shiftVM.BufferMinute = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Minutes;
+                //shiftVM.SetEndTime(shift.EndTimeInSeconds);
+                //shiftVM.SetBufferTime(shift.BufferTimeInSeconds);
                 shiftVM.IsActive = shift.IsActive;
 
                 return View("Update", shiftVM);
@@ -91,11 +97,13 @@ namespace Highbrow.HiPower.Controllers
                 try
                 {
                     Shift shift = new Shift();
+                    shift.Id = shiftVM.Id;
                     shift.ShiftName = shiftVM.ShiftName;
                     shift.StartTimeInSeconds = shiftVM.GetStartTimeInSeconds();
                     shift.EndTimeInSeconds = shiftVM.GetEndTimeInSeconds();
                     shift.BufferTimeInSeconds = shiftVM.GetBufferTimeInSeconds();
                     shift.IsActive = shiftVM.IsActive;
+                    shift.CreatedAt = shiftVM.CreatedAt;
 
                     result = await _shiftService.Update(shift);
 
