@@ -91,3 +91,12 @@ table.dataTable tr td {
 	width: 100px;
 	display: inline;
 }
+.tab-content .form-check {
+	padding-left: 1.25rem;
+}
+.filter-bar {
+	background-color: #eee !important;
+}
+.td-info {
+	font-size: 10px;
+}

@@ -50,28 +50,35 @@ namespace Highbrow.HiPower.ViewModels.ShiftVM
             return time.GetInSeconds();
         }
 
-        public TimeSpan SetStartTime(double startTimeInSeconds)
+        //public TimeSpan SetStartTime(double startTimeInSeconds)
+        //{
+        //    TimeSpan time = TimeSpan.FromSeconds(startTimeInSeconds);
+        //    StartHour = time.Hours;
+        //    StartMinute = time.Minutes;
+        //    return time;
+        //}
+        public void SetStartTime(double startTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(startTimeInSeconds);
             StartHour = time.Hours;
             StartMinute = time.Minutes;
-            return time;
+            //return time;
         }
 
-        public TimeSpan SetEndTime(double endTimeInSeconds)
+        public void SetEndTime(double endTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(endTimeInSeconds);
             EndHour = time.Hours;
             EndMinute = time.Minutes;
-            return time;
+            //return time;
         }
 
-        public TimeSpan SetBufferTime(double bufferTimeInSeconds)
+        public void SetBufferTime(double bufferTimeInSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(bufferTimeInSeconds);
             BufferHour = time.Hours;
             BufferMinute = time.Minutes;
-            return time;
+            //return time;
         }
 
         public List<SelectListItem> TimeHourSelectItem { get; set; }

@@ -1,0 +1,617 @@
+﻿
+
+@{
+	string view = ViewData["form_class"].ToString();
+}
+<div class="col-lg-12 col-md-12 col-12">
+	<div class="row">
+		<div class="col-lg-12 employee-tabs">
+			@using (Html.BeginForm(view, "Employee", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_Employee" }))
+			{
+				@*<form id="form_Employee" action="/Employee/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
+				<ul class="nav nav-tabs primary" id="myTab1" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab2" data-toggle="tab">Personal</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab3" data-toggle="tab">HR</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab4" data-toggle="tab">Dependent</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab5" data-toggle="tab">Education</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab6" data-toggle="tab">Experience</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab7" data-toggle="tab">Bank</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab8" data-toggle="tab">Social / Official</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab9" data-toggle="tab">Profile Picture</a>
+					</li>
+				</ul>
+
+				<div class="tab-content primary" id="myTabContent1">
+					@*tab 1*@
+					<div class="tab-pane fade show active" role="tabpanel" id="tab1">
+						<div class="form-group">
+							<label class="form-label" for="employee_employee_id">Employee ID *</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_employee_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_card_rf_id">Card Id / RF Id</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_card_rf_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_title">Title</label>
+							<div class="controls">
+								<select class="form-control" id="employee_title">
+									<option value="">--Select--</option>
+									<option value="Mr">Mr</option>
+									<option value="Ms">Ms</option>
+									<option value="Mrs">Mrs</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_name">Name *</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_gender">Gender *</label>
+							<div class="controls">
+								<select class="form-control" id="employee_gender">
+									<option value="">--Select--</option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_user_attributes_email">Email *</label>
+							<div class="controls">
+								<input class="form-control" type="text" value="" id="employee_user_attributes_email">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_user_attributes_password">Password *</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_user_attributes_password">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_user_attributes_password_confirmation">Confirm Password *</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_user_attributes_password_confirmation">
+							</div>
+						</div>
+						<input value="HRMS" type="hidden" id="employee_user_attributes_applications">
+						<div class="form-group">
+							<label class="form-label" for="employee_user_attributes_roles">Role *</label>
+							<div class="controls">
+								<select class="form-control" multiple="multiple" id="employee_user_attributes_roles">
+									<option value="Employee">Employee</option>
+									<option value="Supervisor">Supervisor</option>
+									<option value="HR">HR</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_status">Status *</label>
+							<div class="controls">
+								<select class="form-control" id="employee_status">
+									<option value="Active">Active</option>
+									<option value="Inactive">Inactive</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group relieving_date" style="display: none;">
+							<label class="form-label" for="employee_date_of_relieving">Date Of Relieving</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_relieving">
+							</div>
+						</div>
+
+						<a class="btn btn-primary continue" tab-name="tab1">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 2*@
+					<div class="tab-pane fade show " role="tabpanel" id="tab2">
+						<div class="form-group">
+							<label class="form-label" for="employee_father_name">Father Name</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_father_name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_date_of_birth">Date Of Birth</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_birth">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_age">Age</label>
+							<div class="controls">
+								<input class="form-control" type="number" id="employee_age">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_blood_group">Blood Group</label>
+							<div class="controls">
+								<select class="form-control" id="employee_blood_group">
+									<option value="">--Select--</option>
+									<option value="O+">O+</option>
+									<option value="A+">A+</option>
+									<option value="B+">B+</option>
+									<option value="AB+">AB+</option>
+									<option value="O-">O-</option>
+									<option value="A-">A-</option>
+									<option value="B-">B-</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_marital_status">Marital Status</label>
+							<div class="controls">
+								<select class="form-control" id="employee_marital_status">
+									<option value="">--Select--</option>
+									<option value="Single">Single</option>
+									<option value="Married">Married</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_religion">Religion</label>
+							<div class="controls">
+								<select class="form-control" id="employee_religion">
+									<option value="">--Select--</option>
+									<option value="Hindu">Hindu</option>
+									<option value="Christian">Christian</option>
+									<option value="Muslim">Muslim</option>
+									<option value="Other">Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_permanent_address">Permanent Address</label>
+							<div class="controls">
+								<textarea class="form-control autogrow" cols="5" id="employee_permanent_address"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_communication_address">Communication Address</label>
+							<div class="controls">
+								<textarea class="form-control autogrow" cols="5" id="employee_communication_address"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_contact_number">Contact Number</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_contact_number">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_emergency_number">Emergency Number</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_emergency_number">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_personal_mail">Personal Email</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_personal_mail">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_nationality">Nationality</label>
+							<div class="controls">
+								<select class="form-control" id="employee_nationality">
+									<option value="Indian">Indian</option>
+									<option value="Others">Others</option>
+								</select>
+							</div>
+						</div>
+
+						<a class="btn btn-primary continue" tab-name="tab2">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 3*@
+					<div class="tab-pane fade show " id="tab3">
+						<div class="form-group">
+							<label class="form-label" for="employee_department_id">Department</label>
+							<div class="controls">
+								<select class="form-control" id="employee_department_id">
+									<option value="">--Select--</option>
+									<option value="1">Accounting</option>
+									<option value="2">Finance</option>
+									<option value="3">Human Resource Management</option>
+									<option value="4">IT Security</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_designation_id">Current Designation</label>
+							<div class="controls">
+								<select class="form-control" id="employee_designation_id">
+									<option value="">--Select--</option>
+									<option value="1">Admin</option>
+									<option value="2">Analyst</option>
+									<option value="3">Chief Executive Officer</option>
+									<option value="4">Director</option>
+									<option value="5">Engineer</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_previous_designation_id">Previous Designation</label>
+							<div class="controls">
+								<select class="form-control" id="employee_previous_designation_id">
+									<option value="">--Select--</option>
+									<option value="1">Admin</option>
+									<option value="2">Analyst</option>
+									<option value="3">Chief Executive Officer</option>
+									<option value="4">Director</option>
+									<option value="5">Engineer</option>
+
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_shift_id">Shift</label>
+							<div class="controls">
+								<select class="form-control" id="employee_shift_id">
+									<option value="1">General Shift</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_employment_status">Employment Status</label>
+							<div class="controls">
+								<select class="form-control" id="employee_employment_status">
+									<option value="">--Select--</option>
+									<option value="Temporary">Temporary</option>
+									<option value="Probationary">Probationary</option>
+									<option value="Confirmed">Confirmed</option>
+									<option value="Consultant">Consultant</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_location">Location</label>
+							<div class="controls">
+								<select class="form-control" id="employee_location">
+									<option value="India">India</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_date_of_joining">Date Of Joining</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_joining">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_date_of_confirmation">Confirmation Date</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_confirmation">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_notice_period">Notice Period (Days)</label>
+							<div class="controls">
+								<input class="form-control" type="number" id="employee_notice_period">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_first_manager_id">First Level Supervisor</label>
+							<div class="controls">
+								<select class="form-control" id="employee_first_manager_id">
+									<option value="">--Select--</option>
+									<option value="1">Paul McMullen</option>
+									<option value="2">Adam Abraham</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_second_manager_id">Second Level Supervisor</label>
+							<div class="controls">
+								<select class="form-control" id="employee_second_manager_id">
+									<option value="">--Select--</option>
+									<option value="3">Paul McMullen</option>
+									<option value="4">Adam Abraham</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="1" id="employee_is_eligible_wfh">
+								<label for="employee_is_eligible_wfh">Is Eligible for WFH</label>
+							</div>
+						</div>
+						<div class="form-group wfh_days" style="display: none;">
+							<label class="form-label" for="employee_wfh_day_id">WFH Days</label>
+							<div class="controls">
+								<select class="form-control" id="employee_wfh_day_id">
+									<option value="1">HDS_WFH</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="1" id="employee_eligible_medical_lop">
+								<label for="employee_eligible_medical_lop">Is Eligible for Medical LOP</label>
+							</div>
+						</div>
+
+						<a class="btn btn-primary continue" tab-name="tab3">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 4*@
+					<div class="tab-pane fade show " id="tab4">
+						<div class="fields">
+							<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
+							<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
+								<i class="fa fa-times-circle"></i>
+							</a>
+							<div class="form-row">
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_dependent_details_attributes_0_dependent_name">Dependent Name</label>
+									<input class="form-control" type="text" id="employee_dependent_details_attributes_0_dependent_name">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_dependent_details_attributes_0_relation">Relation</label>
+									<select class="form-control" id="employee_dependent_details_attributes_0_relation">
+										<option value=""></option>
+										<option value="Father">Father</option>
+										<option value="Mother">Mother</option>
+										<option value="Spouse">Spouse</option>
+										<option value="Son">Son</option>
+										<option value="Daughter">Daughter</option>
+									</select>
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_dependent_details_attributes_0_date_of_birth">Date of Birth</label>
+									<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_dependent_details_attributes_0_date_of_birth">
+								</div>
+							</div>
+						</div>
+						<div class="align_right">
+							<a class="btn btn-info btn-xs add_nested_fields" data-association="dependent_details" data-blueprint-id="dependent_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+						</div>
+						<br>
+						<a class="btn btn-primary continue" tab-name="tab4">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*<div id="dependent_details_fields_blueprint" style="display: none" data-blueprint="<div class=&quot;fields&quot;>input type=&quot;hidden&quot; value=&quot;false&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][_destroy]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details__destroy&quot; /><a title=&quot;Remove Dependent&quot; data-confirm=&quot;Are you sure want to delete?&quot; class=&quot;remove_nested_fields&quot; data-association=&quot;dependent_details&quot; href=&quot;javascript:void(0)&quot;><i class=&quot;fa fa-times-circle&quot;></i></a><div class=&quot;form-row&quot;><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_dependent_name&quot;>Dependent Name</label><input class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][dependent_name]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_dependent_name&quot; /></div><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_relation&quot;>Relation</label><select class=&quot;form-control&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][relation]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_relation&quot;><option value=&quot;&quot;></option><option value=&quot;Father&quot;>Father</option><option value=&quot;Mother&quot;>Mother</option><option value=&quot;Spouse&quot;>Spouse</option><option value=&quot;Son&quot;>Son</option><option value=&quot;Daughter&quot;>Daughter</option></select></div><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_date_of_birth&quot;>Date of Birth</label><input class=&quot;form-control datepicker&quot; value=&quot;&quot; data-format=&quot;dd-mm-yyyy&quot; type=&quot;text&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][date_of_birth]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_date_of_birth&quot; /></div></div></div>"></div>*@
+					@*tab 5*@
+					<div class="tab-pane fade show " id="tab5">
+						<div class="fields">
+							<a title="Remove Education" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="education_details" href="javascript:void(0)">
+								<i class="fa fa-times-circle"></i>
+							</a>
+							<div class="form-row">
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_education_details_attributes_0_degree">Degree</label>
+									<input class="form-control" type="text" id="employee_education_details_attributes_0_degree">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_education_details_attributes_0_institute">Institute</label>
+									<input class="form-control" type="text" id="employee_education_details_attributes_0_institute">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_education_details_attributes_0_university">Board / University</label>
+									<input class="form-control" type="text" id="employee_education_details_attributes_0_university">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_education_details_attributes_0_year_of_passing">Year Of Passing</label>
+									<input class="form-control" type="text" id="employee_education_details_attributes_0_year_of_passing">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_education_details_attributes_0_grade">Percentage / CGPA</label>
+									<input class="form-control" type="text" id="employee_education_details_attributes_0_grade">
+								</div>
+							</div>
+						</div>
+						<div class="align_right">
+							<a class="btn btn-info btn-xs add_nested_fields" data-association="education_details" data-blueprint-id="education_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+						</div><br>
+						<a class="btn btn-primary continue" tab-name="tab5">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+
+					</div>
+					@*tab 6*@
+					<div class="tab-pane fade show " id="tab6">
+						<div class="fields">
+							<a title="Remove Experience" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="experience_details" href="javascript:void(0)">
+								<i class="fa fa-times-circle"></i>
+							</a>
+							<div class="form-row">
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_experience_details_attributes_0_company_name">Company name</label>
+									<input class="form-control" type="text" id="employee_experience_details_attributes_0_company_name">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_experience_details_attributes_0_designation">Designation</label>
+									<input class="form-control" type="text" id="employee_experience_details_attributes_0_designation">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_experience_details_attributes_0_from_date">From Date</label>
+									<input class="form-control experience_from exp_datepicker datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_experience_details_attributes_0_from_date">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_experience_details_attributes_0_to_date">To Date</label>
+									<input class="form-control experience_to exp_datepicker datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_experience_details_attributes_0_to_date">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label" for="employee_experience_details_attributes_0_duration">Duration</label>
+									<input class="form-control" type="text" id="employee_experience_details_attributes_0_duration">
+								</div>
+							</div>
+						</div>
+						<div class="align_right">
+							<a class="btn btn-info btn-xs add_nested_fields" data-association="experience_details" data-blueprint-id="experience_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+						</div><br>
+						<a class="btn btn-primary continue" tab-name="tab6">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 7*@
+					<div class="tab-pane fade show " id="tab7">
+						<div class="fields">
+							<div class="form-group">
+								<label class="form-label" for="employee_bank_detail_attributes_bank_name">Bank Name</label>
+								<div class="controls">
+									<input class="form-control" type="text" id="employee_bank_detail_attributes_bank_name">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="employee_bank_detail_attributes_acc_no">Account Number</label>
+								<div class="controls">
+									<input class="form-control" type="text" id="employee_bank_detail_attributes_acc_no">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="employee_bank_detail_attributes_ifsc_code">IFSC Code</label>
+								<div class="controls">
+									<input class="form-control" type="text" id="employee_bank_detail_attributes_ifsc_code">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="employee_bank_detail_attributes_branch">Branch</label>
+								<div class="controls">
+									<input class="form-control" type="text" id="employee_bank_detail_attributes_branch">
+								</div>
+							</div>
+						</div>
+						<a class="btn btn-primary continue" tab-name="tab7">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 8*@
+					<div class="tab-pane fade show " id="tab8">
+						<div class="form-group">
+							<label class="form-label" for="employee_aadhaar_no">Aadhaar No</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_aadhaar_no">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_pan_no">PAN No</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_pan_no">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_uan">UAN</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_uan">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_esi_no">ESI No</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_esi_no">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_passport_no">Passport No</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_passport_no">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_passport_expiry">Passport Expiry</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_passport_expiry">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_visa_no">Visa No</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_visa_no">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_visa_type">Visa Type</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_visa_type">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_visa_expiry">Visa Expiry</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_visa_expiry">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_skype_id">Skype ID</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_skype_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_facebook_id">Facebook ID</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_facebook_id">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="employee_linkedin_id">LinkedIn ID</label>
+							<div class="controls">
+								<input class="form-control" type="text" id="employee_linkedin_id">
+							</div>
+						</div>
+						<a class="btn btn-primary continue" tab-name="tab8">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 9*@
+					<div class="tab-pane fade show " id="tab9">
+						<div class="form-group">
+							<label class="form-label" for="employee_photo">Photo</label>
+							<div class="controls">
+								<input class="form-control" type="file" id="employee_photo">
+							</div>
+						</div>
+						<a class="btn btn-primary continue" tab-name="tab9">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+				</div>
+				@*</form>*@
+			}
+		</div>
+	</div>
+</div>
+ 

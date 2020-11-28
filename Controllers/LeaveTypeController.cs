@@ -20,10 +20,10 @@ namespace Highbrow.HiPower.Controllers
 
 		public IActionResult Index()
 		{
-            RedirectToAction("List");
-        }
+			return RedirectToAction("List");
+		}
 
-        [HttpGet, ActionName("Add")]
+		[HttpGet, ActionName("Add")]
         public IActionResult AddGet()
         {            
             return View("Add", new LeaveType());

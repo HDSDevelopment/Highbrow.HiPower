@@ -1,0 +1,122 @@
+﻿@{ ViewData["Title"] = "Leave Balance";
+	ViewData["body_class"] = "detail_leaveBalance"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Leave Balance List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "LeaveBalance")">
+					<div type="button" class="btn btn-primary btn-sm">Add Leave Balance</div>
+				</a>
+				<a href="@Url.Action("BulkUpload", "LeaveBalance")">
+					<div type="button" class="btn btn-info btn-sm">Upload Leave Balance</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						@*filter form*@
+						<nav class="navbar navbar-expand-lg navbar-light filter-bar mb-4">
+							<form class="employee_leave_balance_search" id="employee_leave_balance_search" action="/employee_leave_balances" accept-charset="UTF-8" method="get">
+								<input name="utf8" type="hidden" value="✓">
+								<div class="form-row align-items-center">
+									<div class="col-sm-4 my-1">
+										<select class="form-control" name="q[employee_department_name_eq]" id="q_employee_department_name_eq">
+											<option value="">Department</option>
+											<option value="Accounting">Accounting</option>
+											<option value="Finance">Finance</option>
+											<option value="Human Resource Management">Human Resource Management</option>
+										</select>
+									</div>
+									<div class="col-sm-4 my-1">
+										<select class="form-control" name="q[employee_id_eq]" id="q_employee_id_eq">
+											<option value="">Employee</option>
+											<option value="1">Adam Abraham (E0003)</option>
+											<option value="2">Gajendran (E0010)</option>
+										</select>
+									</div>
+									<div class="col-sm-3 my-1">
+										<select class="form-control" name="q[leave_type_name_eq]" id="q_leave_type_name_eq">
+											<option value="">Leave Type</option>
+											<option value="Casual Leave">Casual Leave</option>
+											<option value="Earned Leave">Earned Leave</option>
+											<option value="Loss of Pay">Loss of Pay</option>
+										</select>
+									</div>
+									<div class="col-sm-2 my-1">
+										<select class="form-control" name="q[leave_year_eq]" id="q_leave_year_eq"><option selected="selected" value="2020">2020</option></select>
+									</div>
+									<div class="col-auto my-1">
+										<input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Search">
+										<a href="/employee_leave_balances?q%5Bleave_year_eq%5D=2020">
+											<div type="button" class="btn">Clear</div>
+										</a>
+									</div>
+								</div>
+							</form>
+						</nav>
+						<div class="table-responsive">
+							<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Department</th>
+										<th>Employee</th>
+										<th>Leave Type</th>
+										<th>Total Leave</th>
+										<th>Eligible</th>
+										<th>Leave Availed</th>
+										<th>Balance</th>
+										<th>Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Finance</td>
+										<td>Adam Abraham</td>
+										<td>Casual Leave</td>
+										<td>12.0</td>
+										<td>12.0</td>
+										<td>5.0</td>
+										<td>7.0</td>
+										<td>Active</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveBalance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Finance</td>
+										<td>Adam Abraham</td>
+										<td>Earned Leave</td>
+										<td>12.0</td>
+										<td>12.0</td>
+										<td>5.0</td>
+										<td>7.0</td>
+										<td>Active</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveBalance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

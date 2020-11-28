@@ -1,0 +1,83 @@
+﻿@{ ViewData["Title"] = "Department Mapping";
+	ViewData["body_class"] = "detail_departmentMapping"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Department Mapping List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "DepartmentMapping")">
+					<div type="button" class="btn btn-primary btn-sm">Add Mapping</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						<div class="table-responsive">
+							<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Department</th>
+										<th>Employee</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>OPS DEPT</td>
+										<td>Paul McMullen</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "DepartmentMapping")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>HR DEPT</td>
+										<td>Paul McMullen</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "DepartmentMapping")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>IT DEPT</td>
+										<td>Paul McMullen</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "DepartmentMapping")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>ACCOUNTS</td>
+										<td>Gajendran</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "DepartmentMapping")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

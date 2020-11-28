@@ -1,0 +1,42 @@
+﻿@{ ViewData["Title"] = "Leave Balance Bulk Upload";
+	ViewData["body_class"] = "bulk_upload"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Upload Details</h2>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<form id="msg_validate" enctype="multipart/form-data" action="/LeaveBalance" accept-charset="UTF-8" method="post" novalidate="novalidate">
+					<div class="col-12 col-md-9 col-lg-8">
+						<div class="form-group row">
+							<label class="col-sm-4 col-form-label">Template Download:</label>
+							<div class="col-sm-8">
+								<a href="/LeaveBalance.xlsx">
+									<div type="button" class="btn btn-primary"><i class="fa fa-cloud-download"></i></div>
+								</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="holiday_file_holiday">Leave Balance File *</label>
+							<div class="controls">
+								<input class="form-control" required="required" type="file"  id="holiday_file_holiday" aria-required="true">
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
+						<div class="text-left">
+							<input type="submit" name="commit" value="Upload" class="btn btn-primary" data-disable-with="Upload">
+							<a href="@Url.Action("List", "LeaveBalance")">
+								<div type="button" class="btn">Cancel</div>
+							</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

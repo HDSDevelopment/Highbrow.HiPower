@@ -1,0 +1,160 @@
+﻿@{ ViewData["Title"] = "Attendance";
+	ViewData["body_class"] = "detail_attendance"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Attendance List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "Attendance")">
+					<div type="button" class="btn btn-primary btn-sm">Add Attendance</div>
+				</a>
+				<a href="@Url.Action("BulkUpload", "Attendance")">
+					<div type="button" class="btn btn-info btn-sm">Upload Attendance</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						@*filter form*@
+						<nav class="navbar navbar-expand-lg navbar-light filter-bar mb-4">
+							<form class="access_card_search" id="access_card_search" action="/attendances" accept-charset="UTF-8" method="get">
+								<input name="utf8" type="hidden" value="✓">
+								<div class="form-row align-items-center">
+									<div class="col-sm-4 my-1">
+										<select class="form-control" name="q[employee_department_name_eq]" id="q_employee_department_name_eq">
+											<option value="">Department</option>
+											<option value="Accounting">Accounting</option>
+											<option value="Finance">Finance</option>
+											<option value="Human Resource Management">Human Resource Management</option>
+										</select>
+									</div>
+									<div class="col-sm-4 my-1">
+										<select class="form-control" name="q[employee_id_eq]" id="q_employee_id_eq">
+											<option value="">Employee</option>
+											<option value="1">Adam Abraham (E0003)</option>
+											<option value="2">Gajendran (E0010)</option>
+										</select>
+									</div>
+									<div class="col-auto my-1">
+										<input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Search">
+										<a href="/attendances">
+											<div type="button" class="btn">Clear</div>
+										</a>
+									</div>
+								</div>
+							</form>
+						</nav>
+						<div class="table-responsive">
+							<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Department</th>
+										<th>Employee</th>
+										<th>Date</th>
+										<th>In Time</th>
+										<th>Out Time</th>
+										<th>Total Time</th>
+										<th>Status</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Finance</td>
+										<td>
+											Paul McMullen<br>
+											<span class="td-info">
+												<b>Emp ID</b> - E0005
+											</span>
+										</td>
+										<td>20 Oct 2020</td>
+										<td>10:32 AM</td>
+										<td>09:18 PM</td>
+										<td>10:46</td>
+										<td>Fullday</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Attendance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Finance</td>
+										<td>
+											Paul McMullen<br>
+											<span class="td-info">
+												<b>Emp ID</b> - E0005
+											</span>
+										</td>
+										<td>19 Oct 2020</td>
+										<td>09:16 AM</td>
+										<td>08:52 PM</td>
+										<td>11:36</td>
+										<td>Fullday</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Attendance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Finance</td>
+										<td>
+											Paul McMullen<br>
+											<span class="td-info">
+												<b>Emp ID</b> - E0005
+											</span>
+										</td>
+										<td>16 Oct 2020</td>
+										<td>10:30 AM</td>
+										<td>07:20 PM</td>
+										<td>08:50</td>
+										<td>Fullday</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Attendance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td>Finance</td>
+										<td>
+											Paul McMullen<br>
+											<span class="td-info">
+												<b>Emp ID</b> - E0005
+											</span>
+										</td>
+										<td>10 Oct 2020</td>
+										<td>09:15 AM</td>
+										<td>08:30 PM</td>
+										<td>11:15</td>
+										<td>Fullday</td>
+										<td>
+											<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Attendance")">
+												<i class="fa fa-edit"></i>
+											</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
+												<i class="fa fa-trash"></i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

@@ -1,0 +1,70 @@
+﻿
+@{
+	string view = ViewData["form_class"].ToString();
+}
+@using (Html.BeginForm(view, "LeaveBalance", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_LeaveBalance" }))
+{
+	@*<form id="form_LeaveBalance" action="/LeaveBalance/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
+		<div class="col-12 col-md-9 col-lg-8">
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_employee_id">Employee *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<select class="form-control" id="employee_leave_balance_employee_id">
+						<option value="">Please Select</option>
+						<option value="1">Adam Abraham (E0003)</option>
+						<option value="2">Gajendran (E0010)</option>
+						<option value="3">Paul McMullen (E0005)</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_leave_type_id">Leave Type *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<select class="form-control" id="employee_leave_balance_leave_type_id">
+						<option value="">Please Select</option>
+						<option value="1">Casual Leave</option>
+						<option value="2">Earned Leave</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_total_leave">Total Leave *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<input class="form-control" type="number" value="0.0" id="employee_leave_balance_total_leave">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_eligible">Eligible *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<input class="form-control" type="number" value="0.0" id="employee_leave_balance_eligible">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_leave_availed">Leave Availed *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<input class="form-control" type="number" value="0.0" id="employee_leave_balance_leave_availed">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="employee_leave_balance_balance">Balance *</label>
+				<span class="desc"></span>
+				<div class="controls">
+					<input class="form-control" type="number" value="0.0" id="employee_leave_balance_balance">
+				</div>
+			</div>
+			<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
+				<div class="text-left">
+					<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+					<a href="@Url.Action("List", "LeaveBalance")">
+						<div type="button" class="btn">Cancel</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	@*</form>*@
+}

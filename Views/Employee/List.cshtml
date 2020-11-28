@@ -1,0 +1,302 @@
+﻿
+
+@{ ViewData["Title"] = "Employee";
+	ViewData["body_class"] = "detail_employee"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Employee List</h2>
+			<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "Employee")">
+					<div type="button" class="btn btn-primary btn-sm">Add Employee</div>
+				</a>
+				<a href="@Url.Action("BulkUpload", "Employee")">
+					<div type="button" class="btn btn-info btn-sm">Upload Employees</div>
+				</a>
+			</div>
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						<div class="text-center">
+							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
+										<i class="fa fa-check"></i> Active (2)
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
+										<i class="fa fa-ban"></i> Inactive (1)
+									</a>
+								</li>
+							</ul>
+						</div>
+						@*filter form*@
+						<nav class="navbar navbar-expand-lg navbar-light filter-bar">
+							<form class="employee_search" id="employee_search" action="/employees" accept-charset="UTF-8" method="get">
+								<input name="utf8" type="hidden" value="✓">
+								<input type="hidden" name="view" id="view" value="list">
+								<input value="Active" type="hidden" name="q[status_eq]" id="q_status_eq">
+								<div class="form-row align-items-center">
+									<div class="col-sm-3 my-1">
+										<input class="form-control" placeholder="Emp ID" type="search" name="q[employee_id_cont]" id="q_employee_id_cont">
+									</div>
+									<div class="col-sm-3 my-1">
+										<input class="form-control" placeholder="Name" type="search" name="q[name_cont]" id="q_name_cont">
+									</div>
+									<div class="col-sm-3 my-1">
+										<select class="form-control" name="q[department_name_eq]" id="q_department_name_eq">
+											<option value="">Department</option>
+											<option value="Accounting">Accounting</option>
+											<option value="Finance">Finance</option>
+											<option value="Human Resource Management">Human Resource Management</option>
+											<option value="IT Security">IT Security</option>
+											<option value="Marketing">Marketing</option>
+											<option value="Production">Production</option>
+											<option value="R&amp;D ">R&amp;D </option>
+											<option value="நிறுவன நிதித் துறை">நிறுவன நிதித் துறை</option>
+										</select>
+									</div>
+									<div class="col-auto my-1">
+										<input type="submit" name="commit" value="Search" class="btn btn-primary" data-disable-with="Search">
+										<a href="/employees?q%5Bstatus_eq%5D=Active&amp;view=list">
+											<div type="button" class="btn">Clear</div>
+										</a>
+									</div>
+								</div>
+							</form>
+						</nav>
+						@*Active*@
+						<div class="tab-content primary" id="myTabContent1">
+							<div class="tab-pane fade show active" id="list_active">
+								<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab2" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link btn btn-secondary active" href="#list_active_table" role="tab" data-toggle="tab">
+											<i class="fa fa-bars"></i> List
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link btn btn-secondary" role="tab" href="#list_active_grid" data-toggle="tab">
+											<i class="fa fa-th-large"></i> Grid
+										</a>
+									</li>
+								</ul>
+								<div class="tab-content primary" id="myTabContent2">
+									@*active table*@
+									<div class="tab-pane fade show active" id="list_active_table">
+										<div class="table-responsive">
+											<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>Emp ID</th>
+														<th>Name</th>
+														<th>Department</th>
+														<th>Designation</th>
+														<th>Email</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>E000</td>
+														<td>Admin</td>
+														<td>Human Resource Management</td>
+														<td>Admin</td>
+														<td>admin@thehipower.com</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="/employees/1/edit?tab=general">
+																<i class="fa fa-edit"></i>
+															</a>
+														</td>
+													</tr>
+													<tr>
+														<td>E0001</td>
+														<td>Paul McMullen</td>
+														<td>Finance</td>
+														<td>Manager</td>
+														<td>paul@thehipower.com</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="/employees/3/edit?tab=general">
+																<i class="fa fa-edit"></i>
+															</a>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									@*active grid*@
+									<div class="tab-pane fade" id="list_active_grid">
+											<div class="row">
+												<div class="col-md-6 col-lg-4">
+													<div class="team-member ">
+														<div class="team-img">
+															<a href="/employees/1">
+																<img class="img-fluid" src="/images/default-profile.jpg">
+															</a>
+														</div>
+														<div class="team-info">
+															<h4>
+																<a href="/employees/1">
+																	Admin(<b>E000</b>)
+																</a>
+															</h4>
+															<span class="team-member-edit">
+																<a href="/employees/1/edit?tab=general">
+																	<i class="fa fa-pencil icon-xs"></i>
+																</a>
+															</span>
+															<span>Admin</span>
+														</div>
+														<p>
+															Human Resource Management<br>
+															admin@thehipower.com
+														</p>
+														<ul class="social-icons list-inline list-unstyled">
+															<li class="list-inline-item">
+																<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
+															</li>
+															<li class="list-inline-item">
+																<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
+															</li>
+														</ul>
+													</div>
+												</div>
+												<div class="col-md-6 col-lg-4">
+													<div class="team-member ">
+														<div class="team-img">
+															<a href="/employees/3">
+																<img class="img-fluid" src="/images/default-profile.jpg">
+															</a>
+														</div>
+														<div class="team-info">
+															<h4>
+																<a href="/employees/3">
+																	Paul McMullen(<b>E0005</b>)
+																</a>
+															</h4>
+															<span class="team-member-edit">
+																<a href="/employees/3/edit?tab=general">
+																	<i class="fa fa-pencil icon-xs"></i>
+																</a>
+															</span>
+															<span>Manager</span>
+														</div>
+														<p>
+															Finance<br>
+															paul@thehipower.com
+														</p>
+														<ul class="social-icons list-inline list-unstyled">
+															<li class="list-inline-item">
+																<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
+															</li>
+															<li class="list-inline-item">
+																<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+									</div>
+								</div>
+							</div>
+							@*Inactive*@
+						<div class="tab-pane fade" id="list_inactive">
+							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab3" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary active" href="#list_inactive_table" role="tab" data-toggle="tab">
+										<i class="fa fa-bars"></i> List
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive_grid" data-toggle="tab">
+										<i class="fa fa-th-large"></i> Grid
+									</a>
+								</li>
+							</ul>
+							<div class="tab-content primary" id="myTabContent3">
+								@*active table*@
+								<div class="tab-pane fade show active" id="list_inactive_table">
+									<div class="table-responsive">
+										<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+											<thead>
+												<tr>
+													<th>Emp ID</th>
+													<th>Name</th>
+													<th>Department</th>
+													<th>Designation</th>
+													<th>Email</th>
+													<th>Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>E002</td>
+													<td>Test</td>
+													<td>Human Resource Management</td>
+													<td>Admin</td>
+													<td>admin@thehipower.com</td>
+													<td>
+														<a class="btn btn-primary btn-xs" title="Edit" href="/employees/1/edit?tab=general">
+															<i class="fa fa-edit"></i>
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								@*active grid*@
+								<div class="tab-pane fade" id="list_inactive_grid">
+									<div class="row">
+										<div class="col-md-6 col-lg-4">
+											<div class="team-member ">
+												<div class="team-img">
+													<a href="/employees/1">
+														<img class="img-fluid" src="/images/default-profile.jpg">
+													</a>
+												</div>
+												<div class="team-info">
+													<h4>
+														<a href="/employees/1">
+															Admin(<b>E000</b>)
+														</a>
+													</h4>
+													<span class="team-member-edit">
+														<a href="/employees/1/edit?tab=general">
+															<i class="fa fa-pencil icon-xs"></i>
+														</a>
+													</span>
+													<span>Test</span>
+												</div>
+												<p>
+													Human Resource Management<br>
+													admin@thehipower.com
+												</p>
+												<ul class="social-icons list-inline list-unstyled">
+													<li class="list-inline-item">
+														<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
+													</li>
+													<li class="list-inline-item">
+														<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

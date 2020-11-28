@@ -70,16 +70,16 @@ namespace Highbrow.HiPower.Controllers
                 ShiftAddUpdateViewModel shiftVM = new ShiftAddUpdateViewModel();
 
                 shiftVM.ShiftName = shift.ShiftName;
-                //shiftVM.SetStartTime(shift.StartTimeInSeconds);
-                shiftVM.StartHour = shiftVM.SetStartTime(shift.StartTimeInSeconds).Hours;
-                shiftVM.StartMinute = shiftVM.SetStartTime(shift.StartTimeInSeconds).Minutes;
-                shiftVM.EndHour = shiftVM.SetEndTime(shift.EndTimeInSeconds).Hours;
-                shiftVM.EndMinute = shiftVM.SetEndTime(shift.EndTimeInSeconds).Minutes;
-                shiftVM.BufferHour = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Hours;
-                shiftVM.BufferMinute = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Minutes;
-                //shiftVM.SetEndTime(shift.EndTimeInSeconds);
-                //shiftVM.SetBufferTime(shift.BufferTimeInSeconds);
-                shiftVM.IsActive = shift.IsActive;
+				shiftVM.SetStartTime(shift.StartTimeInSeconds);
+				//shiftVM.StartHour = shiftVM.SetStartTime(shift.StartTimeInSeconds).Hours;
+				//shiftVM.StartMinute = shiftVM.SetStartTime(shift.StartTimeInSeconds).Minutes;
+				//shiftVM.EndHour = shiftVM.SetEndTime(shift.EndTimeInSeconds).Hours;
+				//shiftVM.EndMinute = shiftVM.SetEndTime(shift.EndTimeInSeconds).Minutes;
+				//shiftVM.BufferHour = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Hours;
+				//shiftVM.BufferMinute = shiftVM.SetBufferTime(shift.BufferTimeInSeconds).Minutes;
+				shiftVM.SetEndTime(shift.EndTimeInSeconds);
+				shiftVM.SetBufferTime(shift.BufferTimeInSeconds);
+				shiftVM.IsActive = shift.IsActive;
 
                 return View("Update", shiftVM);
             }
