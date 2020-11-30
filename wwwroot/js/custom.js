@@ -1,7 +1,6 @@
 ﻿$(document).ready(function () {
     //data tabes initialization
     $('table.display').DataTable();
-
     //menu active open code
     var menuOpen = $('#main-menu-wrapper li.open');
     $(menuOpen).closest('.collapse').addClass('show');

@@ -2474,7 +2474,7 @@ var table5 = $('#example-5').DataTable();
                 var $this = $(e),
                     options = {
                         minViewMode: getValue($this, 'minViewMode', 0),
-                        format: getValue($this, 'format', 'mm/dd/yyyy'),
+                        format: getValue($this, 'format', 'dd-mm-yyyy'),
                         startDate: getValue($this, 'startDate', ''),
                         endDate: getValue($this, 'endDate', ''),
                         daysOfWeekDisabled: getValue($this, 'disabledDays', ''),

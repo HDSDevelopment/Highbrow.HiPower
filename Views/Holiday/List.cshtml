@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "Holidays";
+﻿@using Highbrow.HiPower.ViewModels.HolidayVM
+@model IEnumerable<HolidayListViewModel>
+
+@{ ViewData["Title"] = "Holidays";
 	ViewData["body_class"] = "detail_holiday"; }
 
 <!-- MAIN CONTENT AREA STARTS -->
@@ -20,77 +23,47 @@
 				<div class="col-12">
 					<div id="portfolio" class="hi-tabs">
 
-								<div class="table-responsive">
-									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
-										<thead>
+						<div class="table-responsive">
+							<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Date</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									@if (Model != null)
+									{
+										@foreach (var item in Model)
+										{
 											<tr>
-												<th>Name</th>
-												<th>Date</th>
-												<th>Actions</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td>Christmas</td>
-												<td>25 Dec 2020</td>
+												<td>@item.HolidayName</td>
+												<td>@item.HolidayDate</td>
 												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
+													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday", new { id = item.Id})">
 														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
-														<i class="fa fa-trash"></i>
 													</a>
+													@using (Html.BeginForm("Delete", "Holiday", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+													{
+														<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+															<i class="fa fa-trash"></i>
+														</button>
+													}
 												</td>
 											</tr>
-											<tr>
-												<td>Diwali</td>
-												<td>14 Nov 2020</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>Diwali</td>
-												<td>13 Nov 2020</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>Vijaya Dasami</td>
-												<td>26 Oct 2020</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-											<tr>
-												<td>Ayudha Pooja</td>
-												<td>25 Oct 2020</td>
-												<td>
-													<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Holiday")">
-														<i class="fa fa-edit"></i>
-													</a>                              <a data-confirm="Are you sure?" class="btn btn-danger btn-xs" title="Delete" rel="nofollow" data-method="delete" href="/Holidays/3">
-														<i class="fa fa-trash"></i>
-													</a>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+										}
+									}
+									else
+									{
 
+									}
+								</tbody>
+							</table>
 						</div>
+
 					</div>
+				</div>
 			</div>
 		</div>
 	</section>

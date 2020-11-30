@@ -212,6 +212,33 @@ public class DataGenerator
                         IsActive = false,
                         CreatedAt = Convert.ToDateTime("11/11/2020")
                     });
+            context.Holidays.AddRange(
+                    new Holiday
+                    {
+                        Id = 1,
+                        HolidayName = "Diwali",
+                        HolidayDate = Convert.ToDateTime("13/11/2020"),
+                        CreatedAt = Convert.ToDateTime("11/11/2020"),
+                        UpdatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.Holidays.AddRange(
+                    new Holiday
+                    {
+                        Id = 2,
+                        HolidayName = "Diwali",
+                        HolidayDate = Convert.ToDateTime("14/11/2020"),
+                        CreatedAt = Convert.ToDateTime("11/11/2020"),
+                        UpdatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.Holidays.AddRange(
+                    new Holiday
+                    {
+                        Id = 3,
+                        HolidayName = "Christmas",
+                        HolidayDate = Convert.ToDateTime("25/12/2020"),
+                        CreatedAt = Convert.ToDateTime("11/11/2020"),
+                        UpdatedAt = Convert.ToDateTime("11/11/2020")
+                    });
 
             context.SaveChanges();
     }
