@@ -1,6 +1,9 @@
-﻿@{ ViewData["Title"] = "Edit LeaveProfile";
-	ViewData["body_class"] = "edit_leaveProfile";
-	ViewData["form_class"] = "Update"; }
+﻿@using Highbrow.HiPower.ViewModels.LeaveCategoryVM
+@model LeaveCategoryUpdateViewModel
+
+@{ ViewData["Title"] = "Add Leave Profile";
+	ViewData["body_class"] = "add_leaveProfile";
+	ViewData["form_class"] = "Add"; }
 
 
 <!-- MAIN CONTENT AREA STARTS -->
@@ -11,7 +14,7 @@
 		</header>
 		<div class="content-body">
 			<div class="row">
-				@Html.Partial("~/Views/LeaveProfile/_Form.cshtml")
+				@Html.Partial("~/Views/LeaveCategory/_Form.cshtml", Model)
 			</div>
 		</div>
 	</section>

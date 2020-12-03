@@ -112,6 +112,8 @@ namespace Highbrow.HiPower.Services
             return 0;
         }
 
+       
+
         public async Task<List<LeaveType>> ListInactiveLeaveTypes()
         {
             return await ListByIsActive(false);
@@ -124,6 +126,18 @@ namespace Highbrow.HiPower.Services
             if (inactiveLeaveTypes != null)
                 return inactiveLeaveTypes.Count;
             return 0;
+        }
+
+        public async Task<List<LeaveTypeNameInfo>> ListLeaveTypeNames()
+        {
+            return await (from leaveType in _context.LeaveTypes.AsNoTracking()
+                          where leaveType.IsActive == true
+                          select new LeaveTypeNameInfo
+                          {
+                              Id = leaveType.Id,
+                              LeaveTypeName = leaveType.LeaveTypeName
+                          })
+                            .ToListAsync();
         }
 
         public async Task<bool> Exists(int id)

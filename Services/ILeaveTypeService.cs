@@ -23,6 +23,8 @@ namespace Highbrow.HiPower.Services
     Task<List<LeaveType>> ListActiveLeaveTypes();
 
     Task<List<LeaveType>> ListInactiveLeaveTypes();
+    Task<List<LeaveTypeNameInfo>> ListLeaveTypeNames();
+
 
     Task<int> GetActiveCount();
 

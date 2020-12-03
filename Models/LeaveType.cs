@@ -21,6 +21,6 @@ namespace Highbrow.HiPower.Models
 
         public DateTime UpdatedAt { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; }        
     }
 }

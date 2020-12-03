@@ -17,12 +17,15 @@ namespace Highbrow.HiPower.Data
         public DbSet<Shift> Shifts { get; set; }
         public DbSet<Holiday> Holidays { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
-        //public DbSet<LeaveCategoryType> LeaveCategoryTypes { get; set; }
+        public DbSet<LeaveCategory> LeaveCategories { get; set; }
+        public DbSet<LeaveCategoryType> LeaveCategoryTypes { get; set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<LeaveCategoryType>()
-        //    .HasKey(lct => new { lct.LeaveTypeId, lct.LeaveCategoryId });
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<LeaveCategoryType>()
+            .HasKey(lct => new { lct.LeaveTypeId, lct.LeaveCategoryId });
+
+
+        }
     }
 }

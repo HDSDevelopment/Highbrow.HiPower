@@ -1,0 +1,134 @@
+﻿@using Highbrow.HiPower.ViewModels.LeaveCategoryVM
+@model LeaveCategoryListViewModel
+
+@{ ViewData["Title"] = "Leave Profiles";
+	ViewData["body_class"] = "detail_leaveProfile"; }
+
+<!-- MAIN CONTENT AREA STARTS -->
+<div class="col-xl-12">
+	<section class="box ">
+		<header class="panel_header">
+			<h2 class="title float-left">Leave Profiles List</h2>
+			@*<div class="actions panel_actions float-right">
+				<a href="@Url.Action("Add", "LeaveCategory")">
+					<div type="button" class="btn btn-primary btn-sm">Add Leave Profile</div>
+				</a>
+			</div>*@
+		</header>
+		<div class="content-body">
+			<div class="row">
+				<div class="col-12">
+					<div id="portfolio" class="hi-tabs">
+						<div class="text-center">
+							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
+										<i class="fa fa-check"></i> Active (@Model.ActiveCount)
+									</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
+										<i class="fa fa-ban"></i> Inactive (@Model.InactiveCount)
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="tab-content primary" id="myTabContent1">
+							<div class="tab-pane fade show active" id="list_active">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Leave Category</th>
+												<th>Leave Type</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											@if (Model != null && Model.ActiveCount != 0)
+											{
+												@foreach (var item in Model.ActiveLeaveCategories)
+												{
+													<tr>
+														<td class="text-center vertical-align-middle">@item.CategoryName</td>
+														<td>
+															@foreach (var leaveType in item.LeaveTypes)
+															{
+															<span class="d-block">@leaveType.LeaveTypeName</span>
+															}
+														</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveCategory", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@*@using (Html.BeginForm("Delete", "LeaveCategory", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}*@
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="list_inactive">
+								<div class="table-responsive">
+									<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th>Leave Category</th>
+												<th>Leave Type</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody>
+											@if (Model != null && Model.InactiveCount != 0)
+											{
+												@foreach (var item in Model.InactiveLeaveCategories)
+												{
+													<tr>
+														<td class="text-center vertical-align-middle">@item.CategoryName</td>
+														<td>
+															@foreach (var leaveType in item.LeaveTypes)
+															{
+																<span class="d-block">@leaveType.LeaveTypeName</span>
+															}
+														</td>
+														<td>
+															<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "LeaveCategory", new { id = item.Id})">
+																<i class="fa fa-edit"></i>
+															</a>
+															@*@using (Html.BeginForm("Delete", "LeaveCategory", FormMethod.Post, new { @class = "d-inline", enctype = "multipart/form-data" }))
+															{
+																<button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-xs" title="Delete" name="id" value="@item.Id">
+																	<i class="fa fa-trash"></i>
+																</button>
+															}*@
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+
+											}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+<!-- MAIN CONTENT AREA ENDS -->

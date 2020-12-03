@@ -1,0 +1,50 @@
+﻿@using Highbrow.HiPower.ViewModels.LeaveCategoryVM
+@model LeaveCategoryUpdateViewModel
+@{
+	string view = ViewData["form_class"].ToString();
+}
+@using (Html.BeginForm(view, "LeaveCategory", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_LeaveCategory" }))
+{
+	@*<form id="form_LeaveProfile" action="/LeaveProfiles/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
+	@Html.HiddenFor(m => m.Id)
+	@Html.HiddenFor(m => m.CreatedAt)
+<div class="col-12 col-md-9 col-lg-8">
+
+	<div class="form-group">
+		<label class="form-label" for="CategoryName">Leave Category *</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@Html.EditorFor(m => m.CategoryName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Leave Category", type = "text" } })
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="form-label">Leave Type*</label>
+		<span class="desc"></span>
+		<div class="controls">
+			@*<select class="form-control" multiple="multiple" id="leave_profile_leave_type_id">
+			<option value="1">Casual Leave</option>
+			<option selected="selected" value="2">Sick Leave</option>
+			<option value="3">Earned Leave</option>
+		</select>*@
+			<select id="selectedLeaveTypes" multiple="multiple" asp-for="selectedLeaveTypes" asp-items="@(new SelectList(Model.LeaveTypeNames.Items, "Value", "Text"))" class="form-control"></select>
+			@*<select id="SelectedLeaveTypes" multiple="multiple" asp-for="SelectedLeaveTypes" asp-items="@(new SelectList(Model.AllLeaveTypeNames, "Value", "Text", Model.SelectedLeaveTypes))" class="form-control"></select>*@
+			@*@Html.DropDownListFor(m => m.selectedLeaveTypes, (MultiSelectList)Model.LeaveTypeNames.Items, new { multiple = "true", @class= "form-control" })*@
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="form-check">
+			@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
+			<label class="form-check-label" for="IsActive">Active</label>
+		</div>
+	</div>
+</div>
+	<div class="col-12 col-md-9 col-lg-8 padding-bottom-30">
+		<div class="text-left">
+			<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+			<a href="@Url.Action("List", "LeaveCategory")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+	</div>
+	@*</form>*@
+}

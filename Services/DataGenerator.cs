@@ -209,7 +209,19 @@ public class DataGenerator
                         TotalDays = 1,
                         Gender = GenderType.Both,
                         MaritalStatus = MaritalStatusType.Both,
-                        IsActive = false,
+                        IsActive = true,
+                        CreatedAt = Convert.ToDateTime("11/11/2020")
+                    });
+            context.LeaveTypes.AddRange(
+                    new LeaveType
+                    {
+                        Id = 5,
+                        LeaveTypeName = "Loss of Pay",
+                        ShortCode = "LOP",
+                        TotalDays = 30,
+                        Gender = GenderType.Both,
+                        MaritalStatus = MaritalStatusType.Both,
+                        IsActive = true,
                         CreatedAt = Convert.ToDateTime("11/11/2020")
                     });
             context.Holidays.AddRange(
@@ -239,6 +251,72 @@ public class DataGenerator
                         CreatedAt = Convert.ToDateTime("11/11/2020"),
                         UpdatedAt = Convert.ToDateTime("11/11/2020")
                     });
+            context.LeaveCategories.AddRange(
+                        new LeaveCategory
+                        {
+                            Id = 1,
+                            CategoryName = "Confirmed",
+                            IsActive = true,
+                            CreatedAt = Convert.ToDateTime("11/11/2020"),
+                            UpdatedAt = Convert.ToDateTime("11/11/2020")
+                        });
+
+            context.LeaveCategories.AddRange(
+               new LeaveCategory
+               {
+                   Id = 2,
+                   CategoryName = "Probationary",
+                   IsActive = true,
+                   CreatedAt = Convert.ToDateTime("11/11/2020"),
+                   UpdatedAt = Convert.ToDateTime("11/11/2020")
+               });
+
+            context.LeaveCategoryTypes.AddRange(
+                new LeaveCategoryType
+                {
+                    LeaveCategoryId = 1,
+                    LeaveTypeId = 1
+
+                });
+
+            context.LeaveCategoryTypes.AddRange(
+                new LeaveCategoryType
+                {
+                    LeaveCategoryId = 1,
+                    LeaveTypeId = 2
+
+                });
+            context.LeaveCategoryTypes.AddRange(
+                new LeaveCategoryType
+                {
+                    LeaveCategoryId = 1,
+                    LeaveTypeId = 3
+
+                });
+            context.LeaveCategoryTypes.AddRange(
+                new LeaveCategoryType
+                {
+                    LeaveCategoryId = 1,
+                    LeaveTypeId = 4
+
+                });
+
+            context.LeaveCategoryTypes.AddRange(
+            new LeaveCategoryType
+            {
+                LeaveCategoryId = 2,
+                LeaveTypeId = 1
+
+            });
+
+            context.LeaveCategoryTypes.AddRange(
+                new LeaveCategoryType
+                {
+                    LeaveCategoryId = 2,
+                    LeaveTypeId = 2
+
+                });
+
 
             context.SaveChanges();
     }

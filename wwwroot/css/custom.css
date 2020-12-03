@@ -100,3 +100,6 @@ table.dataTable tr td {
 .td-info {
 	font-size: 10px;
 }
+.vertical-align-middle {
+	vertical-align: middle !important;
+}
