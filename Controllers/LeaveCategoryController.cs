@@ -60,8 +60,6 @@ namespace Highbrow.HiPower.Controllers
 
                 viewModel.SetViewModel(leaveCategory, allLeaveTypes);
 
-
-
                 return View("Update", viewModel);
             }
             return View("Error");
@@ -70,7 +68,6 @@ namespace Highbrow.HiPower.Controllers
         [HttpPost, ActionName("Update")]
         public async Task<IActionResult> UpdatePost(LeaveCategoryUpdateViewModel viewModel)
         {
-
             ServiceResult result = ServiceResult.Failure;
 
             if (ModelState.IsValid)
@@ -79,13 +76,7 @@ namespace Highbrow.HiPower.Controllers
                 {
                     LeaveCategory leaveCategory = viewModel.GetLeaveCategory();
 
-                    List<int> leaveTypeIds = viewModel.selectedLeaveTypes
-                                        .Select(n => Convert.ToInt32(n))
-                                        .ToList();
-
-                    result = await _leaveCategoryService.Update(leaveCategory, leaveTypeIds);
-
-
+                    result = await _leaveCategoryService.Update(leaveCategory, viewModel.SelectedLeaveTypes);
 
                     if (result == ServiceResult.Success)
                         return RedirectToAction("List");

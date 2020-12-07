@@ -29,34 +29,35 @@ namespace Highbrow.HiPower.Services
             return leaveCategory;
         }
 
-        public async Task<ServiceResult> Update(LeaveCategory leaveCategory, List<int> leaveTypeIds)
+        public async Task<ServiceResult> Update(LeaveCategory leaveCategory,
+                                                List<int> leaveTypeIds)
         {
             ServiceResult result = ServiceResult.Failure;
             int recordsAffected = 0;
 
-            LeaveCategory leaveCategoryToUpdate = await Details(leaveCategory.Id);
+            LeaveCategory categoryToUpdate = await _context.LeaveCategories
+                                                .Where(n => n.Id == leaveCategory.Id)
+                                                .Include(n => n.LeaveCategoryTypes)
+                                                .SingleOrDefaultAsync();
 
-            if (leaveCategoryToUpdate != null)                                                                                                                                                          
-            {                
-                leaveCategoryToUpdate.LeaveCategoryTypes.Clear();
-                await _context.SaveChangesAsync();
+            List<LeaveCategoryType> categoryTypes = new List<LeaveCategoryType>();
+            LeaveCategoryType categoryType = new LeaveCategoryType();
 
-                leaveCategory.UpdatedAt = DateTime.Now;
-                List<LeaveCategoryType> leaveCategoryTypes = new List<LeaveCategoryType>();
-                LeaveCategoryType leaveCategoryType = new LeaveCategoryType();
-                foreach (int leaveTypeId in leaveTypeIds)
-				{
-                    leaveCategoryType = new LeaveCategoryType
-                    {
-                        LeaveTypeId = leaveTypeId,
-                        LeaveCategoryId = leaveCategoryToUpdate.Id
-                    };
-                    leaveCategoryTypes.Add(leaveCategoryType);
+            if (await Exists(leaveCategory.Id))
+            {
+                if (leaveTypeIds != null)
+                    foreach (int typeId in leaveTypeIds)
+                        AddToLeaveCategoryTypes(categoryTypes,
+                                                typeId,
+                                                categoryToUpdate.Id);
+                else
+                    AddToLeaveCategoryTypes(categoryTypes,
+                                                null,
+                                                categoryToUpdate.Id);
 
-                }
-
-
-                    await _context.LeaveCategoryTypes.AddRangeAsync(leaveCategoryTypes);
+                categoryToUpdate.UpdatedAt = DateTime.Now;
+                categoryToUpdate.IsActive = leaveCategory.IsActive;
+                categoryToUpdate.LeaveCategoryTypes = categoryTypes;
 
                 recordsAffected = await _context.SaveChangesAsync();
             }
@@ -65,6 +66,23 @@ namespace Highbrow.HiPower.Services
                 result = ServiceResult.Success;
 
             return result;
+        }
+
+        void AddToLeaveCategoryTypes(List<LeaveCategoryType> categoryTypes,
+                                     int? typeId,
+                                     int categoryId)
+        {
+            LeaveCategoryType leaveCategoryType = GetLeaveCategoryType(typeId, categoryId);
+            categoryTypes.Add(leaveCategoryType);
+        }
+
+        LeaveCategoryType GetLeaveCategoryType(int? leaveTypeId, int leaveCategoryId)
+        {
+            return new LeaveCategoryType
+            {
+                LeaveTypeId = (int)leaveTypeId,
+                LeaveCategoryId = leaveCategoryId
+            };
         }
 
         private async Task<List<LeaveCategory>> ListByIsActive(bool isActive)

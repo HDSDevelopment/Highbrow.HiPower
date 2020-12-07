@@ -14,8 +14,9 @@ namespace Highbrow.HiPower.ViewModels.LeaveCategoryVM
 
         public bool IsActive { get; set; }
 
-        public MultiSelectList LeaveTypeNames { get; set; }
-        public List<string> selectedLeaveTypes { get; set; }
+        public List<SelectListItem> allLeaveTypesSelectList { get; set; }
+
+        public List<int> SelectedLeaveTypes { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -27,7 +28,7 @@ namespace Highbrow.HiPower.ViewModels.LeaveCategoryVM
             CategoryName = leaveCategory.CategoryName;
             IsActive = leaveCategory.IsActive;
 
-            List<SelectListItem> allLeaveTypesSelectList = new List<SelectListItem>();
+            allLeaveTypesSelectList = new List<SelectListItem>();
 
             foreach (LeaveTypeNameInfo leaveTypeName in allLeaveTypes)
             {
@@ -39,11 +40,9 @@ namespace Highbrow.HiPower.ViewModels.LeaveCategoryVM
                 allLeaveTypesSelectList.Add(item);
             }
 
-            selectedLeaveTypes = leaveCategory.LeaveCategoryTypes
-                                            .Select(n => Convert.ToString(n.LeaveType.Id))
+            SelectedLeaveTypes = leaveCategory.LeaveCategoryTypes
+                                            .Select(n => n.LeaveType.Id)
                                             .ToList();
-
-            LeaveTypeNames = new MultiSelectList(allLeaveTypesSelectList, selectedLeaveTypes);
         }
 
         public LeaveCategory GetLeaveCategory()
