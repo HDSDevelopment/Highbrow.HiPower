@@ -72,7 +72,7 @@ namespace Highbrow.HiPower.Services
                                      int? typeId,
                                      int categoryId)
         {
-            LeaveCategoryType leaveCategoryType = GetLeaveCategoryType(typeId, categoryId);
+            LeaveCategoryType leaveCategoryType = GetLeaveCategoryType(typeId,                                                                     categoryId);
             categoryTypes.Add(leaveCategoryType);
         }
 

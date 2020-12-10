@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Highbrow.HiPower.Models;
 using Highbrow.HiPower.Data;
+using Highbrow.HiPower.DTO;
 
 namespace Highbrow.HiPower.Services
 {
@@ -124,6 +125,18 @@ namespace Highbrow.HiPower.Services
             if (inactiveDepartments != null)
                 return inactiveDepartments.Count;
             return 0;
+        }
+
+        public async Task<List<DepartmentNameResponse>> ListDepartmentNames()
+        {
+            List<DepartmentNameResponse> departments = 
+            await (from department in _context.Departments.AsNoTracking()
+            select new DepartmentNameResponse{
+                                            Id = department.Id,
+                                            DepartmentName = department.DepartmentName
+                                            }).ToListAsync();
+
+                                            return departments;
         }
 
         public async Task<bool> Exists(int id)

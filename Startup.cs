@@ -39,6 +39,8 @@ namespace Highbrow.HiPower
             services.AddScoped<ILeaveTypeService, LeaveTypeService>();
             services.AddScoped<IHolidayService, HolidayService>();
             services.AddScoped<ILeaveCategoryService, LeaveCategoryService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

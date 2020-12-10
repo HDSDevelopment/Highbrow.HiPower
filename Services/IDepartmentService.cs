@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Highbrow.HiPower.Models;
+using Highbrow.HiPower.DTO;
 
 namespace Highbrow.HiPower.Services
 {
@@ -19,6 +20,8 @@ public interface IDepartmentService
     Task<List<Department>> ListActiveDepartments();
 
     Task<List<Department>> ListInactiveDepartments();
+
+    Task<List<DepartmentNameResponse>> ListDepartmentNames();
 
     Task<int> GetActiveCount();
 

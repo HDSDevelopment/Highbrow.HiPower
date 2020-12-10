@@ -4,6 +4,7 @@ using System.Linq;
 using Highbrow.HiPower.Data;
 using Microsoft.EntityFrameworkCore;
 using Highbrow.HiPower.Models;
+using System.Globalization;
 
 namespace Highbrow.HiPower.Services
 {
@@ -316,6 +317,66 @@ public class DataGenerator
                     LeaveTypeId = 2
 
                 });
+
+
+                                context.Employees.AddRange(
+                    new Employee
+                    {
+                        Id = 1,
+                        OfficeId = "E0001",
+                        Age = 25,
+                        NoticePeriod = 60,
+                        Title = TitleType.Mr,
+                        EmployeeName = "Shivakumar",
+                        FatherName = "Narayanan",
+                        Gender = GenderType.Male,
+                        MaritalStatus = MaritalStatusType.Single,
+                        BloodGroup = BloodGroupType.B_Positive,
+                        Religion = ReligionType.Hindu,
+                        Nationality = NationalityType.Indian,
+                        IsActive = true,                        
+                        UAN = "MH11576494191",
+                        LeaveCategoryId = 1,
+                        PANNumber = "AAAPZ1234C",
+                        ContactNumber = "7777777777",
+                        EmergencyNumber = "9999999999",
+                        PersonalMail = "def@ghi.com",
+                        
+                        CommunicationAddress = "12, ABC street, DEF Nagar, Chennai, Tamilnadu",
+                        
+                        PermanentAddress = "34, DEF Street, EFG Nagar, Trichy, Tamilnadu",
+                        
+                        DateOfBirth = DateTime.ParseExact("14/05/1990", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+
+                        JoiningDate = DateTime.ParseExact("02/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+
+                        CreatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+
+                        UpdatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+
+                        IsEligibleForWFH = false,
+
+                        Location = "Chennai",
+
+                        PhotoFileName = "E0001.jpg",
+
+                        PhotoFileSize = 8000,
+
+                        PhotoUpdatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+
+                        AadharNumber = "499118665246",
+
+                        ESINumber = "31001234560000001",
+
+                        IsExit = false,
+
+                        DepartmentId = 1,
+
+                        DesignationId = 1,
+
+                        ShiftId = 1
+                    });
+
 
 
             context.SaveChanges();
