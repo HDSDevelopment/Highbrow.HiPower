@@ -2,8 +2,11 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Highbrow.HiPower.Services;
 using Highbrow.HiPower.Models;
+using Highbrow.HiPower.DTO;
 using Highbrow.HiPower.ViewModels.EmployeeVM;
 
 namespace Highbrow.HiPower.Controllers
@@ -12,63 +15,57 @@ namespace Highbrow.HiPower.Controllers
     {
         IEmployeeService _employeeService;
         IDepartmentService _departmentService;
-        IDesignationService _designationService;
-        IShiftService _shiftService;
-        IWFHService _wfhService;
 
         public EmployeeController(IEmployeeService employeeService,
-                                    IDepartmentService departmentService,
-                                    IDesignationService designationService,
-                                    IShiftService shiftService,
-                                    IWFHService wfhService)
+                                    IDepartmentService departmentService)
         {
             _employeeService = employeeService;
-            _departmentService = departmentService;
-            _designationService = designationService;
-            _shiftService = shiftService;
-            _wfhService = wfhService;
+            _departmentService = departmentService;            
         }
 
         [HttpGet, ActionName("Add")]
-        public IActionResult AddGet()
+        public async Task<IActionResult> AddGet()
         {
-            return View("Add", new EmployeeAddViewModel());
+            EmployeeAddViewModel viewModel = new EmployeeAddViewModel();
+            
+            List<EmployeeNameResponse> supervisors = await _employeeService.ListActiveEmployeeNames();
+            SetSupervisors(supervisors, viewModel.SupervisorsSelectList);
+
+            List<DepartmentNameResponse> departments = await _departmentService.ListActiveDepartmentNames();
+            SetDepartments(departments, viewModel.DepartmentsSelectList);
+
+            return View("Add", viewModel);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Add")]
-        public async Task<IActionResult> AddPost(EmployeeAddViewModel empViewModel)
+        public async Task<IActionResult> AddPost(EmployeeAddViewModel viewModel)
         {
-            ServiceResult result = ServiceResult.Failure;
+            ServiceResponse<Employee> response = null;
             Employee employee;
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    employee = empViewModel.GetEmployee();
-                    
-                    if(empViewModel.Id == 0)
+                    employee = viewModel.GetEmployee();
+
+                    if (viewModel.Id == 0)
+                        response = await _employeeService.Add(employee);
+
+                    if (response.Result == ServiceResult.Success)
                     {
-                        result = await _employeeService.Add(employee);
-                    }                        
-                    else
-                    {
-                        result = await _employeeService.Update(employee);
-                    }                        
-                    
-                    if(result == ServiceResult.Success)
-                    {
-                        empViewModel.CurrentTab ++;
-                        
-                        int currentTabNumber = (int)empViewModel.CurrentTab;
                         const int lastTab = 9;
-                        
-                        if(currentTabNumber >= lastTab)
-                        {
+                        int currentTabNumber = (int)viewModel.CurrentTab;
+
+                        if (currentTabNumber >= lastTab)
                             return RedirectToAction("List");
-                        }
-                    }                    
-                        return View(empViewModel);
+
+                        viewModel.SetViewModel(response.Data);
+                        currentTabNumber++;
+                        viewModel.CurrentTab = (EmployeeTabs)currentTabNumber;
+                    }
+                    return View(viewModel);
                 }
                 catch (Exception ex)
                 {
@@ -76,7 +73,93 @@ namespace Highbrow.HiPower.Controllers
                     return View("~/Views/Home/Error/500.cshtml");
                 }
             }
-            return View(empViewModel);
+            return View(viewModel);
+        }
+
+        [HttpGet, ActionName("Update")]
+        public async Task<IActionResult> UpdateGet(int? id)
+        {
+            Employee employee = await _employeeService.Details(id);
+            
+            EmployeeAddViewModel viewModel = new EmployeeAddViewModel();
+            viewModel.SetViewModel(employee);
+            
+            List<EmployeeNameResponse> supervisors = await _employeeService.ListActiveEmployeeNames();
+            SetSupervisors(supervisors, viewModel.SupervisorsSelectList);
+
+            List<DepartmentNameResponse> departments = await _departmentService.ListActiveDepartmentNames();
+            SetDepartments(departments, viewModel.DepartmentsSelectList);
+            
+            return View("Update", viewModel);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Update")]
+        public async Task<IActionResult> UpdatePost(EmployeeUpdateViewModel viewModel)
+        {
+            ServiceResponse<Employee> response = null;
+            Employee employee;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    employee = viewModel.GetEmployee();
+
+                    if (viewModel.Id != 0)
+                        response = await _employeeService.Update(employee);
+
+                    if (response.Result == ServiceResult.Success)
+                    {
+                        const int lastTab = 9;
+                        int currentTabNumber = (int)viewModel.CurrentTab;
+
+                        if (currentTabNumber >= lastTab)
+                            return RedirectToAction("List");
+
+                        viewModel.SetViewModel(response.Data);
+                        currentTabNumber++;
+                        viewModel.CurrentTab = (EmployeeTabs)currentTabNumber;
+                    }
+                    return View(viewModel);
+                }
+                catch (Exception ex)
+                {
+                    //Perform logging here
+                    return View("~/Views/Home/Error/500.cshtml");
+                }
+            }
+            return View(viewModel);
+        }
+
+        void SetSupervisors(List<EmployeeNameResponse> supervisors, List<SelectListItem> supervisorItems)
+        {
+            SelectListItem supervisorItem;
+
+            if (supervisors != null)
+            {
+                foreach (EmployeeNameResponse supervisor in supervisors)
+                {
+                    supervisorItem = new SelectListItem { Text = supervisor.EmployeeName, Value = Convert.ToString(supervisor.Id) };
+
+                    supervisorItems.Add(supervisorItem);
+                }
+            }
+        }
+
+        void SetDepartments(List<DepartmentNameResponse> departments, List<SelectListItem> departmentItems)
+        {
+            SelectListItem departmentItem;
+
+            if (departments != null)
+            {
+                foreach (DepartmentNameResponse department in departments)
+                {
+                    departmentItem = new SelectListItem { Text = department.DepartmentName, Value = Convert.ToString(department.Id) };
+
+                    departmentItems.Add(departmentItem);
+                }
+            }
         }
 
         public async Task<IActionResult> List()
@@ -86,7 +169,7 @@ namespace Highbrow.HiPower.Controllers
         viewModel.InactiveEmployees = await _employeeService.ListInactiveEmployees();
             viewModel.ActiveCount = await _employeeService.GetActiveCount();
             viewModel.InactiveCount = await _employeeService.GetInactiveCount();
-            viewModel.Departments = await _departmentService.ListDepartmentNames();
+            viewModel.Departments = await _departmentService.ListActiveDepartmentNames();
 
             return View("List", viewModel);
         }
@@ -94,11 +177,11 @@ namespace Highbrow.HiPower.Controllers
         public async Task<IActionResult> ListBySearchCriteria(EmployeeSearchCriteria criteria)
         {
             EmployeeListViewModel viewModel = new EmployeeListViewModel();
-    viewModel.ActiveEmployees = await _employeeService.ListActiveEmployees(criteria);
-            viewModel.ActiveCount = await _employeeService.GetActiveCount();
-    viewModel.InactiveEmployees = await _employeeService.ListInactiveEmployees();
+    viewModel.ActiveEmployees = await _employeeService.ListActiveEmployees(criteria);    
+    viewModel.InactiveEmployees = await _employeeService.ListInactiveEmployees(criteria);
+    viewModel.ActiveCount = await _employeeService.GetActiveCount();
             viewModel.InactiveCount = await _employeeService.GetInactiveCount();
-            viewModel.Departments = await _departmentService.ListDepartmentNames();
+            viewModel.Departments = await _departmentService.ListActiveDepartmentNames();
 
             return View("List", viewModel);
         }

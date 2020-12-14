@@ -23,48 +23,66 @@ namespace Highbrow.HiPower.Services
             Employee employee = null;
 
             if (id != null)
-                employee = await _context.Employees
-                                        .FirstOrDefaultAsync(n => n.Id == id);
-
+                employee = await _context.Employees.
+                                         Include(n => n.Dependents)
+                                         .Include(n => n.Educations)
+                                         .Include(n => n.Experiences)
+                                         .Include(n => n.BankDetail)
+                                         .FirstOrDefaultAsync(n => n.Id == id);
             return employee;
         }
 
-        public async Task<ServiceResult> Add(Employee employee)
+        public async Task<ServiceResponse<Employee>> Add(Employee employee)
         {
-            ServiceResult result = ServiceResult.Failure;
+            ServiceResponse<Employee> response = new ServiceResponse<Employee>();
+            int recordsAffected = 0;
+            response.Data = employee;
+            response.Message = "Unable to add Employee";
+            response.Result = ServiceResult.Failure;
 
-            if (await Exists(employee.OfficeId))
-                return result;
+            if (!await Exists(employee.OfficeId))
+            {
+                employee.CreatedAt = DateTime.Now;
+                employee.UpdatedAt = employee.CreatedAt;
 
-            employee.CreatedAt = DateTime.Now;
-            employee.UpdatedAt = employee.CreatedAt;
+                await _context.AddAsync(employee);
+                recordsAffected = await _context.SaveChangesAsync();
 
-            await _context.AddAsync(employee);
-            int recordsAffected = await _context.SaveChangesAsync();
-
-            if (recordsAffected != 0)
-                result = ServiceResult.Success;
-
-            return result;
+                if (recordsAffected != 0)
+                {
+                    response.Message = "Employee Successfully added";
+                    response.Result = ServiceResult.Success;
+                }
+                return response;
+            }
+            return response;
         }
 
-        public async Task<ServiceResult> Update(Employee employee)
+        public async Task<ServiceResponse<Employee>> Update(Employee employee)
         {
-            ServiceResult result = ServiceResult.Failure;
+            ServiceResponse<Employee> response = new ServiceResponse<Employee>();
             int recordsAffected = 0;
+            response.Data = employee;
+            response.Message = "Unable to update Employee";
+            response.Result = ServiceResult.Failure;
 
-            if (await Exists(employee.Id))
+            string officeId = await GetOfficeID(employee.Id);
+
+            if (await Exists(employee.Id) && employee.OfficeId == officeId)
             {
                 employee.UpdatedAt = DateTime.Now;
 
                 _context.Update(employee);
                 recordsAffected = await _context.SaveChangesAsync();
+
+                if (recordsAffected != 0)
+                {
+                    response.Message = "Employee Successfully added";
+                    response.Result = ServiceResult.Success;
+                }
+                return response;
             }
-
-            if (recordsAffected != 0)
-                result = ServiceResult.Success;
-
-            return result;
+            return response;
         }
 
         private async Task<List<EmployeeListResponse>> ListByIsActive(bool isActive)
@@ -76,9 +94,16 @@ namespace Highbrow.HiPower.Services
                           select new EmployeeListResponse
                           {
                               Id = employee.Id,
+                              OfficeId = employee.OfficeId,
+                              CardRFId = employee.CardRFId,
                               EmployeeName = employee.EmployeeName,
                               DepartmentName = employee.Department.DepartmentName,
-                              DesignationName = employee.Designation.DesignationName
+                              DesignationName = employee.Designation.DesignationName,
+                              PersonalMail = employee.PersonalMail,
+                              PhotoFileName = employee.PhotoFileName,
+                              SkypeId = employee.SkypeId,
+                              FacebookId = employee.FacebookId,
+                              LinkedinId = employee.LinkedinId
                           })
                         .ToListAsync();
         }
@@ -118,15 +143,16 @@ namespace Highbrow.HiPower.Services
                             select new
                             {
                                 Id = employee.Id,
-
-                                EmployeeName = employee.EmployeeName,
-
-                                DepartmentName = employee.Department.DepartmentName,
-
-                                DesignationName = employee.Designation.DesignationName,
-
                                 OfficeId = employee.OfficeId,
-
+                                CardRFId = employee.CardRFId,
+                                EmployeeName = employee.EmployeeName,
+                                DepartmentName = employee.Department.DepartmentName,
+                                DesignationName = employee.Designation.DesignationName,
+                                PersonalMail = employee.PersonalMail,
+                                PhotoFileName = employee.PhotoFileName,
+                                SkypeId = employee.SkypeId,
+                                FacebookId = employee.FacebookId,
+                                LinkedinId = employee.LinkedinId,
                                 DepartmentId = employee.DepartmentId
                             };
 
@@ -170,6 +196,21 @@ namespace Highbrow.HiPower.Services
             return await ListByIsActive(criteria, true);
         }
 
+        public async Task<List<EmployeeNameResponse>> ListActiveEmployeeNames()
+        {
+            if (await _context.Employees.AnyAsync())
+                return await (from employee in _context.Employees.AsNoTracking()
+                              where employee.IsActive == true
+                              select new EmployeeNameResponse
+                              {
+                                  Id = employee.Id,
+                                  EmployeeName = employee.EmployeeName
+                              })
+                                  .ToListAsync();
+
+            return null;
+        }
+
         public async Task<List<EmployeeListResponse>> ListInactiveEmployees(EmployeeSearchCriteria criteria)
         {
             return await ListByIsActive(criteria, false);
@@ -177,15 +218,37 @@ namespace Highbrow.HiPower.Services
 
         public async Task<bool> Exists(long id)
         {
-            Employee employee = await _context.Employees.AsNoTracking().FirstAsync(n => n.Id == id);
-            return employee != null ? true : false;
+            long idToFind = 0;
+
+            idToFind = await (from employee in _context.Employees.AsNoTracking()
+                              where employee.Id == id
+                              select employee.Id)
+                                        .FirstOrDefaultAsync();
+
+            return idToFind != 0 ? true : false;
         }
 
         public async Task<bool> Exists(string officeId)
         {
-            Employee employee = await _context.Employees.AsNoTracking()
-                                        .FirstAsync(n => n.OfficeId == officeId);
-            return employee != null ? true : false;
+            long id = 0;
+
+            id = await (from employee in _context.Employees.AsNoTracking()
+                        where employee.OfficeId == officeId
+                        select employee.Id)
+                                        .FirstOrDefaultAsync();
+
+            return id != 0 ? true : false;
+        }
+
+        public async Task<string> GetOfficeID(long id)
+        {
+            string officeId = "";
+
+            officeId = await (from employee in _context.Employees.AsNoTracking()
+                              where employee.Id == id
+                              select employee.OfficeId)
+                                        .FirstOrDefaultAsync();
+            return officeId;
         }
     }
 }

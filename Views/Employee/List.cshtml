@@ -1,4 +1,5 @@
-﻿
+﻿@using Highbrow.HiPower.ViewModels.EmployeeVM
+@model EmployeeListViewModel
 
 @{ ViewData["Title"] = "Employee";
 	ViewData["body_class"] = "detail_employee"; }
@@ -26,12 +27,12 @@
 							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab1" role="tablist">
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary active" href="#list_active" role="tab" data-toggle="tab">
-										<i class="fa fa-check"></i> Active (2)
+										<i class="fa fa-check"></i> Active (@Model.ActiveCount)
 									</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive" data-toggle="tab">
-										<i class="fa fa-ban"></i> Inactive (1)
+										<i class="fa fa-ban"></i> Inactive (@Model.InactiveCount)
 									</a>
 								</li>
 							</ul>
@@ -102,191 +103,187 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr>
-														<td>E000</td>
-														<td>Admin</td>
-														<td>Human Resource Management</td>
-														<td>Admin</td>
-														<td>admin@thehipower.com</td>
-														<td>
-															<a class="btn btn-primary btn-xs" title="Edit" href="/employees/1/edit?tab=general">
-																<i class="fa fa-edit"></i>
-															</a>
-														</td>
-													</tr>
-													<tr>
-														<td>E0001</td>
-														<td>Paul McMullen</td>
-														<td>Finance</td>
-														<td>Manager</td>
-														<td>paul@thehipower.com</td>
-														<td>
-															<a class="btn btn-primary btn-xs" title="Edit" href="/employees/3/edit?tab=general">
-																<i class="fa fa-edit"></i>
-															</a>
-														</td>
-													</tr>
+													@if (Model != null && Model.ActiveCount != 0)
+													{
+														@foreach (var item in Model.ActiveEmployees)
+														{
+															<tr>
+																<td>@item.OfficeId</td>
+																<td>@item.EmployeeName</td>
+																<td>@item.DepartmentName</td>
+																<td>@item.DesignationName</td>
+																<td>@item.PersonalMail</td>
+																<td>
+																	<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																		<i class="fa fa-edit"></i>
+																	</a>
+																</td>
+															</tr>
+														}
+													}
+													else
+													{
+
+													}
 												</tbody>
 											</table>
 										</div>
 									</div>
 									@*active grid*@
 									<div class="tab-pane fade" id="list_active_grid">
-											<div class="row">
-												<div class="col-md-6 col-lg-4">
-													<div class="team-member ">
-														<div class="team-img">
-															<a href="/employees/1">
-																<img class="img-fluid" src="/images/default-profile.jpg">
-															</a>
-														</div>
-														<div class="team-info">
-															<h4>
-																<a href="/employees/1">
-																	Admin(<b>E000</b>)
-																</a>
-															</h4>
-															<span class="team-member-edit">
-																<a href="/employees/1/edit?tab=general">
-																	<i class="fa fa-pencil icon-xs"></i>
-																</a>
-															</span>
-															<span>Admin</span>
-														</div>
-														<p>
-															Human Resource Management<br>
-															admin@thehipower.com
-														</p>
-														<ul class="social-icons list-inline list-unstyled">
-															<li class="list-inline-item">
-																<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
-															</li>
-															<li class="list-inline-item">
-																<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
-															</li>
-														</ul>
+										<div class="row">
+											@if (Model != null && Model.ActiveCount != 0)
+											{
+												@foreach (var item in Model.ActiveEmployees)
+												{
+											<div class="col-md-6 col-lg-4">
+												<div class="team-member ">
+													<div class="team-img">
+														<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+															<img class="img-fluid" src="/images/@item.PhotoFileName">
+														</a>
 													</div>
-												</div>
-												<div class="col-md-6 col-lg-4">
-													<div class="team-member ">
-														<div class="team-img">
-															<a href="/employees/3">
-																<img class="img-fluid" src="/images/default-profile.jpg">
+													<div class="team-info">
+														<h4>
+															<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																@item.EmployeeName<span>(<b>@item.OfficeId</b>)</span>
 															</a>
-														</div>
-														<div class="team-info">
-															<h4>
-																<a href="/employees/3">
-																	Paul McMullen(<b>E0005</b>)
-																</a>
-															</h4>
-															<span class="team-member-edit">
-																<a href="/employees/3/edit?tab=general">
-																	<i class="fa fa-pencil icon-xs"></i>
-																</a>
-															</span>
-															<span>Manager</span>
-														</div>
-														<p>
-															Finance<br>
-															paul@thehipower.com
-														</p>
-														<ul class="social-icons list-inline list-unstyled">
-															<li class="list-inline-item">
-																<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
-															</li>
-															<li class="list-inline-item">
-																<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
-															</li>
-														</ul>
+														</h4>
+														<span class="team-member-edit">
+															<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																<i class="fa fa-pencil icon-xs"></i>
+															</a>
+														</span>
+														<span>@item.DesignationName</span>
 													</div>
+													<p>
+														@item.DepartmentName<br>
+														@item.PersonalMail
+													</p>
+													<ul class="social-icons list-inline list-unstyled">
+														<li class="list-inline-item">
+															<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
+														</li>
+														<li class="list-inline-item">
+															<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
+														</li>
+													</ul>
 												</div>
 											</div>
+												}
+											}
+											else
+											{
+
+											}
+											
+										</div>
 									</div>
 								</div>
 							</div>
 							@*Inactive*@
-						<div class="tab-pane fade" id="list_inactive">
-							<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab3" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link btn btn-secondary active" href="#list_inactive_table" role="tab" data-toggle="tab">
-										<i class="fa fa-bars"></i> List
-									</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive_grid" data-toggle="tab">
-										<i class="fa fa-th-large"></i> Grid
-									</a>
-								</li>
-							</ul>
-							<div class="tab-content primary" id="myTabContent3">
-								@*active table*@
-								<div class="tab-pane fade show active" id="list_inactive_table">
-									<div class="table-responsive">
-										<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
-											<thead>
-												<tr>
-													<th>Emp ID</th>
-													<th>Name</th>
-													<th>Department</th>
-													<th>Designation</th>
-													<th>Email</th>
-													<th>Actions</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>E002</td>
-													<td>Test</td>
-													<td>Human Resource Management</td>
-													<td>Admin</td>
-													<td>admin@thehipower.com</td>
-													<td>
-														<a class="btn btn-primary btn-xs" title="Edit" href="/employees/1/edit?tab=general">
-															<i class="fa fa-edit"></i>
-														</a>
-													</td>
-												</tr>
-											</tbody>
-										</table>
+							<div class="tab-pane fade" id="list_inactive">
+								<ul class="nav nav-tabs portfolio-filter list-inline" id="myTab3" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link btn btn-secondary active" href="#list_inactive_table" role="tab" data-toggle="tab">
+											<i class="fa fa-bars"></i> List
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link btn btn-secondary" role="tab" href="#list_inactive_grid" data-toggle="tab">
+											<i class="fa fa-th-large"></i> Grid
+										</a>
+									</li>
+								</ul>
+								<div class="tab-content primary" id="myTabContent3">
+									@*active table*@
+									<div class="tab-pane fade show active" id="list_inactive_table">
+										<div class="table-responsive">
+											<table class="table table-striped dt-responsive display" cellspacing="0" width="100%">
+												<thead>
+													<tr>
+														<th>Emp ID</th>
+														<th>Name</th>
+														<th>Department</th>
+														<th>Designation</th>
+														<th>Email</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													@if (Model != null && Model.InactiveCount != 0)
+													{
+														@foreach (var item in Model.InactiveEmployees)
+														{
+															<tr>
+																<td>@item.OfficeId</td>
+																<td>@item.EmployeeName</td>
+																<td>@item.DepartmentName</td>
+																<td>@item.DesignationName</td>
+																<td>@item.PersonalMail</td>
+																<td>
+																	<a class="btn btn-primary btn-xs" title="Edit" href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																		<i class="fa fa-edit"></i>
+																	</a>
+																</td>
+															</tr>
+														}
+													}
+													else
+													{
+
+													}
+												</tbody>
+											</table>
+										</div>
 									</div>
-								</div>
-								@*active grid*@
-								<div class="tab-pane fade" id="list_inactive_grid">
-									<div class="row">
-										<div class="col-md-6 col-lg-4">
-											<div class="team-member ">
-												<div class="team-img">
-													<a href="/employees/1">
-														<img class="img-fluid" src="/images/default-profile.jpg">
-													</a>
-												</div>
-												<div class="team-info">
-													<h4>
-														<a href="/employees/1">
-															Admin(<b>E000</b>)
-														</a>
-													</h4>
-													<span class="team-member-edit">
-														<a href="/employees/1/edit?tab=general">
-															<i class="fa fa-pencil icon-xs"></i>
-														</a>
-													</span>
-													<span>Test</span>
-												</div>
-												<p>
-													Human Resource Management<br>
-													admin@thehipower.com
-												</p>
-												<ul class="social-icons list-inline list-unstyled">
-													<li class="list-inline-item">
-														<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
-													</li>
-													<li class="list-inline-item">
-														<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
-													</li>
-												</ul>
-											</div>
+									@*active grid*@
+									<div class="tab-pane fade" id="list_inactive_grid">
+										<div class="row">
+											@if (Model != null && Model.InactiveCount != 0)
+											{
+												@foreach (var item in Model.InactiveEmployees)
+												{
+													<div class="col-md-6 col-lg-4">
+														<div class="team-member ">
+															<div class="team-img">
+																<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																	<img class="img-fluid" src="/images/@item.PhotoFileName">
+																</a>
+															</div>
+															<div class="team-info">
+																<h4>
+																	<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																		@item.EmployeeName<span>(<b>@item.OfficeId</b>)</span>
+																	</a>
+																</h4>
+																<span class="team-member-edit">
+																	<a href="@Url.Action("Update", "Employee", new { id = item.Id})">
+																		<i class="fa fa-pencil icon-xs"></i>
+																	</a>
+																</span>
+																<span>@item.DesignationName</span>
+															</div>
+															<p>
+																@item.DepartmentName<br>
+																@item.PersonalMail
+															</p>
+															<ul class="social-icons list-inline list-unstyled">
+																<li class="list-inline-item">
+																	<a target="blank" href="https://www.facebook.com/"><i class="fa fa-facebook icon-bordered icon-primary icon-xs"></i></a>
+																</li>
+																<li class="list-inline-item">
+																	<a target="blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-bordered icon-primary icon-xs"></i></a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												}
+											}
+											else
+											{
+
+											}
 										</div>
 									</div>
 								</div>
@@ -295,7 +292,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 </div>

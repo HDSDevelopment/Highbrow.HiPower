@@ -7,19 +7,17 @@ using Highbrow.HiPower.Models;
 using Highbrow.HiPower.Utilities;
 
 namespace Highbrow.HiPower.ViewModels.EmployeeVM
-{    
-    public class EmployeeAddViewModel : EmployeeUpdateViewModel
+{
+    public enum EmployeeTabs
     {
+        General = 1, Personal = 2, HR = 3, Dependent = 4,
+        Education = 5, Experience = 6, Bank = 7, Social = 8,
+        ProfilePicture = 9
+    }
 
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; } 
- 
- 
- /*        //General
+    public class EmployeeUpdateViewModel
+    {
+        //General
         public long Id { get; set; }
 
         [Required]
@@ -39,17 +37,19 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
         //[Required]
         public string OfficeEmail { get; set; }
 
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
+        /*         [DataType(DataType.Password)]
+                public string Password { get; set; }
 
-        [DataType(DataType.Password)]
-        [Compare("Password")]
-        public string ConfirmPassword { get; set; }
+                [DataType(DataType.Password)]
+                [Compare("Password")]
+                public string ConfirmPassword { get; set; }
+
+                */
 
         public List<int> Roles { get; set; }
         public List<SelectListItem> RolesSelectList { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
 
         //Personal
@@ -106,11 +106,14 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
         public int NoticePeriodInDays { get; set; }
 
-        //First and second Manager
+        public long? FirstLevelSupervisorId { get; set; }
 
-        public bool? IsEligibleForWFH { get; set; }
+        public long? SecondLevelSupervisorId { get; set; }
+        public List<SelectListItem> SupervisorsSelectList { get; set; }
 
-        public bool? IsMedicalLOPEligible { get; set; }
+        public bool IsEligibleForWFH { get; set; }
+
+        public bool IsMedicalLOPEligible { get; set; }
 
 
         //Dependent
@@ -158,11 +161,13 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
         public EmployeeTabs CurrentTab { get; set; }
 
-        public EmployeeAddViewModel()
+        public EmployeeUpdateViewModel()
         {
             LocationSelectList = new List<SelectListItem>{
                                     new SelectListItem{Text = "India",
                                                         Value = "India"}};
+            DepartmentsSelectList = new List<SelectListItem>();
+            SupervisorsSelectList = new List<SelectListItem>();
             Dependents = new List<Dependent>();
             Educations = new List<Education>();
             Experiences = new List<Experience>();
@@ -171,6 +176,8 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
         {
             Employee employee = new Employee();
 
+            employee.Id = this.Id;
+            
             employee.OfficeId = StringUtility.GetTrimmedUpperCase(OfficeId);
 
             employee.CardRFId = StringUtility.GetTrimmed(CardRFId);
@@ -223,6 +230,10 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
             employee.NoticePeriodInDays = NoticePeriodInDays;
 
+            employee.FirstLevelSupervisorId = this.FirstLevelSupervisorId;
+
+            employee.SecondLevelSupervisorId = this.SecondLevelSupervisorId;
+
             employee.IsEligibleForWFH = IsEligibleForWFH;
 
             employee.IsMedicalLOPEligible = IsMedicalLOPEligible;
@@ -260,8 +271,6 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
             employee.LinkedinId = LinkedinId;
 
             return employee;
-
-            //First and second Manager
         }
 
         public void SetViewModel(Employee employee)
@@ -278,7 +287,7 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
             Gender = employee.Gender;
 
-            IsActive = employee.IsActive;
+            IsActive = (bool)employee.IsActive;
 
             FatherName = employee.FatherName;
 
@@ -294,7 +303,7 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
             PermanentAddress = employee.PermanentAddress;
 
-            CommunicationAddress = employee.CommunicationAddress ;
+            CommunicationAddress = employee.CommunicationAddress;
 
             ContactNumber = employee.ContactNumber;
 
@@ -320,9 +329,13 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
 
             NoticePeriodInDays = employee.NoticePeriodInDays;
 
-            IsEligibleForWFH = employee.IsEligibleForWFH;
+            FirstLevelSupervisorId = employee.FirstLevelSupervisorId;
 
-            IsMedicalLOPEligible = employee.IsMedicalLOPEligible;
+            SecondLevelSupervisorId = employee.SecondLevelSupervisorId;
+
+            IsEligibleForWFH = (bool)employee.IsEligibleForWFH;
+
+            IsMedicalLOPEligible = (bool)employee.IsMedicalLOPEligible;
 
             Dependents = employee.Dependents;
 
@@ -355,6 +368,6 @@ namespace Highbrow.HiPower.ViewModels.EmployeeVM
             FacebookId = employee.FacebookId;
 
             LinkedinId = employee.LinkedinId;
-        }*/
+        }
     }
 }

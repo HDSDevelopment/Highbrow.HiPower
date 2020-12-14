@@ -26,7 +26,15 @@ namespace Highbrow.HiPower.Data
             modelBuilder.Entity<LeaveCategoryType>()
             .HasKey(lct => new { lct.LeaveTypeId, lct.LeaveCategoryId });
 
+            modelBuilder.Entity<Employee>()
+            .HasOne(n => n.FirstLevelSupervisor)
+            .WithMany(n => n.FirstLevelSupervised)
+            .HasForeignKey(n => n.FirstLevelSupervisorId);
 
+            modelBuilder.Entity<Employee>()
+            .HasOne(n => n.SecondLevelSupervisor)
+            .WithMany(n => n.SecondLevelSupervised)
+            .HasForeignKey(n => n.SecondLevelSupervisorId);
         }
     }
 }

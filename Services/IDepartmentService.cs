@@ -21,7 +21,7 @@ public interface IDepartmentService
 
     Task<List<Department>> ListInactiveDepartments();
 
-    Task<List<DepartmentNameResponse>> ListDepartmentNames();
+    Task<List<DepartmentNameResponse>> ListActiveDepartmentNames();
 
     Task<int> GetActiveCount();
 

@@ -127,10 +127,11 @@ namespace Highbrow.HiPower.Services
             return 0;
         }
 
-        public async Task<List<DepartmentNameResponse>> ListDepartmentNames()
+        public async Task<List<DepartmentNameResponse>> ListActiveDepartmentNames()
         {
             List<DepartmentNameResponse> departments = 
             await (from department in _context.Departments.AsNoTracking()
+            where department.IsActive == true
             select new DepartmentNameResponse{
                                             Id = department.Id,
                                             DepartmentName = department.DepartmentName

@@ -9,9 +9,9 @@ namespace Highbrow.HiPower.Services
     {
         Task<Employee> Details(int? id);
 
-        Task<ServiceResult> Add(Employee employee);
+        Task<ServiceResponse<Employee>> Add(Employee employee);
 
-        Task<ServiceResult> Update(Employee employee);
+        Task<ServiceResponse<Employee>> Update(Employee employee);
 
         Task<List<EmployeeListResponse>> ListActiveEmployees();
 
@@ -23,10 +23,14 @@ namespace Highbrow.HiPower.Services
 
         Task<List<EmployeeListResponse>> ListActiveEmployees(EmployeeSearchCriteria criteria);
 
+        Task<List<EmployeeNameResponse>> ListActiveEmployeeNames();
+
         Task<List<EmployeeListResponse>> ListInactiveEmployees(EmployeeSearchCriteria criteria);
 
         Task<bool> Exists(long id);
 
         Task<bool> Exists(string officeId);
+
+        Task<string> GetOfficeID(long id);
     }
 }

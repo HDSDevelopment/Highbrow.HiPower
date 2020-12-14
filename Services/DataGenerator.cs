@@ -1,22 +1,28 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
-using Highbrow.HiPower.Data;
-using Microsoft.EntityFrameworkCore;
-using Highbrow.HiPower.Models;
+using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.EntityFrameworkCore;
+using Highbrow.HiPower.Data;
+using Highbrow.HiPower.Models;
+
+
 
 namespace Highbrow.HiPower.Services
 {
-public class DataGenerator
-{
-    public static void Initialize(IServiceProvider serviceProvider)
+    public class DataGenerator
     {
-        var context = new HiPowerContext(
+        public static void Initialize(IServiceProvider serviceProvider)
+        {
+            var context = new HiPowerContext(
 
-            serviceProvider.GetRequiredService<DbContextOptions<HiPowerContext>>());
-        
-            if(context.CompanyProfiles.Any())
+                serviceProvider.GetRequiredService<DbContextOptions<HiPowerContext>>());
+
+            CultureInfo culture = CultureInfo.InvariantCulture;
+            string format = "dd/MM/yyyy";
+
+            if (context.CompanyProfiles.Any())
             {
                 return;
             }
@@ -41,7 +47,7 @@ public class DataGenerator
 
                     LogoFileSize = 356,
 
-                    LogoCreatedAt = Convert.ToDateTime("11/11/2020"),
+                    LogoCreatedAt = DateTime.ParseExact("11/11/2020", format, culture),
 
                     TermsOfService = true,
 
@@ -319,67 +325,297 @@ public class DataGenerator
                 });
 
 
-                                context.Employees.AddRange(
-                    new Employee
-                    {
-                        Id = 1,
-                        OfficeId = "E0001",
-                        Age = 25,
-                        NoticePeriod = 60,
-                        Title = TitleType.Mr,
-                        EmployeeName = "Shivakumar",
-                        FatherName = "Narayanan",
-                        Gender = GenderType.Male,
-                        MaritalStatus = MaritalStatusType.Single,
-                        BloodGroup = BloodGroupType.B_Positive,
-                        Religion = ReligionType.Hindu,
-                        Nationality = NationalityType.Indian,
-                        IsActive = true,                        
-                        UAN = "MH11576494191",
-                        LeaveCategoryId = 1,
-                        PANNumber = "AAAPZ1234C",
-                        ContactNumber = "7777777777",
-                        EmergencyNumber = "9999999999",
-                        PersonalMail = "def@ghi.com",
-                        
-                        CommunicationAddress = "12, ABC street, DEF Nagar, Chennai, Tamilnadu",
-                        
-                        PermanentAddress = "34, DEF Street, EFG Nagar, Trichy, Tamilnadu",
-                        
-                        DateOfBirth = DateTime.ParseExact("14/05/1990", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+            context.Employees.AddRange(
+new Employee
+{
+    //General
+    Id = 1,
+    OfficeId = "E0001",
+    Title = TitleType.Mr,
+    EmployeeName = "Shivakumar",
+    Gender = GenderType.Male,
+    IsActive = true,
+    FirstLevelSupervisorId = 3,
 
-                        JoiningDate = DateTime.ParseExact("02/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-
-                        CreatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-
-                        UpdatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-
-                        IsEligibleForWFH = false,
-
-                        Location = "Chennai",
-
-                        PhotoFileName = "E0001.jpg",
-
-                        PhotoFileSize = 8000,
-
-                        PhotoUpdatedAt = DateTime.ParseExact("10/01/2019", "dd/MM/yyyy", CultureInfo.InvariantCulture),
-
-                        AadharNumber = "499118665246",
-
-                        ESINumber = "31001234560000001",
-
-                        IsExit = false,
-
-                        DepartmentId = 1,
-
-                        DesignationId = 1,
-
-                        ShiftId = 1
-                    });
+    FatherName = "Narayanan",
+    DateOfBirth = DateTime.ParseExact("22/06/1990", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+    Age = 25,
+    BloodGroup = BloodGroupType.B_Positive,
+    MaritalStatus = MaritalStatusType.Single,
+    Religion = ReligionType.Hindu,
+    PermanentAddress = "34, DEF Street, EFG Nagar, Trichy, Tamilnadu",
+    CommunicationAddress = "12, ABC street, DEF Nagar, Chennai, Tamilnadu",
+    ContactNumber = "7777777777",
+    EmergencyNumber = "9999999999",
+    PersonalMail = "def@ghi.com",
+    Nationality = NationalityType.Indian,
 
 
+    //HR
+    DepartmentId = 1,
+    DesignationId = 1,
+    ShiftId = 1,
+    LeaveCategoryId = 1,
+    Location = "India",
+    JoiningDate = DateTime.ParseExact("02/01/2019", format, culture),
+    ConfirmationDate = DateTime.ParseExact("02/07/2020", format, culture),
+    NoticePeriodInDays = 60,
+    IsEligibleForWFH = true,
+    IsMedicalLOPEligible = true,
+
+    Dependents = new List<Dependent>{
+                            new Dependent{
+                                Id = 1,
+                                DependentName = "Seetha",
+                                Relation = RelationType.Spouse,
+                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+                            EmployeeId = 1},
+                        new Dependent{
+                                Id = 4,
+                                DependentName = "Reetha",
+                                Relation = RelationType.Daughter,
+                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+                            EmployeeId = 1},
+                        new Dependent{
+                                Id = 5,
+                                DependentName = "Leetha",
+                                Relation = RelationType.Daughter,
+                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+                            EmployeeId = 1}},
+
+    Educations = new List<Education>{
+                            new Education{
+                                Id = 1,
+                                Degree = "BE Computer Science",
+                                Institute = "PSG Institute of Technology",
+                                BoardOrUniversity = "Coimbatore University",
+                                YearOfPassing = 2007,
+                                PercentageCGPA = 7.7F,
+                                EmployeeId = 1}},
+
+    Experiences = new List<Experience>{
+                            new Experience{
+                                Id = 1,
+                                CompanyName = "Hexaware Technologies Private Limited",
+                                Designation = "Junior Software Engineer",
+                                FromDate = DateTime.ParseExact("28/10/2008", format, culture),
+                                ToDate = DateTime.ParseExact("15/12/2009", format, culture),
+                                Duration = "1 year 2 months",
+                                EmployeeId = 1}},
+
+    BankDetail = new BankDetail
+    {
+        Id = 1,
+        BankName = "Corporation Bank",
+        AccountNumber = "111111111111",
+        IFSCCode = "CORP0000504",
+        Branch = "Whites Road",
+        EmployeeId = 1
+    },
+
+    UAN = "MH11576494191",
+
+    ESINumber = "31001234560000001",
+
+    CreatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    UpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    PhotoFileName = "default-profile.jpg",
+
+    PhotoFileSize = 8000,
+
+    PhotoUpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    IsExit = false,
+});
+
+            context.Employees.AddRange(
+new Employee
+{
+    //General
+    Id = 2,
+    OfficeId = "E0002",
+    Title = TitleType.Mr,
+    EmployeeName = "Test1",
+    Gender = GenderType.Male,
+    IsActive = true,
+    FirstLevelSupervisorId = 3,
+
+    FatherName = "Narayanan",
+    DateOfBirth = DateTime.ParseExact("22/06/1990", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+    Age = 25,
+    BloodGroup = BloodGroupType.B_Positive,
+    MaritalStatus = MaritalStatusType.Single,
+    Religion = ReligionType.Hindu,
+    PermanentAddress = "34, DEF Street, EFG Nagar, Trichy, Tamilnadu",
+    CommunicationAddress = "12, ABC street, DEF Nagar, Chennai, Tamilnadu",
+    ContactNumber = "7777777777",
+    EmergencyNumber = "9999999999",
+    PersonalMail = "test@gmail.com",
+    Nationality = NationalityType.Indian,
+
+
+    //HR
+    DepartmentId = 1,
+    DesignationId = 1,
+    ShiftId = 1,
+    LeaveCategoryId = 1,
+    Location = "India",
+    JoiningDate = DateTime.ParseExact("02/01/2019", format, culture),
+    ConfirmationDate = DateTime.ParseExact("02/07/2020", format, culture),
+    NoticePeriodInDays = 60,
+    IsEligibleForWFH = true,
+    IsMedicalLOPEligible = true,
+
+    Dependents = new List<Dependent>{
+                            new Dependent{
+                                Id = 2,
+                                DependentName = "Geetha",
+                                Relation = RelationType.Spouse,
+                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+                            EmployeeId = 2}},
+
+    Educations = new List<Education>{
+                            new Education{
+                                Id = 2,
+                                Degree = "BE Computer Science",
+                                Institute = "PSG Institute of Technology",
+                                BoardOrUniversity = "Coimbatore University",
+                                YearOfPassing = 2007,
+                                PercentageCGPA = 7.7F,
+                                EmployeeId = 2}},
+
+    Experiences = new List<Experience>{
+                            new Experience{
+                                Id = 2,
+                                CompanyName = "Hexaware Technologies Private Limited",
+                                Designation = "Junior Software Engineer",
+                                FromDate = DateTime.ParseExact("28/10/2008", format, culture),
+                                ToDate = DateTime.ParseExact("15/12/2009", format, culture),
+                                Duration = "1 year 2 months",
+                                EmployeeId = 2}},
+
+    BankDetail = new BankDetail
+    {
+        Id = 2,
+        BankName = "Corporation Bank",
+        AccountNumber = "111111111111",
+        IFSCCode = "CORP0000504",
+        Branch = "Whites Road",
+        EmployeeId = 2
+    },
+
+    UAN = "MH11576494191",
+
+    ESINumber = "31001234560000001",
+
+    CreatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    UpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    PhotoFileName = "default-profile.jpg",
+
+    PhotoFileSize = 8000,
+
+    PhotoUpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    IsExit = false,
+});
+
+            context.Employees.AddRange(
+new Employee
+{
+    //General
+    Id = 3,
+    OfficeId = "E0003",
+    Title = TitleType.Mr,
+    EmployeeName = "Test2",
+    Gender = GenderType.Male,
+    IsActive = false,
+
+    FatherName = "Narayanan",
+    DateOfBirth = DateTime.ParseExact("22/06/1990", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+    Age = 25,
+    BloodGroup = BloodGroupType.B_Positive,
+    MaritalStatus = MaritalStatusType.Single,
+    Religion = ReligionType.Hindu,
+    PermanentAddress = "34, DEF Street, EFG Nagar, Trichy, Tamilnadu",
+    CommunicationAddress = "12, ABC street, DEF Nagar, Chennai, Tamilnadu",
+    ContactNumber = "7777777777",
+    EmergencyNumber = "9999999999",
+    PersonalMail = "test2@gmail.com",
+    Nationality = NationalityType.Indian,
+
+
+    //HR
+    DepartmentId = 1,
+    DesignationId = 1,
+    ShiftId = 1,
+    LeaveCategoryId = 1,
+    Location = "India",
+    JoiningDate = DateTime.ParseExact("02/01/2019", format, culture),
+    ConfirmationDate = DateTime.ParseExact("02/07/2020", format, culture),
+    NoticePeriodInDays = 60,
+    IsEligibleForWFH = true,
+    IsMedicalLOPEligible = true,
+
+    Dependents = new List<Dependent>{
+                            new Dependent{
+                                Id = 3,
+                                DependentName = "Reetha",
+                                Relation = RelationType.Spouse,
+                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+                            EmployeeId = 3}},
+
+    Educations = new List<Education>{
+                            new Education{
+                                Id = 3,
+                                Degree = "BE Computer Science",
+                                Institute = "PSG Institute of Technology",
+                                BoardOrUniversity = "Coimbatore University",
+                                YearOfPassing = 2007,
+                                PercentageCGPA = 7.7F,
+                                EmployeeId = 3}},
+
+    Experiences = new List<Experience>{
+                            new Experience{
+                                Id = 3,
+                                CompanyName = "Hexaware Technologies Private Limited",
+                                Designation = "Junior Software Engineer",
+                                FromDate = DateTime.ParseExact("28/10/2008", format, culture),
+                                ToDate = DateTime.ParseExact("15/12/2009", format, culture),
+                                Duration = "1 year 2 months",
+                                EmployeeId = 3}},
+
+    BankDetail = new BankDetail
+    {
+        Id = 3,
+        BankName = "Corporation Bank",
+        AccountNumber = "111111111111",
+        IFSCCode = "CORP0000504",
+        Branch = "Whites Road",
+        EmployeeId = 3
+    },
+
+    UAN = "MH11576494191",
+
+    ESINumber = "31001234560000001",
+
+    CreatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    UpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    PhotoFileName = "default-profile.jpg",
+
+    PhotoFileSize = 8000,
+
+    PhotoUpdatedAt = DateTime.ParseExact("10/01/2019", format, culture),
+
+    IsExit = false,
+});
 
             context.SaveChanges();
+        }
     }
-}
 }

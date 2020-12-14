@@ -1,617 +1,524 @@
 ﻿
 
+@using Highbrow.HiPower.ViewModels.EmployeeVM
+@model EmployeeAddViewModel
+
 @{
 	string view = ViewData["form_class"].ToString();
 }
+
 <div class="col-lg-12 col-md-12 col-12">
 	<div class="row">
 		<div class="col-lg-12 employee-tabs">
 			@using (Html.BeginForm(view, "Employee", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_Employee" }))
 			{
 				@*<form id="form_Employee" action="/Employee/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
-				<ul class="nav nav-tabs primary" id="myTab1" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab2" data-toggle="tab">Personal</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab3" data-toggle="tab">HR</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab4" data-toggle="tab">Dependent</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab5" data-toggle="tab">Education</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab6" data-toggle="tab">Experience</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab7" data-toggle="tab">Bank</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab8" data-toggle="tab">Social / Official</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " role="tab" href="#tab9" data-toggle="tab">Profile Picture</a>
-					</li>
-				</ul>
+			<ul class="nav nav-tabs primary" id="myTab1" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab2" data-toggle="tab">Personal</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab3" data-toggle="tab">HR</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab4" data-toggle="tab">Dependent</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab5" data-toggle="tab">Education</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab6" data-toggle="tab">Experience</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab7" data-toggle="tab">Bank</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab8" data-toggle="tab">Social / Official</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link " role="tab" href="#tab9" data-toggle="tab">Profile Picture</a>
+				</li>
+			</ul>
 
-				<div class="tab-content primary" id="myTabContent1">
-					@*tab 1*@
-					<div class="tab-pane fade show active" role="tabpanel" id="tab1">
-						<div class="form-group">
-							<label class="form-label" for="employee_employee_id">Employee ID *</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_employee_id">
-							</div>
+			<div class="tab-content primary" id="myTabContent1">
+				@Html.HiddenFor(m => m.Id)
+				@Html.HiddenFor(m => m.Password)
+				@Html.HiddenFor(m => m.ConfirmPassword)
+				@*tab 1*@
+				<div class="tab-pane fade show active" role="tabpanel" id="tab1">
+					<div class="form-group">
+						<label class="form-label" for="OfficeId">Employee ID *</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.OfficeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the employee ID.", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_card_rf_id">Card Id / RF Id</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_card_rf_id">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="CardRFId">Card Id / RF Id</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.CardRFId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the card ID.", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_title">Title</label>
-							<div class="controls">
-								<select class="form-control" id="employee_title">
-									<option value="">--Select--</option>
-									<option value="Mr">Mr</option>
-									<option value="Ms">Ms</option>
-									<option value="Mrs">Mrs</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Title">Title</label>
+						<div class="controls">
+							<select id="Title" asp-for="Title" asp-items="Html.GetEnumSelectList<TitleType>()" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_name">Name *</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_name">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="EmployeeName">Name *</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.EmployeeName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee name", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_gender">Gender *</label>
-							<div class="controls">
-								<select class="form-control" id="employee_gender">
-									<option value="">--Select--</option>
-									<option value="Male">Male</option>
-									<option value="Female">Female</option>
-									<option value="Other">Other</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Gender">Gender *</label>
+						<div class="controls">
+							<select id="Gender" asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderType>()" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_user_attributes_email">Email *</label>
-							<div class="controls">
-								<input class="form-control" type="text" value="" id="employee_user_attributes_email">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="OfficeEmail">Email *</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.OfficeEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee email", type = "email" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_user_attributes_password">Password *</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_user_attributes_password">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Password">Password *</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password", type = "password" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_user_attributes_password_confirmation">Confirm Password *</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_user_attributes_password_confirmation">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="ConfirmPassword">Confirm Password *</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter confirm password", type = "password" } })
 						</div>
-						<input value="HRMS" type="hidden" id="employee_user_attributes_applications">
-						<div class="form-group">
-							<label class="form-label" for="employee_user_attributes_roles">Role *</label>
-							<div class="controls">
-								<select class="form-control" multiple="multiple" id="employee_user_attributes_roles">
-									<option value="Employee">Employee</option>
-									<option value="Supervisor">Supervisor</option>
-									<option value="HR">HR</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="employee_user_attributes_roles">Role *</label>
+						<div class="controls">
+							<select id="Roles" multiple="multiple" asp-for="Roles" asp-items="@Model.RolesSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_status">Status *</label>
-							<div class="controls">
-								<select class="form-control" id="employee_status">
-									<option value="Active">Active</option>
-									<option value="Inactive">Inactive</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="form-check">
+							@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
+							<label class="form-check-label" for="IsActive">Active</label>
 						</div>
-						<div class="form-group relieving_date" style="display: none;">
-							<label class="form-label" for="employee_date_of_relieving">Date Of Relieving</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_relieving">
-							</div>
+					</div>
+					<div class="form-group relieving_date" style="display: none;">
+						<label class="form-label" for="employee_date_of_relieving">Date Of Relieving</label>
+						<div class="controls">
+							<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_relieving">
 						</div>
+					</div>
 
-						<a class="btn btn-primary continue" tab-name="tab1">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+					<a class="btn btn-primary continue" tab-name="tab1">Save &amp; Continue</a>
+					<a href="@Url.Action("List", "Employee")">
+						<div type="button" class="btn">Cancel</div>
+					</a>
+				</div>
+				@*tab 2*@
+				<div class="tab-pane fade show " role="tabpanel" id="tab2">
+					<div class="form-group">
+						<label class="form-label" for="FatherName">Father Name</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.FatherName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter father name", type = "text" } })
+						</div>
 					</div>
-					@*tab 2*@
-					<div class="tab-pane fade show " role="tabpanel" id="tab2">
-						<div class="form-group">
-							<label class="form-label" for="employee_father_name">Father Name</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_father_name">
-							</div>
+					<div class="form-group">
+						<label class="form-label" for="DateOfBirth">Date Of Birth</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_date_of_birth">Date Of Birth</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_birth">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Age">Age</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee age", type = "number" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_age">Age</label>
-							<div class="controls">
-								<input class="form-control" type="number" id="employee_age">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="BloodGroup">Blood Group</label>
+						<div class="controls">
+							<select id="BloodGroup" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroupType>()" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_blood_group">Blood Group</label>
-							<div class="controls">
-								<select class="form-control" id="employee_blood_group">
-									<option value="">--Select--</option>
-									<option value="O+">O+</option>
-									<option value="A+">A+</option>
-									<option value="B+">B+</option>
-									<option value="AB+">AB+</option>
-									<option value="O-">O-</option>
-									<option value="A-">A-</option>
-									<option value="B-">B-</option>
-									<option value="Other">Other</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="MaritalStatus">Marital Status</label>
+						<div class="controls">
+							<select id="MaritalStatus" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatusType>()" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_marital_status">Marital Status</label>
-							<div class="controls">
-								<select class="form-control" id="employee_marital_status">
-									<option value="">--Select--</option>
-									<option value="Single">Single</option>
-									<option value="Married">Married</option>
-									<option value="Other">Other</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Religion">Religion</label>
+						<div class="controls">
+							<select id="Religion" asp-for="Religion" asp-items="Html.GetEnumSelectList<ReligionType>()" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_religion">Religion</label>
-							<div class="controls">
-								<select class="form-control" id="employee_religion">
-									<option value="">--Select--</option>
-									<option value="Hindu">Hindu</option>
-									<option value="Christian">Christian</option>
-									<option value="Muslim">Muslim</option>
-									<option value="Other">Other</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="PermanentAddress">Permanent Address</label>
+						<div class="controls">
+							@Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control autogrow", placeholder = "Enter Permanent Address", rows = 5 })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_permanent_address">Permanent Address</label>
-							<div class="controls">
-								<textarea class="form-control autogrow" cols="5" id="employee_permanent_address"></textarea>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="CommunicationAddress">Communication Address</label>
+						<div class="controls">
+							@Html.TextAreaFor(m => m.CommunicationAddress, new { @class = "form-control autogrow", placeholder = "Enter Communication Address", rows = 5 })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_communication_address">Communication Address</label>
-							<div class="controls">
-								<textarea class="form-control autogrow" cols="5" id="employee_communication_address"></textarea>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="ContactNumber">Contact Number</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.ContactNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact number", type = "number" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_contact_number">Contact Number</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_contact_number">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="EmergencyNumber">Emergency Number</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.EmergencyNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter emergency number", type = "number" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_emergency_number">Emergency Number</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_emergency_number">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="PersonalMail">Personal Email</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.PersonalMail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter personal email", type = "email" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_personal_mail">Personal Email</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_personal_mail">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_nationality">Nationality</label>
-							<div class="controls">
-								<select class="form-control" id="employee_nationality">
-									<option value="Indian">Indian</option>
-									<option value="Others">Others</option>
-								</select>
-							</div>
-						</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="Nationality">Nationality</label>
+						<div class="controls">
 
-						<a class="btn btn-primary continue" tab-name="tab2">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+							<select id="Nationality" asp-for="Nationality" asp-items="Html.GetEnumSelectList<NationalityType>()" class="form-control"></select>
+						</div>
 					</div>
-					@*tab 3*@
-					<div class="tab-pane fade show " id="tab3">
-						<div class="form-group">
-							<label class="form-label" for="employee_department_id">Department</label>
-							<div class="controls">
-								<select class="form-control" id="employee_department_id">
-									<option value="">--Select--</option>
-									<option value="1">Accounting</option>
-									<option value="2">Finance</option>
-									<option value="3">Human Resource Management</option>
-									<option value="4">IT Security</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_designation_id">Current Designation</label>
-							<div class="controls">
-								<select class="form-control" id="employee_designation_id">
-									<option value="">--Select--</option>
-									<option value="1">Admin</option>
-									<option value="2">Analyst</option>
-									<option value="3">Chief Executive Officer</option>
-									<option value="4">Director</option>
-									<option value="5">Engineer</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_previous_designation_id">Previous Designation</label>
-							<div class="controls">
-								<select class="form-control" id="employee_previous_designation_id">
-									<option value="">--Select--</option>
-									<option value="1">Admin</option>
-									<option value="2">Analyst</option>
-									<option value="3">Chief Executive Officer</option>
-									<option value="4">Director</option>
-									<option value="5">Engineer</option>
 
-								</select>
-							</div>
+					<a class="btn btn-primary continue" tab-name="tab2">Save &amp; Continue</a>
+					<a href="@Url.Action("List", "Employee")">
+						<div type="button" class="btn">Cancel</div>
+					</a>
+				</div>
+				@*tab 3*@
+				<div class="tab-pane fade show " id="tab3">
+					<div class="form-group">
+						<label class="form-label" for="DepartmentId">Department</label>
+						<div class="controls">
+							<select id="DepartmentId" asp-for="DepartmentId" asp-items="@Model.DepartmentsSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_shift_id">Shift</label>
-							<div class="controls">
-								<select class="form-control" id="employee_shift_id">
-									<option value="1">General Shift</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="DesignationId">Current Designation</label>
+						<div class="controls">
+							<select id="DesignationId" asp-for="DesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_employment_status">Employment Status</label>
-							<div class="controls">
-								<select class="form-control" id="employee_employment_status">
-									<option value="">--Select--</option>
-									<option value="Temporary">Temporary</option>
-									<option value="Probationary">Probationary</option>
-									<option value="Confirmed">Confirmed</option>
-									<option value="Consultant">Consultant</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="PreviousDesignationId">Previous Designation</label>
+						<div class="controls">
+							<select id="PreviousDesignationId" asp-for="PreviousDesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_location">Location</label>
-							<div class="controls">
-								<select class="form-control" id="employee_location">
-									<option value="India">India</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="JoiningDate">Date Of Joining</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.JoiningDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_date_of_joining">Date Of Joining</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_joining">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="ConfirmationDate">Confirmation Date</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.ConfirmationDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_date_of_confirmation">Confirmation Date</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_confirmation">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="NoticePeriodInDays">Notice Period (Days)</label>
+						<div class="controls">
+							@Html.EditorFor(m => m.NoticePeriodInDays, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter notice period", type = "number" } })
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_notice_period">Notice Period (Days)</label>
-							<div class="controls">
-								<input class="form-control" type="number" id="employee_notice_period">
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="FirstLevelSupervisorId">First Level Supervisor</label>
+						<div class="controls">
+							<select id="FirstLevelSupervisorId" asp-for="FirstLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_first_manager_id">First Level Supervisor</label>
-							<div class="controls">
-								<select class="form-control" id="employee_first_manager_id">
-									<option value="">--Select--</option>
-									<option value="1">Paul McMullen</option>
-									<option value="2">Adam Abraham</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="SecondLevelSupervisorId">Second Level Supervisor</label>
+						<div class="controls">
+							<select id="SecondLevelSupervisorId" asp-for="SecondLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_second_manager_id">Second Level Supervisor</label>
-							<div class="controls">
-								<select class="form-control" id="employee_second_manager_id">
-									<option value="">--Select--</option>
-									<option value="3">Paul McMullen</option>
-									<option value="4">Adam Abraham</option>
-								</select>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="form-check">
+							@Html.CheckBoxFor(m => m.IsEligibleForWFH, new { @class = "skin-flat-blue" })
+							<label class="form-check-label" for="IsEligibleForWFH">Is Eligible for WFH</label>
 						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="1" id="employee_is_eligible_wfh">
-								<label for="employee_is_eligible_wfh">Is Eligible for WFH</label>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="form-check">
+							@Html.CheckBoxFor(m => m.IsMedicalLOPEligible, new { @class = "skin-flat-blue" })
+							<label class="form-check-label" for="IsMedicalLOPEligible">Is Eligible for Medical LOP</label>
 						</div>
-						<div class="form-group wfh_days" style="display: none;">
-							<label class="form-label" for="employee_wfh_day_id">WFH Days</label>
-							<div class="controls">
-								<select class="form-control" id="employee_wfh_day_id">
-									<option value="1">HDS_WFH</option>
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value="1" id="employee_eligible_medical_lop">
-								<label for="employee_eligible_medical_lop">Is Eligible for Medical LOP</label>
-							</div>
-						</div>
+					</div>
 
-						<a class="btn btn-primary continue" tab-name="tab3">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+					<a class="btn btn-primary continue" tab-name="tab3">Save &amp; Continue</a>
+					<a href="@Url.Action("List", "Employee")">
+						<div type="button" class="btn">Cancel</div>
+					</a>
+				</div>
+				@*tab 4*@
+		<div class="tab-pane fade show " id="tab4">
+			<div class="fields">
+				<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
+				<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
+					<i class="fa fa-times-circle"></i>
+				</a>
+				@foreach (var dependent in Model.Dependents)
+				{
+					@Html.HiddenFor(m => dependent.Id)
+					<div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="dependent.DependentName">Dependent Name</label>
+							@Html.EditorFor(m => dependent.DependentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter dependent name", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="dependent.Relation">Relation</label>
+							<select id="@dependent.Relation" asp-for="@dependent.Relation" asp-items="Html.GetEnumSelectList<RelationType>()" class="form-control"></select>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="dependent.DateOfBirth">Date of Birth</label>
+							@Html.EditorFor(m => dependent.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+						</div>
 					</div>
-					@*tab 4*@
-					<div class="tab-pane fade show " id="tab4">
-						<div class="fields">
-							<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
-							<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
-								<i class="fa fa-times-circle"></i>
-							</a>
-							<div class="form-row">
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_dependent_details_attributes_0_dependent_name">Dependent Name</label>
-									<input class="form-control" type="text" id="employee_dependent_details_attributes_0_dependent_name">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_dependent_details_attributes_0_relation">Relation</label>
-									<select class="form-control" id="employee_dependent_details_attributes_0_relation">
-										<option value=""></option>
-										<option value="Father">Father</option>
-										<option value="Mother">Mother</option>
-										<option value="Spouse">Spouse</option>
-										<option value="Son">Son</option>
-										<option value="Daughter">Daughter</option>
-									</select>
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_dependent_details_attributes_0_date_of_birth">Date of Birth</label>
-									<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_dependent_details_attributes_0_date_of_birth">
-								</div>
-							</div>
-						</div>
-						<div class="align_right">
-							<a class="btn btn-info btn-xs add_nested_fields" data-association="dependent_details" data-blueprint-id="dependent_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-						</div>
-						<br>
-						<a class="btn btn-primary continue" tab-name="tab4">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
-					</div>
-					@*<div id="dependent_details_fields_blueprint" style="display: none" data-blueprint="<div class=&quot;fields&quot;>input type=&quot;hidden&quot; value=&quot;false&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][_destroy]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details__destroy&quot; /><a title=&quot;Remove Dependent&quot; data-confirm=&quot;Are you sure want to delete?&quot; class=&quot;remove_nested_fields&quot; data-association=&quot;dependent_details&quot; href=&quot;javascript:void(0)&quot;><i class=&quot;fa fa-times-circle&quot;></i></a><div class=&quot;form-row&quot;><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_dependent_name&quot;>Dependent Name</label><input class=&quot;form-control&quot; type=&quot;text&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][dependent_name]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_dependent_name&quot; /></div><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_relation&quot;>Relation</label><select class=&quot;form-control&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][relation]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_relation&quot;><option value=&quot;&quot;></option><option value=&quot;Father&quot;>Father</option><option value=&quot;Mother&quot;>Mother</option><option value=&quot;Spouse&quot;>Spouse</option><option value=&quot;Son&quot;>Son</option><option value=&quot;Daughter&quot;>Daughter</option></select></div><div class=&quot;col-md-4 mb-3&quot;><label class=&quot;form-label&quot; for=&quot;employee_dependent_details_attributes_new_dependent_details_date_of_birth&quot;>Date of Birth</label><input class=&quot;form-control datepicker&quot; value=&quot;&quot; data-format=&quot;dd-mm-yyyy&quot; type=&quot;text&quot; name=&quot;employee[dependent_details_attributes][new_dependent_details][date_of_birth]&quot; id=&quot;employee_dependent_details_attributes_new_dependent_details_date_of_birth&quot; /></div></div></div>"></div>*@
-					@*tab 5*@
-					<div class="tab-pane fade show " id="tab5">
-						<div class="fields">
-							<a title="Remove Education" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="education_details" href="javascript:void(0)">
-								<i class="fa fa-times-circle"></i>
-							</a>
-							<div class="form-row">
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_education_details_attributes_0_degree">Degree</label>
-									<input class="form-control" type="text" id="employee_education_details_attributes_0_degree">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_education_details_attributes_0_institute">Institute</label>
-									<input class="form-control" type="text" id="employee_education_details_attributes_0_institute">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_education_details_attributes_0_university">Board / University</label>
-									<input class="form-control" type="text" id="employee_education_details_attributes_0_university">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_education_details_attributes_0_year_of_passing">Year Of Passing</label>
-									<input class="form-control" type="text" id="employee_education_details_attributes_0_year_of_passing">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_education_details_attributes_0_grade">Percentage / CGPA</label>
-									<input class="form-control" type="text" id="employee_education_details_attributes_0_grade">
-								</div>
-							</div>
-						</div>
-						<div class="align_right">
-							<a class="btn btn-info btn-xs add_nested_fields" data-association="education_details" data-blueprint-id="education_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-						</div><br>
-						<a class="btn btn-primary continue" tab-name="tab5">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+				}
 
+			</div>
+			<div class="align_right">
+				<a class="btn btn-info btn-xs add_nested_fields" data-association="dependent_details" data-blueprint-id="dependent_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+			</div>
+			<br>
+			<a class="btn btn-primary continue" tab-name="tab4">Save &amp; Continue</a>
+			<a href="@Url.Action("List", "Employee")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+				@*tab 5*@
+				<div class="tab-pane fade show " id="tab5">
+			<div class="fields">
+				<a title="Remove Education" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="education_details" href="javascript:void(0)">
+					<i class="fa fa-times-circle"></i>
+				</a>
+				@foreach (var education in Model.Educations)
+				{
+					@Html.HiddenFor(m => education.Id)
+					<div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@education.Degree">Degree</label>
+							@Html.EditorFor(m => education.Degree, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter degree", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@education.Institute">Institute</label>
+							@Html.EditorFor(m => education.Institute, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter institute", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@education.BoardOrUniversity">Board / University</label>
+							@Html.EditorFor(m => education.BoardOrUniversity, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter university", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@education.YearOfPassing">Year Of Passing</label>
+							@Html.EditorFor(m => education.YearOfPassing, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter year of passing", type = "number" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@education.PercentageCGPA">Percentage / CGPA</label>
+							@Html.EditorFor(m => education.PercentageCGPA, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter CGPA", type = "number" } })
+						</div>
 					</div>
-					@*tab 6*@
-					<div class="tab-pane fade show " id="tab6">
-						<div class="fields">
-							<a title="Remove Experience" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="experience_details" href="javascript:void(0)">
-								<i class="fa fa-times-circle"></i>
-							</a>
-							<div class="form-row">
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_experience_details_attributes_0_company_name">Company name</label>
-									<input class="form-control" type="text" id="employee_experience_details_attributes_0_company_name">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_experience_details_attributes_0_designation">Designation</label>
-									<input class="form-control" type="text" id="employee_experience_details_attributes_0_designation">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_experience_details_attributes_0_from_date">From Date</label>
-									<input class="form-control experience_from exp_datepicker datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_experience_details_attributes_0_from_date">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_experience_details_attributes_0_to_date">To Date</label>
-									<input class="form-control experience_to exp_datepicker datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_experience_details_attributes_0_to_date">
-								</div>
-								<div class="col-md-4 mb-3">
-									<label class="form-label" for="employee_experience_details_attributes_0_duration">Duration</label>
-									<input class="form-control" type="text" id="employee_experience_details_attributes_0_duration">
-								</div>
-							</div>
+				}
+
+			</div>
+			<div class="align_right">
+				<a class="btn btn-info btn-xs add_nested_fields" data-association="education_details" data-blueprint-id="education_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+			</div><br>
+			<a class="btn btn-primary continue" tab-name="tab5">Save &amp; Continue</a>
+			<a href="@Url.Action("List", "Employee")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+
+		</div>
+				@*tab 6*@
+				<div class="tab-pane fade show " id="tab6">
+			<div class="fields">
+				<a title="Remove Experience" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="experience_details" href="javascript:void(0)">
+					<i class="fa fa-times-circle"></i>
+				</a>
+				@foreach (var experience in Model.Experiences)
+				{
+					@Html.HiddenFor(m => experience.Id)
+					<div class="form-row">
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@experience.CompanyName">Company name</label>
+							@Html.EditorFor(m => experience.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter company name", type = "text" } })
 						</div>
-						<div class="align_right">
-							<a class="btn btn-info btn-xs add_nested_fields" data-association="experience_details" data-blueprint-id="experience_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-						</div><br>
-						<a class="btn btn-primary continue" tab-name="tab6">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@experience.Designation">Designation</label>
+							@Html.EditorFor(m => experience.Designation, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter designation", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@experience.FromDate">From Date</label>
+							@Html.EditorFor(m => experience.FromDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@experience.ToDate">To Date</label>
+							@Html.EditorFor(m => experience.ToDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+						</div>
+						<div class="col-md-4 mb-3">
+							<label class="form-label" for="@experience.Duration">Duration</label>
+							@Html.EditorFor(m => experience.Duration, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter duration", type = "number" } })
+						</div>
 					</div>
-					@*tab 7*@
-					<div class="tab-pane fade show " id="tab7">
-						<div class="fields">
-							<div class="form-group">
-								<label class="form-label" for="employee_bank_detail_attributes_bank_name">Bank Name</label>
-								<div class="controls">
-									<input class="form-control" type="text" id="employee_bank_detail_attributes_bank_name">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="employee_bank_detail_attributes_acc_no">Account Number</label>
-								<div class="controls">
-									<input class="form-control" type="text" id="employee_bank_detail_attributes_acc_no">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="employee_bank_detail_attributes_ifsc_code">IFSC Code</label>
-								<div class="controls">
-									<input class="form-control" type="text" id="employee_bank_detail_attributes_ifsc_code">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="form-label" for="employee_bank_detail_attributes_branch">Branch</label>
-								<div class="controls">
-									<input class="form-control" type="text" id="employee_bank_detail_attributes_branch">
-								</div>
-							</div>
-						</div>
-						<a class="btn btn-primary continue" tab-name="tab7">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
-					</div>
-					@*tab 8*@
-					<div class="tab-pane fade show " id="tab8">
-						<div class="form-group">
-							<label class="form-label" for="employee_aadhaar_no">Aadhaar No</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_aadhaar_no">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_pan_no">PAN No</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_pan_no">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_uan">UAN</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_uan">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_esi_no">ESI No</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_esi_no">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_passport_no">Passport No</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_passport_no">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_passport_expiry">Passport Expiry</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_passport_expiry">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_visa_no">Visa No</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_visa_no">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_visa_type">Visa Type</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_visa_type">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_visa_expiry">Visa Expiry</label>
-							<div class="controls">
-								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_visa_expiry">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_skype_id">Skype ID</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_skype_id">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_facebook_id">Facebook ID</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_facebook_id">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="employee_linkedin_id">LinkedIn ID</label>
-							<div class="controls">
-								<input class="form-control" type="text" id="employee_linkedin_id">
-							</div>
-						</div>
-						<a class="btn btn-primary continue" tab-name="tab8">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
-					</div>
-					@*tab 9*@
-					<div class="tab-pane fade show " id="tab9">
-						<div class="form-group">
-							<label class="form-label" for="employee_photo">Photo</label>
-							<div class="controls">
-								<input class="form-control" type="file" id="employee_photo">
-							</div>
-						</div>
-						<a class="btn btn-primary continue" tab-name="tab9">Save &amp; Continue</a>
-						<a href="@Url.Action("List", "Employee")">
-							<div type="button" class="btn">Cancel</div>
-						</a>
+				}
+			</div>
+			<div class="align_right">
+				<a class="btn btn-info btn-xs add_nested_fields" data-association="experience_details" data-blueprint-id="experience_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+			</div><br>
+			<a class="btn btn-primary continue" tab-name="tab6">Save &amp; Continue</a>
+			<a href="@Url.Action("List", "Employee")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+				@*tab 7*@
+				<div class="tab-pane fade show " id="tab7">
+			@Html.HiddenFor(m => m.BankDetail.Id)
+			<div class="fields">
+				<div class="form-group">
+					<label class="form-label" for="BankDetail.BankName">Bank Name</label>
+					<div class="controls">
+						@Html.EditorFor(m => m.BankDetail.BankName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter bank name", type = "text" } })
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="form-label" for="BankDetail.AccountNumber">Account Number</label>
+					<div class="controls">
+						@Html.EditorFor(m => m.BankDetail.AccountNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter account number", type = "number" } })
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="BankDetail.IFSCCode">IFSC Code</label>
+					<div class="controls">
+						@Html.EditorFor(m => m.BankDetail.IFSCCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter IFSC code", type = "text" } })
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="BankDetail.Branch">Branch</label>
+					<div class="controls">
+						@Html.EditorFor(m => m.BankDetail.Branch, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter branch", type = "text" } })
+					</div>
+				</div>
+			</div>
+			<a class="btn btn-primary continue" tab-name="tab7">Save &amp; Continue</a>
+			<a href="@Url.Action("List", "Employee")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+				@*tab 8*@
+				<div class="tab-pane fade show " id="tab8">
+			<div class="form-group">
+				<label class="form-label" for="AadharNumber">Aadhaar No</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.AadharNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter aadhar number", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="PANNumber">PAN No</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.PANNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter PAN num ber", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="UAN">UAN</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.UAN, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UAN", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="ESINumber">ESI No</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.ESINumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ESI number", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="PassportNumber">Passport No</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.PassportNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter passport number", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="PassportExpiry">Passport Expiry</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.PassportExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="VisaNumber">Visa No</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.VisaNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa number", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="VisaType">Visa Type</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.VisaType, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa type", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="VisaExpiry">Visa Expiry</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.VisaExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="SkypeId">Skype ID</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.SkypeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter skype id", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="FacebookId">Facebook ID</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.FacebookId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter facebook id", type = "text" } })
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="form-label" for="LinkedinId">LinkedIn ID</label>
+				<div class="controls">
+					@Html.EditorFor(m => m.LinkedinId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter linkedin id", type = "text" } })
+				</div>
+			</div>
+			<a class="btn btn-primary continue" tab-name="tab8">Save &amp; Continue</a>
+			<a href="@Url.Action("List", "Employee")">
+				<div type="button" class="btn">Cancel</div>
+			</a>
+		</div>
+				@*tab 9*@
+			<div class="tab-pane fade show " id="tab9">
+				<div class="form-group">
+					<label class="form-label" for="employee_photo">Photo</label>
+					<div class="controls">
+						<input class="form-control text-box single-line" id="PhotoFile" name="PhotoFile" placeholder="Logo" type="file">
+					</div>
+				</div>
+				<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+				<a href="@Url.Action("List", "Employee")">
+					<div type="button" class="btn">Cancel</div>
+				</a>
+			</div>
+			</div>
 				@*</form>*@
 			}
 		</div>
 	</div>
 </div>
- 

@@ -19,13 +19,20 @@ namespace Highbrow.HiPower.Models
         [Required]
         public string EmployeeName { get; set; }
 
-        public GenderType Gender { get; set; }        
+        public GenderType Gender { get; set; }
 
         public bool? IsActive { get; set; }
 
         public int? NoticePeriod { get; set; }
 
-        //First and second Manager
+        public long? FirstLevelSupervisorId { get; set; }
+        public Employee FirstLevelSupervisor { get; set; }
+
+        public long? SecondLevelSupervisorId { get; set; }
+        public Employee SecondLevelSupervisor { get; set; }
+
+        public List<Employee> FirstLevelSupervised { get; set; }
+        public List<Employee> SecondLevelSupervised { get; set; }
 
         //Personal
         public string FatherName { get; set; }
@@ -58,11 +65,9 @@ namespace Highbrow.HiPower.Models
         public Department Department { get; set; }
 
         public int? DesignationId { get; set; }
-
         public Designation Designation { get; set; }
 
         public int? PreviousDesignationId { get; set; }
-
         public Designation PreviousDesignation { get; set; }
 
         public int? ShiftId { get; set; }
@@ -70,7 +75,6 @@ namespace Highbrow.HiPower.Models
         public Shift Shift { get; set; }
 
         public int LeaveCategoryId { get; set; }
-
         public LeaveCategory LeaveCategory { get; set; }
 
         public string Location { get; set; }
@@ -123,7 +127,6 @@ namespace Highbrow.HiPower.Models
         public string FacebookId { get; set; }
 
         public string LinkedinId { get; set; }
-
 
 
         public DateTime CreatedAt { get; set; }
