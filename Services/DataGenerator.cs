@@ -362,28 +362,30 @@ new Employee
     NoticePeriodInDays = 60,
     IsEligibleForWFH = true,
     IsMedicalLOPEligible = true,
+    //Dependents = null,
 
-    Dependents = new List<Dependent>{
-                            new Dependent{
-                                Id = 1,
-                                DependentName = "Seetha",
-                                Relation = RelationType.Spouse,
-                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
-                            EmployeeId = 1},
-                        new Dependent{
-                                Id = 4,
-                                DependentName = "Reetha",
-                                Relation = RelationType.Daughter,
-                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
-                            EmployeeId = 1},
-                        new Dependent{
-                                Id = 5,
-                                DependentName = "Leetha",
-                                Relation = RelationType.Daughter,
-                                DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
-                            EmployeeId = 1}},
+	Dependents = new List<Dependent>{
+		new Dependent{
+			Id = 1,
+			DependentName = "Seetha",
+			Relation = RelationType.Spouse,
+			DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+		EmployeeId = 1},
+	new Dependent{
+			Id = 4,
+			DependentName = "Reetha",
+			Relation = RelationType.Daughter,
+			DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+		EmployeeId = 1},
+	new Dependent{
+			Id = 5,
+			DependentName = "Leetha",
+			Relation = RelationType.Daughter,
+			DateOfBirth = DateTime.ParseExact("23/07/1992", format, culture),
+		EmployeeId = 1}
+	},
 
-    Educations = new List<Education>{
+	Educations = new List<Education>{
                             new Education{
                                 Id = 1,
                                 Degree = "BE Computer Science",

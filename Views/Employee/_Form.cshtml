@@ -13,510 +13,564 @@
 			@using (Html.BeginForm(view, "Employee", FormMethod.Post, new { @class = "", enctype = "multipart/form-data", id = "form_Employee" }))
 			{
 				@*<form id="form_Employee" action="/Employee/1" accept-charset="UTF-8" method="post" novalidate="novalidate">*@
-			<ul class="nav nav-tabs primary" id="myTab1" role="tablist">
-				<li class="nav-item">
-					<a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab2" data-toggle="tab">Personal</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab3" data-toggle="tab">HR</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab4" data-toggle="tab">Dependent</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab5" data-toggle="tab">Education</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab6" data-toggle="tab">Experience</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab7" data-toggle="tab">Bank</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab8" data-toggle="tab">Social / Official</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " role="tab" href="#tab9" data-toggle="tab">Profile Picture</a>
-				</li>
-			</ul>
+				<ul class="nav nav-tabs primary" id="myTab1" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" href="#tab1" role="tab" data-toggle="tab">General</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab2" data-toggle="tab">Personal</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab3" data-toggle="tab">HR</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab4" data-toggle="tab">Dependent</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab5" data-toggle="tab">Education</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab6" data-toggle="tab">Experience</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab7" data-toggle="tab">Bank</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab8" data-toggle="tab">Social / Official</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link " role="tab" href="#tab9" data-toggle="tab">Profile Picture</a>
+					</li>
+				</ul>
 
-			<div class="tab-content primary" id="myTabContent1">
-				@Html.HiddenFor(m => m.Id)
-				@Html.HiddenFor(m => m.Password)
-				@Html.HiddenFor(m => m.ConfirmPassword)
-				@*tab 1*@
-				<div class="tab-pane fade show active" role="tabpanel" id="tab1">
-					<div class="form-group">
-						<label class="form-label" for="OfficeId">Employee ID *</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.OfficeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the employee ID.", type = "text" } })
+				<div class="tab-content primary" id="myTabContent1">
+					@Html.HiddenFor(m => m.Id)
+					@Html.HiddenFor(m => m.Password)
+					@Html.HiddenFor(m => m.ConfirmPassword)
+					@*tab 1*@
+					<div class="tab-pane fade show active" role="tabpanel" id="tab1">
+						<div class="form-group">
+							<label class="form-label" for="OfficeId">Employee ID *</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.OfficeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the employee ID.", type = "text" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="CardRFId">Card Id / RF Id</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.CardRFId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the card ID.", type = "text" } })
+						<div class="form-group">
+							<label class="form-label" for="CardRFId">Card Id / RF Id</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.CardRFId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter the card ID.", type = "text" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Title">Title</label>
-						<div class="controls">
-							<select id="Title" asp-for="Title" asp-items="Html.GetEnumSelectList<TitleType>()" class="form-control"></select>
+						<div class="form-group">
+							<label class="form-label" for="Title">Title</label>
+							<div class="controls">
+								<select id="Title" asp-for="Title" asp-items="Html.GetEnumSelectList<TitleType>()" class="form-control"></select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="EmployeeName">Name *</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.EmployeeName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee name", type = "text" } })
+						<div class="form-group">
+							<label class="form-label" for="EmployeeName">Name *</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.EmployeeName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee name", type = "text" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Gender">Gender *</label>
-						<div class="controls">
-							<select id="Gender" asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderType>()" class="form-control"></select>
+						<div class="form-group">
+							<label class="form-label" for="Gender">Gender *</label>
+							<div class="controls">
+								<select id="Gender" asp-for="Gender" asp-items="Html.GetEnumSelectList<GenderType>()" class="form-control"></select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="OfficeEmail">Email *</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.OfficeEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee email", type = "email" } })
+						<div class="form-group">
+							<label class="form-label" for="OfficeEmail">Email *</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.OfficeEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee email", type = "email" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Password">Password *</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password", type = "password" } })
+						<div class="form-group">
+							<label class="form-label" for="Password">Password *</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password", type = "password" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="ConfirmPassword">Confirm Password *</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter confirm password", type = "password" } })
+						<div class="form-group">
+							<label class="form-label" for="ConfirmPassword">Confirm Password *</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter confirm password", type = "password" } })
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="employee_user_attributes_roles">Role *</label>
-						<div class="controls">
-							<select id="Roles" multiple="multiple" asp-for="Roles" asp-items="@Model.RolesSelectList" class="form-control"></select>
+						<div class="form-group">
+							<label class="form-label" for="employee_user_attributes_roles">Role *</label>
+							<div class="controls">
+								<select id="Roles" multiple="multiple" asp-for="Roles" asp-items="@Model.RolesSelectList" class="form-control"></select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<div class="form-check">
-							@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
-							<label class="form-check-label" for="IsActive">Active</label>
+						<div class="form-group">
+							<div class="form-check">
+								@Html.CheckBoxFor(m => m.IsActive, new { @class = "skin-flat-blue" })
+								<label class="form-check-label" for="IsActive">Active</label>
+							</div>
 						</div>
-					</div>
-					<div class="form-group relieving_date" style="display: none;">
-						<label class="form-label" for="employee_date_of_relieving">Date Of Relieving</label>
-						<div class="controls">
-							<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_relieving">
+						<div class="form-group relieving_date" style="display: none;">
+							<label class="form-label" for="employee_date_of_relieving">Date Of Relieving</label>
+							<div class="controls">
+								<input class="form-control datepicker" value="" data-format="dd-mm-yyyy" type="text" id="employee_date_of_relieving">
+							</div>
 						</div>
-					</div>
 
-					<a class="btn btn-primary continue" tab-name="tab1">Save &amp; Continue</a>
-					<a href="@Url.Action("List", "Employee")">
-						<div type="button" class="btn">Cancel</div>
+						<a class="btn btn-primary continue" tab-name="tab1">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 2*@
+					<div class="tab-pane fade show " role="tabpanel" id="tab2">
+						<div class="form-group">
+							<label class="form-label" for="FatherName">Father Name</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.FatherName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter father name", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="DateOfBirth">Date Of Birth</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="Age">Age</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee age", type = "number" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="BloodGroup">Blood Group</label>
+							<div class="controls">
+								<select id="BloodGroup" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroupType>()" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="MaritalStatus">Marital Status</label>
+							<div class="controls">
+								<select id="MaritalStatus" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatusType>()" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="Religion">Religion</label>
+							<div class="controls">
+								<select id="Religion" asp-for="Religion" asp-items="Html.GetEnumSelectList<ReligionType>()" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="PermanentAddress">Permanent Address</label>
+							<div class="controls">
+								@Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control autogrow", placeholder = "Enter Permanent Address", rows = 5 })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="CommunicationAddress">Communication Address</label>
+							<div class="controls">
+								@Html.TextAreaFor(m => m.CommunicationAddress, new { @class = "form-control autogrow", placeholder = "Enter Communication Address", rows = 5 })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ContactNumber">Contact Number</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.ContactNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact number", type = "number" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="EmergencyNumber">Emergency Number</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.EmergencyNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter emergency number", type = "number" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="PersonalMail">Personal Email</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.PersonalMail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter personal email", type = "email" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="Nationality">Nationality</label>
+							<div class="controls">
+
+								<select id="Nationality" asp-for="Nationality" asp-items="Html.GetEnumSelectList<NationalityType>()" class="form-control"></select>
+							</div>
+						</div>
+
+						<a class="btn btn-primary continue" tab-name="tab2">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 3*@
+					<div class="tab-pane fade show " id="tab3">
+						<div class="form-group">
+							<label class="form-label" for="DepartmentId">Department</label>
+							<div class="controls">
+								<select id="DepartmentId" asp-for="DepartmentId" asp-items="@Model.DepartmentsSelectList" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="DesignationId">Current Designation</label>
+							<div class="controls">
+								<select id="DesignationId" asp-for="DesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="PreviousDesignationId">Previous Designation</label>
+							<div class="controls">
+								<select id="PreviousDesignationId" asp-for="PreviousDesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="JoiningDate">Date Of Joining</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.JoiningDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="ConfirmationDate">Confirmation Date</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.ConfirmationDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="NoticePeriodInDays">Notice Period (Days)</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.NoticePeriodInDays, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter notice period", type = "number" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="FirstLevelSupervisorId">First Level Supervisor</label>
+							<div class="controls">
+								<select id="FirstLevelSupervisorId" asp-for="FirstLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="SecondLevelSupervisorId">Second Level Supervisor</label>
+							<div class="controls">
+								<select id="SecondLevelSupervisorId" asp-for="SecondLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								@Html.CheckBoxFor(m => m.IsEligibleForWFH, new { @class = "skin-flat-blue" })
+								<label class="form-check-label" for="IsEligibleForWFH">Is Eligible for WFH</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-check">
+								@Html.CheckBoxFor(m => m.IsMedicalLOPEligible, new { @class = "skin-flat-blue" })
+								<label class="form-check-label" for="IsMedicalLOPEligible">Is Eligible for Medical LOP</label>
+							</div>
+						</div>
+
+						<a class="btn btn-primary continue" tab-name="tab3">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 4*@
+				<div class="tab-pane fade show" id="tab4">
+					<div class="dependent-row">
+						@if (Model.Dependents == null || Model.Dependents.Count == 0)
+						{
+							@*<div class="fields" count="0">
+								<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
+								<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
+									<i class="fa fa-times-circle"></i>
+								</a>
+								@Html.HiddenFor(m => m.Dependents[0].Id)
+								<div class="form-row">
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="dependent.DependentName">Dependent Name</label>
+										@Html.EditorFor(m => m.Dependents[0].DependentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter dependent name", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="dependent.Relation">Relation</label>
+										<select asp-for="Dependents[0].Relation" asp-items="Html.GetEnumSelectList<RelationType>()" class="form-control"></select>
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="dependent.DateOfBirth">Date of Birth</label>
+										@Html.EditorFor(m => m.Dependents[0].DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+									</div>
+								</div>
+							</div>*@
+						}
+						else
+						{
+							@for (int i = 0; i < Model.Dependents.Count; i++)
+			{
+				<div class="fields" count=@i>
+					<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
+					<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
+						<i class="fa fa-times-circle"></i>
 					</a>
-				</div>
-				@*tab 2*@
-				<div class="tab-pane fade show " role="tabpanel" id="tab2">
-					<div class="form-group">
-						<label class="form-label" for="FatherName">Father Name</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.FatherName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter father name", type = "text" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="DateOfBirth">Date Of Birth</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Age">Age</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.Age, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter employee age", type = "number" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="BloodGroup">Blood Group</label>
-						<div class="controls">
-							<select id="BloodGroup" asp-for="BloodGroup" asp-items="Html.GetEnumSelectList<BloodGroupType>()" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="MaritalStatus">Marital Status</label>
-						<div class="controls">
-							<select id="MaritalStatus" asp-for="MaritalStatus" asp-items="Html.GetEnumSelectList<MaritalStatusType>()" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Religion">Religion</label>
-						<div class="controls">
-							<select id="Religion" asp-for="Religion" asp-items="Html.GetEnumSelectList<ReligionType>()" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="PermanentAddress">Permanent Address</label>
-						<div class="controls">
-							@Html.TextAreaFor(m => m.PermanentAddress, new { @class = "form-control autogrow", placeholder = "Enter Permanent Address", rows = 5 })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="CommunicationAddress">Communication Address</label>
-						<div class="controls">
-							@Html.TextAreaFor(m => m.CommunicationAddress, new { @class = "form-control autogrow", placeholder = "Enter Communication Address", rows = 5 })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="ContactNumber">Contact Number</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.ContactNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter contact number", type = "number" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="EmergencyNumber">Emergency Number</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.EmergencyNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter emergency number", type = "number" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="PersonalMail">Personal Email</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.PersonalMail, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter personal email", type = "email" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="Nationality">Nationality</label>
-						<div class="controls">
-
-							<select id="Nationality" asp-for="Nationality" asp-items="Html.GetEnumSelectList<NationalityType>()" class="form-control"></select>
-						</div>
-					</div>
-
-					<a class="btn btn-primary continue" tab-name="tab2">Save &amp; Continue</a>
-					<a href="@Url.Action("List", "Employee")">
-						<div type="button" class="btn">Cancel</div>
-					</a>
-				</div>
-				@*tab 3*@
-				<div class="tab-pane fade show " id="tab3">
-					<div class="form-group">
-						<label class="form-label" for="DepartmentId">Department</label>
-						<div class="controls">
-							<select id="DepartmentId" asp-for="DepartmentId" asp-items="@Model.DepartmentsSelectList" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="DesignationId">Current Designation</label>
-						<div class="controls">
-							<select id="DesignationId" asp-for="DesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="PreviousDesignationId">Previous Designation</label>
-						<div class="controls">
-							<select id="PreviousDesignationId" asp-for="PreviousDesignationId" asp-items="@Model.DesignationsSelectList" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="JoiningDate">Date Of Joining</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.JoiningDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="ConfirmationDate">Confirmation Date</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.ConfirmationDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="NoticePeriodInDays">Notice Period (Days)</label>
-						<div class="controls">
-							@Html.EditorFor(m => m.NoticePeriodInDays, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter notice period", type = "number" } })
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="FirstLevelSupervisorId">First Level Supervisor</label>
-						<div class="controls">
-							<select id="FirstLevelSupervisorId" asp-for="FirstLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="SecondLevelSupervisorId">Second Level Supervisor</label>
-						<div class="controls">
-							<select id="SecondLevelSupervisorId" asp-for="SecondLevelSupervisorId" asp-items="@Model.SupervisorsSelectList" class="form-control"></select>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="form-check">
-							@Html.CheckBoxFor(m => m.IsEligibleForWFH, new { @class = "skin-flat-blue" })
-							<label class="form-check-label" for="IsEligibleForWFH">Is Eligible for WFH</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="form-check">
-							@Html.CheckBoxFor(m => m.IsMedicalLOPEligible, new { @class = "skin-flat-blue" })
-							<label class="form-check-label" for="IsMedicalLOPEligible">Is Eligible for Medical LOP</label>
-						</div>
-					</div>
-
-					<a class="btn btn-primary continue" tab-name="tab3">Save &amp; Continue</a>
-					<a href="@Url.Action("List", "Employee")">
-						<div type="button" class="btn">Cancel</div>
-					</a>
-				</div>
-				@*tab 4*@
-		<div class="tab-pane fade show " id="tab4">
-			<div class="fields">
-				<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
-				<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
-					<i class="fa fa-times-circle"></i>
-				</a>
-				@foreach (var dependent in Model.Dependents)
-				{
-					@Html.HiddenFor(m => dependent.Id)
+					@Html.HiddenFor(m => m.Dependents[i].Id)
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
 							<label class="form-label" for="dependent.DependentName">Dependent Name</label>
-							@Html.EditorFor(m => dependent.DependentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter dependent name", type = "text" } })
+							@Html.EditorFor(m => m.Dependents[i].DependentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter dependent name", type = "text" } })
 						</div>
 						<div class="col-md-4 mb-3">
 							<label class="form-label" for="dependent.Relation">Relation</label>
-							<select id="@dependent.Relation" asp-for="@dependent.Relation" asp-items="Html.GetEnumSelectList<RelationType>()" class="form-control"></select>
+							<select asp-for="Dependents[i].Relation" asp-items="Html.GetEnumSelectList<RelationType>()" class="form-control"></select>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label class="form-label" for="dependent.DateOfBirth">Date of Birth</label>
-							@Html.EditorFor(m => dependent.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							@Html.EditorFor(m => m.Dependents[i].DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
 						</div>
 					</div>
-				}
+				</div>
+			}
+							@*foreach (var dep in Model.Dependents)
+							{
+					<div class="fields">
+						<input type="hidden" value="false" id="employee_dependent_details_attributes_0__destroy">
+						<a title="Remove Dependent" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="dependent_details" href="javascript:void(0)">
+							<i class="fa fa-times-circle"></i>
+						</a>
+						@Html.HiddenFor(m => dep.Id)
+						<div class="form-row">
+							<div class="col-md-4 mb-3">
+								<label class="form-label" for="dep.DependentName">Dependent Name</label>
+								@Html.EditorFor(m => dep.DependentName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter dependent name", type = "text" } })
+							</div>
+							<div class="col-md-4 mb-3">
+								<label class="form-label" for="dependent.Relation">Relation</label>
+								<select id="@dep.Relation" asp-for="@dep.Relation" asp-items="Html.GetEnumSelectList<RelationType>()" class="form-control"></select>
+							</div>
+							<div class="col-md-4 mb-3">
+								<label class="form-label" for="dependent.DateOfBirth">Date of Birth</label>
+								@Html.EditorFor(m => dep.DateOfBirth, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+					</div>
+							}*@
+						}
+					</div>
 
-			</div>
-			<div class="align_right">
-				<a class="btn btn-info btn-xs add_nested_fields" data-association="dependent_details" data-blueprint-id="dependent_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-			</div>
-			<br>
-			<a class="btn btn-primary continue" tab-name="tab4">Save &amp; Continue</a>
-			<a href="@Url.Action("List", "Employee")">
-				<div type="button" class="btn">Cancel</div>
-			</a>
-		</div>
-				@*tab 5*@
-				<div class="tab-pane fade show " id="tab5">
-			<div class="fields">
-				<a title="Remove Education" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="education_details" href="javascript:void(0)">
-					<i class="fa fa-times-circle"></i>
-				</a>
-				@foreach (var education in Model.Educations)
-				{
-					@Html.HiddenFor(m => education.Id)
-					<div class="form-row">
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@education.Degree">Degree</label>
-							@Html.EditorFor(m => education.Degree, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter degree", type = "text" } })
-						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@education.Institute">Institute</label>
-							@Html.EditorFor(m => education.Institute, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter institute", type = "text" } })
-						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@education.BoardOrUniversity">Board / University</label>
-							@Html.EditorFor(m => education.BoardOrUniversity, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter university", type = "text" } })
-						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@education.YearOfPassing">Year Of Passing</label>
-							@Html.EditorFor(m => education.YearOfPassing, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter year of passing", type = "number" } })
-						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@education.PercentageCGPA">Percentage / CGPA</label>
-							@Html.EditorFor(m => education.PercentageCGPA, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter CGPA", type = "number" } })
-						</div>
+					<div class="align_right">
+						<a class="btn btn-info btn-xs add_nested_fields" id="dependent_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
 					</div>
-				}
+					<br>
+					<a class="btn btn-primary continue" tab-name="tab4">Save &amp; Continue</a>
+					<a href="@Url.Action("List", "Employee")">
+						<div type="button" class="btn">Cancel</div>
+					</a>
+				</div>  
+					@*tab 5*@
+					<div class="tab-pane fade show " id="tab5">
+						<div class="fields">
+							<a title="Remove Education" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="education_details" href="javascript:void(0)">
+								<i class="fa fa-times-circle"></i>
+							</a>
+							@foreach (var education in Model.Educations)
+							{
+								@Html.HiddenFor(m => education.Id)
+								<div class="form-row">
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@education.Degree">Degree</label>
+										@Html.EditorFor(m => education.Degree, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter degree", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@education.Institute">Institute</label>
+										@Html.EditorFor(m => education.Institute, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter institute", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@education.BoardOrUniversity">Board / University</label>
+										@Html.EditorFor(m => education.BoardOrUniversity, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter university", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@education.YearOfPassing">Year Of Passing</label>
+										@Html.EditorFor(m => education.YearOfPassing, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter year of passing", type = "number" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@education.PercentageCGPA">Percentage / CGPA</label>
+										@Html.EditorFor(m => education.PercentageCGPA, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter CGPA", type = "number" } })
+									</div>
+								</div>
+							}
 
-			</div>
-			<div class="align_right">
-				<a class="btn btn-info btn-xs add_nested_fields" data-association="education_details" data-blueprint-id="education_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-			</div><br>
-			<a class="btn btn-primary continue" tab-name="tab5">Save &amp; Continue</a>
-			<a href="@Url.Action("List", "Employee")">
-				<div type="button" class="btn">Cancel</div>
-			</a>
+						</div>
+						<div class="align_right">
+							<a class="btn btn-info btn-xs add_nested_fields" data-association="education_details" data-blueprint-id="education_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+						</div><br>
+						<a class="btn btn-primary continue" tab-name="tab5">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
 
-		</div>
-				@*tab 6*@
-				<div class="tab-pane fade show " id="tab6">
-			<div class="fields">
-				<a title="Remove Experience" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="experience_details" href="javascript:void(0)">
-					<i class="fa fa-times-circle"></i>
-				</a>
-				@foreach (var experience in Model.Experiences)
-				{
-					@Html.HiddenFor(m => experience.Id)
-					<div class="form-row">
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@experience.CompanyName">Company name</label>
-							@Html.EditorFor(m => experience.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter company name", type = "text" } })
+					</div>
+					@*tab 6*@
+					<div class="tab-pane fade show " id="tab6">
+						<div class="fields">
+							<a title="Remove Experience" data-confirm="Are you sure want to delete?" class="remove_nested_fields" data-association="experience_details" href="javascript:void(0)">
+								<i class="fa fa-times-circle"></i>
+							</a>
+							@foreach (var experience in Model.Experiences)
+							{
+								@Html.HiddenFor(m => experience.Id)
+								<div class="form-row">
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@experience.CompanyName">Company name</label>
+										@Html.EditorFor(m => experience.CompanyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter company name", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@experience.Designation">Designation</label>
+										@Html.EditorFor(m => experience.Designation, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter designation", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@experience.FromDate">From Date</label>
+										@Html.EditorFor(m => experience.FromDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@experience.ToDate">To Date</label>
+										@Html.EditorFor(m => experience.ToDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+									</div>
+									<div class="col-md-4 mb-3">
+										<label class="form-label" for="@experience.Duration">Duration</label>
+										@Html.EditorFor(m => experience.Duration, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter duration", type = "number" } })
+									</div>
+								</div>
+							}
 						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@experience.Designation">Designation</label>
-							@Html.EditorFor(m => experience.Designation, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter designation", type = "text" } })
+						<div class="align_right">
+							<a class="btn btn-info btn-xs add_nested_fields" data-association="experience_details" data-blueprint-id="experience_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
+						</div><br>
+						<a class="btn btn-primary continue" tab-name="tab6">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 7*@
+					<div class="tab-pane fade show " id="tab7">
+						@Html.HiddenFor(m => m.BankDetail.Id)
+						<div class="fields">
+							<div class="form-group">
+								<label class="form-label" for="BankDetail.BankName">Bank Name</label>
+								<div class="controls">
+									@Html.EditorFor(m => m.BankDetail.BankName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter bank name", type = "text" } })
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="BankDetail.AccountNumber">Account Number</label>
+								<div class="controls">
+									@Html.EditorFor(m => m.BankDetail.AccountNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter account number", type = "number" } })
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="BankDetail.IFSCCode">IFSC Code</label>
+								<div class="controls">
+									@Html.EditorFor(m => m.BankDetail.IFSCCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter IFSC code", type = "text" } })
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label" for="BankDetail.Branch">Branch</label>
+								<div class="controls">
+									@Html.EditorFor(m => m.BankDetail.Branch, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter branch", type = "text" } })
+								</div>
+							</div>
 						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@experience.FromDate">From Date</label>
-							@Html.EditorFor(m => experience.FromDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+						<a class="btn btn-primary continue" tab-name="tab7">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
+					</div>
+					@*tab 8*@
+					<div class="tab-pane fade show " id="tab8">
+						<div class="form-group">
+							<label class="form-label" for="AadharNumber">Aadhaar No</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.AadharNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter aadhar number", type = "text" } })
+							</div>
 						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@experience.ToDate">To Date</label>
-							@Html.EditorFor(m => experience.ToDate, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+						<div class="form-group">
+							<label class="form-label" for="PANNumber">PAN No</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.PANNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter PAN num ber", type = "text" } })
+							</div>
 						</div>
-						<div class="col-md-4 mb-3">
-							<label class="form-label" for="@experience.Duration">Duration</label>
-							@Html.EditorFor(m => experience.Duration, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter duration", type = "number" } })
+						<div class="form-group">
+							<label class="form-label" for="UAN">UAN</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.UAN, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UAN", type = "text" } })
+							</div>
 						</div>
+						<div class="form-group">
+							<label class="form-label" for="ESINumber">ESI No</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.ESINumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ESI number", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="PassportNumber">Passport No</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.PassportNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter passport number", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="PassportExpiry">Passport Expiry</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.PassportExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="VisaNumber">Visa No</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.VisaNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa number", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="VisaType">Visa Type</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.VisaType, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa type", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="VisaExpiry">Visa Expiry</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.VisaExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="SkypeId">Skype ID</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.SkypeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter skype id", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="FacebookId">Facebook ID</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.FacebookId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter facebook id", type = "text" } })
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="form-label" for="LinkedinId">LinkedIn ID</label>
+							<div class="controls">
+								@Html.EditorFor(m => m.LinkedinId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter linkedin id", type = "text" } })
+							</div>
+						</div>
+						<a class="btn btn-primary continue" tab-name="tab8">Save &amp; Continue</a>
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
 					</div>
-				}
-			</div>
-			<div class="align_right">
-				<a class="btn btn-info btn-xs add_nested_fields" data-association="experience_details" data-blueprint-id="experience_details_fields_blueprint" href="javascript:void(0)">+ Add</a>
-			</div><br>
-			<a class="btn btn-primary continue" tab-name="tab6">Save &amp; Continue</a>
-			<a href="@Url.Action("List", "Employee")">
-				<div type="button" class="btn">Cancel</div>
-			</a>
-		</div>
-				@*tab 7*@
-				<div class="tab-pane fade show " id="tab7">
-			@Html.HiddenFor(m => m.BankDetail.Id)
-			<div class="fields">
-				<div class="form-group">
-					<label class="form-label" for="BankDetail.BankName">Bank Name</label>
-					<div class="controls">
-						@Html.EditorFor(m => m.BankDetail.BankName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter bank name", type = "text" } })
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="BankDetail.AccountNumber">Account Number</label>
-					<div class="controls">
-						@Html.EditorFor(m => m.BankDetail.AccountNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter account number", type = "number" } })
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="BankDetail.IFSCCode">IFSC Code</label>
-					<div class="controls">
-						@Html.EditorFor(m => m.BankDetail.IFSCCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter IFSC code", type = "text" } })
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="form-label" for="BankDetail.Branch">Branch</label>
-					<div class="controls">
-						@Html.EditorFor(m => m.BankDetail.Branch, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter branch", type = "text" } })
-					</div>
-				</div>
-			</div>
-			<a class="btn btn-primary continue" tab-name="tab7">Save &amp; Continue</a>
-			<a href="@Url.Action("List", "Employee")">
-				<div type="button" class="btn">Cancel</div>
-			</a>
-		</div>
-				@*tab 8*@
-				<div class="tab-pane fade show " id="tab8">
-			<div class="form-group">
-				<label class="form-label" for="AadharNumber">Aadhaar No</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.AadharNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter aadhar number", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="PANNumber">PAN No</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.PANNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter PAN num ber", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="UAN">UAN</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.UAN, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter UAN", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="ESINumber">ESI No</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.ESINumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ESI number", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="PassportNumber">Passport No</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.PassportNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter passport number", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="PassportExpiry">Passport Expiry</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.PassportExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="VisaNumber">Visa No</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.VisaNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa number", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="VisaType">Visa Type</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.VisaType, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter visa type", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="VisaExpiry">Visa Expiry</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.VisaExpiry, new { htmlAttributes = new { @class = "form-control datepicker", placeholder = "dd-mm-yyyy", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="SkypeId">Skype ID</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.SkypeId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter skype id", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="FacebookId">Facebook ID</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.FacebookId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter facebook id", type = "text" } })
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="form-label" for="LinkedinId">LinkedIn ID</label>
-				<div class="controls">
-					@Html.EditorFor(m => m.LinkedinId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter linkedin id", type = "text" } })
-				</div>
-			</div>
-			<a class="btn btn-primary continue" tab-name="tab8">Save &amp; Continue</a>
-			<a href="@Url.Action("List", "Employee")">
-				<div type="button" class="btn">Cancel</div>
-			</a>
-		</div>
-				@*tab 9*@
-			<div class="tab-pane fade show " id="tab9">
-				<div class="form-group">
-					<label class="form-label" for="employee_photo">Photo</label>
-					<div class="controls">
-						<input class="form-control text-box single-line" id="PhotoFile" name="PhotoFile" placeholder="Logo" type="file">
+					@*tab 9*@
+					<div class="tab-pane fade show " id="tab9">
+						<div class="form-group">
+							<label class="form-label" for="employee_photo">Photo</label>
+							<div class="controls">
+								<input class="form-control text-box single-line" id="PhotoFile" name="PhotoFile" placeholder="Logo" type="file">
+							</div>
+						</div>
+						<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
+						<a href="@Url.Action("List", "Employee")">
+							<div type="button" class="btn">Cancel</div>
+						</a>
 					</div>
 				</div>
-				<input type="submit" name="commit" value="Save" class="btn btn-primary" data-disable-with="Save">
-				<a href="@Url.Action("List", "Employee")">
-					<div type="button" class="btn">Cancel</div>
-				</a>
-			</div>
-			</div>
+
 				@*</form>*@
 			}
 		</div>

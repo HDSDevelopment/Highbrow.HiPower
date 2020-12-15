@@ -95,7 +95,7 @@ namespace Highbrow.HiPower.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost, ActionName("Update")]
-        public async Task<IActionResult> UpdatePost(EmployeeUpdateViewModel viewModel)
+        public async Task<IActionResult> UpdatePost(EmployeeAddViewModel viewModel)
         {
             ServiceResponse<Employee> response = null;
             Employee employee;
@@ -121,7 +121,7 @@ namespace Highbrow.HiPower.Controllers
                         currentTabNumber++;
                         viewModel.CurrentTab = (EmployeeTabs)currentTabNumber;
                     }
-                    return View(viewModel);
+                    return View("Update", viewModel);
                 }
                 catch (Exception ex)
                 {
@@ -129,7 +129,7 @@ namespace Highbrow.HiPower.Controllers
                     return View("~/Views/Home/Error/500.cshtml");
                 }
             }
-            return View(viewModel);
+            return View("Update", viewModel);
         }
 
         void SetSupervisors(List<EmployeeNameResponse> supervisors, List<SelectListItem> supervisorItems)
